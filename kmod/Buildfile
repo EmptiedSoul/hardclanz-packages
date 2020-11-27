@@ -1,0 +1,38 @@
+PACKAGE="kmod"
+VER="27"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(openssl glibc zlib xz)
+CONFLICTS=()
+
+URL="https://www.kernel.org/pub/linux/utils/kernel/kmod/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS	\
+	--bindir=/bin	\
+	--with-rootlibdir=/lib	\
+	--with-xz	\
+	--with-zlib	
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+	mkdir $DEST/sbin
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+  ln -sfv $DEST/bin/kmod $DEST/sbin/$target
+done
+}

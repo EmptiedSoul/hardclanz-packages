@@ -1,0 +1,35 @@
+PACKAGE="ninja"
+VER="1.10.0"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(gcc)
+CONFLICTS=()
+
+URL="https://github.com/ninja-build/ninja/archive/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure.py --bootstrap #$CONFIGUREOPTS
+    mkdir buildZ
+    cd buildZ
+    cmake ..
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    #make $MAKEOPTS DESTDIR="$DEST" install
+    mkdir -p $DEST/usr/bin
+    cp -v ninja* manifest_parser_perftest hash_collision_bench build_log_perftest canon_perftest depfile_parser_perftest $DEST/usr/bin/ >&2
+}

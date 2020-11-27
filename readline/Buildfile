@@ -1,0 +1,31 @@
+PACKAGE="readline"
+VER="8.0"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(glibc ncurses)
+CONFLICTS=()
+
+URL="http://ftp.gnu.org/gnu/readline/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS	\
+	--with-curses	
+}
+__compilesrc(){
+    make $MAKEOPTS SHLIB_LIBS="-lncursesw" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" SHLIB_LIBS="-lncursesw" install
+}

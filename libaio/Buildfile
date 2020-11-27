@@ -1,0 +1,30 @@
+PACKAGE="libaio"
+VER="0.3.112"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="http://ftp.de.debian.org/debian/pool/main/liba/libaio/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${PACKAGE}_${VER}.orig.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ 
+}
+__preparesrc(){
+	sed -i '/install.*libaio.a/s/^/#/' src/Makefile
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

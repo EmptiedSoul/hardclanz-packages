@@ -1,0 +1,32 @@
+PACKAGE="tcl"
+VER="8.6.10"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(zlib)
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/tcl/"
+SRCDIR="${PACKAGE}${VER}"
+SRCTGZ="${SRCDIR}-src.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    cd unix
+    ./configure $CONFIGUREOPTS \
+	--enable-64bit
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

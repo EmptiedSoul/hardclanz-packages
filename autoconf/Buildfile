@@ -1,0 +1,28 @@
+PACKAGE="autoconf"
+VER="999git"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(gawk m4 diffutils perl sh)
+CONFLICTS=()
+
+SRCURL="git://git.sv.gnu.org/autoconf"
+SRCDIR="autoconf"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__preparesrc(){
+	po/update-potfiles
+	autopoint --force
+	autoreconf -f -i
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

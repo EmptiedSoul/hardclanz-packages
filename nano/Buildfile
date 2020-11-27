@@ -1,0 +1,31 @@
+PACKAGE="nano"
+VER="5.2"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="https://www.nano-editor.org/dist/v5/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS \
+	--enable-utf8
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

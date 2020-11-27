@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>m4-1.4.18-glibc-change-work-around.patch\m4\m4\recipes-devtools\meta - openembedded-core - OpenEmbedded Core layer</title>
+<meta name='generator' content='cgit v1.2'/>
+<meta name='robots' content='index, nofollow'/>
+<link rel='stylesheet' type='text/css' href='/cgit.css'/>
+<link rel='shortcut icon' href='/favicon.ico'/>
+<link rel='alternate' title='Atom feed' href='http://_/openembedded-core/atom/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch?h=master' type='application/atom+xml'/>
+<link rel='vcs-git' href='https://git.openembedded.org/openembedded-core' title='openembedded-core Git repository'/>
+<link rel='vcs-git' href='git://git.openembedded.org/openembedded-core' title='openembedded-core Git repository'/>
+</head>
+<body>
+<div id='cgit'><table id='header'>
+<tr>
+<td class='logo' rowspan='2'><a href='/'><img src='/oe.png' alt='cgit logo'/></a></td>
+<td class='main'><a href='/'>index</a> : <a title='openembedded-core' href='/openembedded-core/'>openembedded-core</a></td><td class='form'><form method='get'>
+<select name='h' onchange='this.form.submit();'>
+<option value='2011-1'>2011-1</option>
+<option value='daisy'>daisy</option>
+<option value='danny'>danny</option>
+<option value='denzil'>denzil</option>
+<option value='dizzy'>dizzy</option>
+<option value='dora'>dora</option>
+<option value='dunfell'>dunfell</option>
+<option value='dunfell-next'>dunfell-next</option>
+<option value='dylan'>dylan</option>
+<option value='fido'>fido</option>
+<option value='gatesgarth'>gatesgarth</option>
+<option value='gatesgarth-next'>gatesgarth-next</option>
+<option value='jethro'>jethro</option>
+<option value='krogoth'>krogoth</option>
+<option value='krogoth-next'>krogoth-next</option>
+<option value='master' selected='selected'>master</option>
+<option value='master-next'>master-next</option>
+<option value='master-next-1.9'>master-next-1.9</option>
+<option value='master-next-2.5'>master-next-2.5</option>
+<option value='master-next2'>master-next2</option>
+<option value='morty'>morty</option>
+<option value='morty-next'>morty-next</option>
+<option value='pyro'>pyro</option>
+<option value='pyro-next'>pyro-next</option>
+<option value='rocko'>rocko</option>
+<option value='rocko-next'>rocko-next</option>
+<option value='sumo'>sumo</option>
+<option value='sumo-next'>sumo-next</option>
+<option value='thud'>thud</option>
+<option value='thud-next'>thud-next</option>
+<option value='warrior'>warrior</option>
+<option value='warrior-next'>warrior-next</option>
+<option value='zeus'>zeus</option>
+<option value='zeus-next'>zeus-next</option>
+</select> <input type='submit' value='switch'/></form></td></tr>
+<tr><td class='sub'>OpenEmbedded Core layer</td><td class='sub right'>OpenEmbedded</td></tr></table>
+<table class='tabs'><tr><td>
+<a href='/openembedded-core/'>summary</a><a href='/openembedded-core/refs/'>refs</a><a href='/openembedded-core/log/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>log</a><a class='active' href='/openembedded-core/tree/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>tree</a><a href='/openembedded-core/commit/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>commit</a><a href='/openembedded-core/diff/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>diff</a><a href='/openembedded-core/stats/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>stats</a></td><td class='form'><form class='right' method='get' action='/openembedded-core/log/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>
+<select name='qt'>
+<option value='grep'>log msg</option>
+<option value='author'>author</option>
+<option value='committer'>committer</option>
+<option value='range'>range</option>
+</select>
+<input class='txt' type='search' size='10' name='q' value=''/>
+<input type='submit' value='search'/>
+</form>
+</td></tr></table>
+<div class='path'>path: <a href='/openembedded-core/tree/'>root</a>/<a href='/openembedded-core/tree/meta'>meta</a>/<a href='/openembedded-core/tree/meta/recipes-devtools'>recipes-devtools</a>/<a href='/openembedded-core/tree/meta/recipes-devtools/m4'>m4</a>/<a href='/openembedded-core/tree/meta/recipes-devtools/m4/m4'>m4</a>/<a href='/openembedded-core/tree/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>m4-1.4.18-glibc-change-work-around.patch</a></div><div class='content'>blob: c10bcbf693747df5ff7c9e7fa1e7ffdb1001858c (<a href='/openembedded-core/plain/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch'>plain</a>)
+<table summary='blob content' class='blob'>
+<tr><td class='linenumbers'><pre><a id='n1' href='#n1'>1</a>
+<a id='n2' href='#n2'>2</a>
+<a id='n3' href='#n3'>3</a>
+<a id='n4' href='#n4'>4</a>
+<a id='n5' href='#n5'>5</a>
+<a id='n6' href='#n6'>6</a>
+<a id='n7' href='#n7'>7</a>
+<a id='n8' href='#n8'>8</a>
+<a id='n9' href='#n9'>9</a>
+<a id='n10' href='#n10'>10</a>
+<a id='n11' href='#n11'>11</a>
+<a id='n12' href='#n12'>12</a>
+<a id='n13' href='#n13'>13</a>
+<a id='n14' href='#n14'>14</a>
+<a id='n15' href='#n15'>15</a>
+<a id='n16' href='#n16'>16</a>
+<a id='n17' href='#n17'>17</a>
+<a id='n18' href='#n18'>18</a>
+<a id='n19' href='#n19'>19</a>
+<a id='n20' href='#n20'>20</a>
+<a id='n21' href='#n21'>21</a>
+<a id='n22' href='#n22'>22</a>
+<a id='n23' href='#n23'>23</a>
+<a id='n24' href='#n24'>24</a>
+<a id='n25' href='#n25'>25</a>
+<a id='n26' href='#n26'>26</a>
+<a id='n27' href='#n27'>27</a>
+<a id='n28' href='#n28'>28</a>
+<a id='n29' href='#n29'>29</a>
+<a id='n30' href='#n30'>30</a>
+<a id='n31' href='#n31'>31</a>
+<a id='n32' href='#n32'>32</a>
+<a id='n33' href='#n33'>33</a>
+<a id='n34' href='#n34'>34</a>
+<a id='n35' href='#n35'>35</a>
+<a id='n36' href='#n36'>36</a>
+<a id='n37' href='#n37'>37</a>
+<a id='n38' href='#n38'>38</a>
+<a id='n39' href='#n39'>39</a>
+<a id='n40' href='#n40'>40</a>
+<a id='n41' href='#n41'>41</a>
+<a id='n42' href='#n42'>42</a>
+<a id='n43' href='#n43'>43</a>
+<a id='n44' href='#n44'>44</a>
+<a id='n45' href='#n45'>45</a>
+<a id='n46' href='#n46'>46</a>
+<a id='n47' href='#n47'>47</a>
+<a id='n48' href='#n48'>48</a>
+<a id='n49' href='#n49'>49</a>
+<a id='n50' href='#n50'>50</a>
+<a id='n51' href='#n51'>51</a>
+<a id='n52' href='#n52'>52</a>
+<a id='n53' href='#n53'>53</a>
+<a id='n54' href='#n54'>54</a>
+<a id='n55' href='#n55'>55</a>
+<a id='n56' href='#n56'>56</a>
+<a id='n57' href='#n57'>57</a>
+<a id='n58' href='#n58'>58</a>
+<a id='n59' href='#n59'>59</a>
+<a id='n60' href='#n60'>60</a>
+<a id='n61' href='#n61'>61</a>
+<a id='n62' href='#n62'>62</a>
+<a id='n63' href='#n63'>63</a>
+<a id='n64' href='#n64'>64</a>
+<a id='n65' href='#n65'>65</a>
+<a id='n66' href='#n66'>66</a>
+<a id='n67' href='#n67'>67</a>
+<a id='n68' href='#n68'>68</a>
+<a id='n69' href='#n69'>69</a>
+<a id='n70' href='#n70'>70</a>
+<a id='n71' href='#n71'>71</a>
+<a id='n72' href='#n72'>72</a>
+<a id='n73' href='#n73'>73</a>
+<a id='n74' href='#n74'>74</a>
+<a id='n75' href='#n75'>75</a>
+<a id='n76' href='#n76'>76</a>
+<a id='n77' href='#n77'>77</a>
+<a id='n78' href='#n78'>78</a>
+<a id='n79' href='#n79'>79</a>
+<a id='n80' href='#n80'>80</a>
+<a id='n81' href='#n81'>81</a>
+<a id='n82' href='#n82'>82</a>
+<a id='n83' href='#n83'>83</a>
+<a id='n84' href='#n84'>84</a>
+<a id='n85' href='#n85'>85</a>
+<a id='n86' href='#n86'>86</a>
+<a id='n87' href='#n87'>87</a>
+<a id='n88' href='#n88'>88</a>
+<a id='n89' href='#n89'>89</a>
+<a id='n90' href='#n90'>90</a>
+<a id='n91' href='#n91'>91</a>
+<a id='n92' href='#n92'>92</a>
+<a id='n93' href='#n93'>93</a>
+<a id='n94' href='#n94'>94</a>
+<a id='n95' href='#n95'>95</a>
+<a id='n96' href='#n96'>96</a>
+<a id='n97' href='#n97'>97</a>
+<a id='n98' href='#n98'>98</a>
+<a id='n99' href='#n99'>99</a>
+<a id='n100' href='#n100'>100</a>
+<a id='n101' href='#n101'>101</a>
+<a id='n102' href='#n102'>102</a>
+<a id='n103' href='#n103'>103</a>
+<a id='n104' href='#n104'>104</a>
+<a id='n105' href='#n105'>105</a>
+<a id='n106' href='#n106'>106</a>
+<a id='n107' href='#n107'>107</a>
+<a id='n108' href='#n108'>108</a>
+<a id='n109' href='#n109'>109</a>
+<a id='n110' href='#n110'>110</a>
+<a id='n111' href='#n111'>111</a>
+<a id='n112' href='#n112'>112</a>
+<a id='n113' href='#n113'>113</a>
+<a id='n114' href='#n114'>114</a>
+<a id='n115' href='#n115'>115</a>
+<a id='n116' href='#n116'>116</a>
+<a id='n117' href='#n117'>117</a>
+<a id='n118' href='#n118'>118</a>
+<a id='n119' href='#n119'>119</a>
+<a id='n120' href='#n120'>120</a>
+<a id='n121' href='#n121'>121</a>
+<a id='n122' href='#n122'>122</a>
+<a id='n123' href='#n123'>123</a>
+<a id='n124' href='#n124'>124</a>
+<a id='n125' href='#n125'>125</a>
+<a id='n126' href='#n126'>126</a>
+<a id='n127' href='#n127'>127</a>
+<a id='n128' href='#n128'>128</a>
+<a id='n129' href='#n129'>129</a>
+<a id='n130' href='#n130'>130</a>
+</pre></td>
+<td class='lines'><pre><code><style>.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #333333 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #666666 } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008800 } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #336699 } /* Name.Attribute */
+.highlight .nb { color: #003388 } /* Name.Builtin */
+.highlight .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555 } /* Name.Decorator */
+.highlight .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #336699; font-style: italic } /* Name.Label */
+.highlight .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.highlight .py { color: #336699; font-weight: bold } /* Name.Property */
+.highlight .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #336699 } /* Name.Variable */
+.highlight .ow { color: #008800 } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #0000DD; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.highlight .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.highlight .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.highlight .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.highlight .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700 } /* Name.Variable.Global */
+.highlight .vi { color: #3333bb } /* Name.Variable.Instance */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre>update for glibc libio.h removal in 2.28+
+
+see
+https://src.fedoraproject.org/rpms/m4/c/814d592134fad36df757f9a61422d164ea2c6c9b?branch=master
+
+Upstream-Status: Backport [https://git.savannah.gnu.org/cgit/gnulib.git/commit/?id=4af4a4a718]
+Signed-off-by: Khem Raj &lt;raj.khem@gmail.com&gt;
+
+<span class="gh">Index: m4-1.4.18/lib/fflush.c</span>
+<span class="gh">===================================================================</span>
+<span class="gd">--- m4-1.4.18.orig/lib/fflush.c</span>
+<span class="gi">+++ m4-1.4.18/lib/fflush.c</span>
+<span class="gu">@@ -33,7 +33,7 @@</span>
+ #undef fflush
+ 
+ 
+<span class="gd">-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+ 
+ /* Clear the stream&#39;s ungetc buffer, preserving the value of ftello (fp).  */
+ static void
+<span class="gu">@@ -72,7 +72,7 @@ clear_ungetc_buffer (FILE *fp)</span>
+ 
+ #endif
+ 
+<span class="gd">-#if ! (defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */)</span>
+<span class="gi">+#if ! (defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */)</span>
+ 
+ # if (defined __sferror || defined __DragonFly__ || defined __ANDROID__) &amp;&amp; defined __SNPT
+ /* FreeBSD, NetBSD, OpenBSD, DragonFly, Mac OS X, Cygwin, Android */
+<span class="gu">@@ -148,7 +148,7 @@ rpl_fflush (FILE *stream)</span>
+   if (stream == NULL || ! freading (stream))
+     return fflush (stream);
+ 
+<span class="gd">-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+ 
+   clear_ungetc_buffer_preserving_position (stream);
+ 
+<span class="gh">Index: m4-1.4.18/lib/fpending.c</span>
+<span class="gh">===================================================================</span>
+<span class="gd">--- m4-1.4.18.orig/lib/fpending.c</span>
+<span class="gi">+++ m4-1.4.18/lib/fpending.c</span>
+<span class="gu">@@ -32,7 +32,7 @@ __fpending (FILE *fp)</span>
+   /* Most systems provide FILE as a struct and the necessary bitmask in
+      &lt;stdio.h&gt;, because they need it for implementing getc() and putc() as
+      fast macros.  */
+<span class="gd">-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+   return fp-&gt;_IO_write_ptr - fp-&gt;_IO_write_base;
+ #elif defined __sferror || defined __DragonFly__ || defined __ANDROID__
+   /* FreeBSD, NetBSD, OpenBSD, DragonFly, Mac OS X, Cygwin, Android */
+<span class="gh">Index: m4-1.4.18/lib/fpurge.c</span>
+<span class="gh">===================================================================</span>
+<span class="gd">--- m4-1.4.18.orig/lib/fpurge.c</span>
+<span class="gi">+++ m4-1.4.18/lib/fpurge.c</span>
+<span class="gu">@@ -62,7 +62,7 @@ fpurge (FILE *fp)</span>
+   /* Most systems provide FILE as a struct and the necessary bitmask in
+      &lt;stdio.h&gt;, because they need it for implementing getc() and putc() as
+      fast macros.  */
+<span class="gd">-# if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+# if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+   fp-&gt;_IO_read_end = fp-&gt;_IO_read_ptr;
+   fp-&gt;_IO_write_ptr = fp-&gt;_IO_write_base;
+   /* Avoid memory leak when there is an active ungetc buffer.  */
+<span class="gh">Index: m4-1.4.18/lib/freadahead.c</span>
+<span class="gh">===================================================================</span>
+<span class="gd">--- m4-1.4.18.orig/lib/freadahead.c</span>
+<span class="gi">+++ m4-1.4.18/lib/freadahead.c</span>
+<span class="gu">@@ -25,7 +25,7 @@</span>
+ size_t
+ freadahead (FILE *fp)
+ {
+<span class="gd">-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+   if (fp-&gt;_IO_write_ptr &gt; fp-&gt;_IO_write_base)
+     return 0;
+   return (fp-&gt;_IO_read_end - fp-&gt;_IO_read_ptr)
+<span class="gh">Index: m4-1.4.18/lib/freading.c</span>
+<span class="gh">===================================================================</span>
+<span class="gd">--- m4-1.4.18.orig/lib/freading.c</span>
+<span class="gi">+++ m4-1.4.18/lib/freading.c</span>
+<span class="gu">@@ -31,7 +31,7 @@ freading (FILE *fp)</span>
+   /* Most systems provide FILE as a struct and the necessary bitmask in
+      &lt;stdio.h&gt;, because they need it for implementing getc() and putc() as
+      fast macros.  */
+<span class="gd">-# if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+# if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+   return ((fp-&gt;_flags &amp; _IO_NO_WRITES) != 0
+           || ((fp-&gt;_flags &amp; (_IO_NO_READS | _IO_CURRENTLY_PUTTING)) == 0
+               &amp;&amp; fp-&gt;_IO_read_base != NULL));
+<span class="gh">Index: m4-1.4.18/lib/fseeko.c</span>
+<span class="gh">===================================================================</span>
+<span class="gd">--- m4-1.4.18.orig/lib/fseeko.c</span>
+<span class="gi">+++ m4-1.4.18/lib/fseeko.c</span>
+<span class="gu">@@ -47,7 +47,7 @@ fseeko (FILE *fp, off_t offset, int when</span>
+ #endif
+ 
+   /* These tests are based on fpurge.c.  */
+<span class="gd">-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+   if (fp-&gt;_IO_read_end == fp-&gt;_IO_read_ptr
+       &amp;&amp; fp-&gt;_IO_write_ptr == fp-&gt;_IO_write_base
+       &amp;&amp; fp-&gt;_IO_save_base == NULL)
+<span class="gu">@@ -123,7 +123,7 @@ fseeko (FILE *fp, off_t offset, int when</span>
+           return -1;
+         }
+ 
+<span class="gd">-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+<span class="gi">+#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */</span>
+       fp-&gt;_flags &amp;= ~_IO_EOF_SEEN;
+       fp-&gt;_offset = pos;
+ #elif defined __sferror || defined __DragonFly__ || defined __ANDROID__
+<span class="gh">Index: m4-1.4.18/lib/stdio-impl.h</span>
+<span class="gh">===================================================================</span>
+<span class="gd">--- m4-1.4.18.orig/lib/stdio-impl.h</span>
+<span class="gi">+++ m4-1.4.18/lib/stdio-impl.h</span>
+<span class="gu">@@ -18,6 +18,12 @@</span>
+    the same implementation of stdio extension API, except that some fields
+    have different naming conventions, or their access requires some casts.  */
+ 
+<span class="gi">+/* Glibc 2.28 made _IO_IN_BACKUP private.  For now, work around this</span>
+<span class="gi">+   problem by defining it ourselves.  FIXME: Do not rely on glibc</span>
+<span class="gi">+   internals.  */</span>
+<span class="gi">+#if !defined _IO_IN_BACKUP &amp;&amp; defined _IO_EOF_SEEN</span>
+<span class="gi">+# define _IO_IN_BACKUP 0x100</span>
+<span class="gi">+#endif</span>
+ 
+ /* BSD stdio derived implementations.  */
+ 
+</pre></div>
+</code></pre></td></tr></table>
+</div> <!-- class=content -->
+<div class='footer'>generated by <a href='https://git.zx2c4.com/cgit/about/'>cgit v1.2</a> (<a href='https://git-scm.com/'>git 2.18.0</a>) at 2020-11-19 12:04:00 +0000</div>
+</div> <!-- id=cgit -->
+</body>
+</html>

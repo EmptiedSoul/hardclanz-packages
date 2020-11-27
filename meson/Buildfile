@@ -1,0 +1,33 @@
+PACKAGE="meson"
+VER="0.55.0"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(python ninja)
+CONFLICTS=()
+
+URL="https://github.com/mesonbuild/meson/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    #./configure $CONFIGUREOPTS
+    true
+}
+__compilesrc(){
+    #make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    python setup.py build
+}
+__installsrc(){
+    #make $MAKEOPTS DESTDIR="$DEST" install
+    python setup.py install --prefix usr --root $DEST
+}

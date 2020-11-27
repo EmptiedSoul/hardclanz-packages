@@ -1,0 +1,38 @@
+PACKAGE="man-db"
+VER="2.9.3"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(bash gdbm zlib groff libpipeline less)
+CONFLICTS=()
+
+URL=" http://download.savannah.gnu.org/releases/man-db/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS	\
+	--disable-setuid	\
+	--enable-cache-owner=bin	\
+	--with-browser=/usr/bin/lynx	\
+	--with-vgrind=/usr/bin/vgrind	\
+	--with-grap=/usr/bin/grap	\
+	--with-systemdtmpfilesdir=	\
+	--with-systemdsystemunitdir=
+
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install --ignore-errors
+}

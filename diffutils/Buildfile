@@ -1,0 +1,26 @@
+PACKAGE="diffutils"
+VER="999git"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(glibc bash)
+CONFLICTS=()
+
+SRCURL="git://git.savannah.gnu.org/diffutils.git"
+SRCDIR="diffutils"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__preparesrc(){
+	./bootstrap
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" WERROR_CFLAGS="-Wall -Wextra"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

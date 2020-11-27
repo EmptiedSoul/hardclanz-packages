@@ -1,0 +1,31 @@
+PACKAGE="openrc"
+VER="999git"
+ARCH="installer"
+ACCESS="restricted"
+
+DEPENDS="bash"
+CONFLICTS=""
+
+SRCURL="https://github.com/OpenRC/openrc.git"
+SRCDIR="openrc"
+CRYPT="key"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__compilesrc(){
+	make $MAKEOPTS \
+		LIBNAME=lib64 \
+		DESTDIR=$DEST \
+		MKBASHCOMP=yes \
+		MKPREFIX=yes \
+		MKSYSVINIT=yes \
+		MKTERMCAP=ncurses \
+		MKZSHCOMP=yes \
+		PREFIX=/usr \
+		BRANDING=\"HarDClanZ/$(uname -s)\" \
+		SH=/bin/bash
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

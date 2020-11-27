@@ -1,0 +1,32 @@
+PACKAGE="audit"
+VER="2.8.5"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+#URL="https://github.com/linux-audit/audit-userspace/releases/download/v${VER}/"
+SRCDIR="audit-userspace-${VER}"
+SRCTGZ="v${VER}.tar.gz"
+SRCURL="https://github.com/linux-audit/audit-userspace/archive/v${VER}.tar.gz"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+./autogen.sh    
+./configure $CONFIGUREOPTS
+sed -i '53s/^/extern /' src/ausearch-common.h
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

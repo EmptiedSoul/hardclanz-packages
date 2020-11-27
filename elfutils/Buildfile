@@ -1,0 +1,30 @@
+PACKAGE="elfutils"
+VER="0.182"
+
+ARCH="installer"
+ACCESS="restricted"
+
+DEPENDS=(glibc xz zlib)
+CONFLICTS=()
+
+SRCURL="https://sourceware.org/ftp/elfutils/0.182/elfutils-0.182.tar.bz2"
+SRCTGZ="elfutils-0.182.tar.bz2"
+SRCDIR="elfutils-0.182"
+
+CRYPT="key"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xjf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

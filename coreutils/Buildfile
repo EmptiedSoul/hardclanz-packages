@@ -1,0 +1,34 @@
+PACKAGE="coreutils"
+VER="999git"
+ARCH="installer"
+ACCESS="restricted"
+DEPENDS=(glibc acl attr gmp libcap openssl)
+CONFLICTS=()
+SRCURL="git://git.sv.gnu.org/coreutils"
+SRCDIR="coreutils"
+CRYPT="key"
+
+__getsrc(){
+
+git clone $SRCURL
+
+}
+
+__preparesrc(){
+
+./bootstrap
+./configure $CONFIGUREOPTS
+
+}
+
+__compilesrc(){
+
+make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+
+}
+
+__installsrc(){
+
+make $MAKEOPTS DESTDIR="$DEST" install
+
+}

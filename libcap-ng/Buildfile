@@ -1,0 +1,31 @@
+PACKAGE="libcap-ng"
+VER="0.8.1"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(libcap)
+CONFLICTS=()
+
+URL="https://github.com/stevegrubb/libcap-ng/archive/v0.8.1.tar.gz"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="v${VER}.tar.gz"
+SRCURL="${URL}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+	./autogen.sh
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

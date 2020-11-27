@@ -1,0 +1,38 @@
+PACKAGE="bash"
+VER="5.0"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(readline glibc ncurses)
+CONFLICTS=()
+
+URL="https://ftp.gnu.org/gnu/bash/"
+SRCTGZ="${PACKAGE}-${VER}.tar.gz"
+SRCDIR="${PACKAGE}-${VER}"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xzf $SRCTGZ
+}
+__preparesrc(){
+	./configure $CONFIGUREOPTS	\
+	--without-bash-malloc	\
+	--with-installed-readline	\
+	--enable-job-control
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+	mkdir -p $DEST/bin
+	mv $DEST/usr/bin/bash $DEST/bin/bash
+	pushd $DEST
+	ln -s bin/bash bin/sh
+	popd
+}

@@ -1,0 +1,31 @@
+PACKAGE="bzip2"
+VER="1.0.8"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(glibc bash)
+CONFLICTS=()
+
+SRCURL="https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz"
+SRCTAR="bzip2-1.0.8.tar.gz"
+SRCDIR="bzip2-1.0.8"
+
+__getsrc(){
+	wget $SRCURL
+}
+__unpacksrc(){
+	tar xzf $SRCTAR
+}
+__compilesrc(){
+	make $MAKEOPTS -f Makefile-libbz2_so
+	make $MAKEOPTS PREFIX=$DEST/usr
+}
+__installsrc(){
+	make $MAKEOPTS PREFIX=$DEST/usr install
+	cp -v *.so.* $DEST/usr/lib >&2
+	pushd $DEST/usr/lib
+	ln -sfv libbz2.so.1.0.8 libbz2.so.1.0
+	popd
+}

@@ -1,0 +1,31 @@
+PACKAGE="acl"
+VER="999git"
+CRYPT="key"
+
+ARCH="installer"
+ACCESS="restricted"
+
+DEPENDS=(attr)
+CONFLICTS=()
+
+SRCURL="https://git.savannah.nongnu.org/git/acl.git"
+SRCDIR="acl"
+
+__getsrc(){
+	git clone "$SRCURL"
+}
+
+__preparesrc(){
+	./autogen.sh
+	autoreconf
+	./configure $CONFIGUREOPTS
+}
+
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install install-lib
+	true
+}

@@ -1,0 +1,25 @@
+PACKAGE="bc"
+VER="999git"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(readline)
+CONFLICTS=()
+
+SRCURL="https://git.yzena.com/gavin/bc.git"
+SRCDIR="bc"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__preparesrc(){
+	./configure --prefix=/usr
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install 
+}

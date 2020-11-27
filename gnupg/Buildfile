@@ -1,0 +1,32 @@
+PACKAGE="gnupg"
+VER="2.2.21"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(libassuan libgcrypt libksba npth pinentry)
+CONFLICTS=()
+
+URL="https://www.gnupg.org/ftp/gcrypt/gnupg/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xjf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS \
+	--enable-g13 \
+	--enable-symcryptrun
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

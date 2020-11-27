@@ -1,0 +1,30 @@
+PACKAGE="vim"
+VER="8.2.1361"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+CONFLICTS=()
+DEPENDS=(gmp glibc zlib libffi)
+
+URL="http://anduin.linuxfromscratch.org/LFS/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

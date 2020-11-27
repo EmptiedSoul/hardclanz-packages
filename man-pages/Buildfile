@@ -1,0 +1,32 @@
+PACKAGE="man-pages"
+VER="5.08"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="https://www.kernel.org/pub/linux/docs/man-pages/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+   # ./configure $CONFIGUREOPTS
+    true
+}
+__compilesrc(){
+#    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" --ignore-errors
+    true
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install --ignore-errors
+}

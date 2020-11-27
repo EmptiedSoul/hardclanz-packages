@@ -1,0 +1,25 @@
+PACKAGE="dejagnu"
+VER="999git"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(bash expect)
+CONFLICTS=()
+
+SRCURL="git://git.savannah.gnu.org/dejagnu.git"
+SRCDIR="dejagnu"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__preparesrc(){
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="CFLAGS="$CFLAGS"" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install --keep-going --ignore-errors
+}

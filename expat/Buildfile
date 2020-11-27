@@ -1,0 +1,29 @@
+PACKAGE="expat"
+VER="2.2.9"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(glibc)
+CONFLICTS=()
+
+SRCURL="https://prdownloads.sourceforge.net/expat/expat-2.2.9.tar.xz"
+SRCTGZ="expat-2.2.9.tar.xz"
+SRCDIR="expat-2.2.9"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

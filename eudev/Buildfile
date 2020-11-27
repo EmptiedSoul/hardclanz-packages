@@ -1,0 +1,38 @@
+PACKAGE="eudev"
+VER="3.2.9"
+
+ARCH="installer"
+ACCESS="restricted"
+
+DEPENDS=(acl libcap kbd kmod util-linux elfutils)
+CONFLICTS=()
+
+CRYPT="key"
+
+SRCURL="https://dev.gentoo.org/~blueness/eudev/eudev-3.2.9.tar.gz"
+SRCTGZ="eudev-3.2.9.tar.gz"
+SRCDIR="eudev-3.2.9"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS	\
+	--bindir=/sbin          \
+            --sbindir=/sbin         \
+            --libdir=/usr/lib       \
+            --libexecdir=/lib       \
+            --with-rootprefix=      \
+            --with-rootlibdir=/lib  \
+            --enable-manpages       \
+            --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

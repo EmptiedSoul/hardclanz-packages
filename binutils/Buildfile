@@ -1,0 +1,37 @@
+PACKAGE="binutils"
+VER="2.35.1"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(glibc zlib elfutils)
+CONFLICTS=()
+
+URL="https://ftp.gnu.org/gnu/binutils/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xJf $SRCTGZ
+}
+__preparesrc(){
+	./configure $CONFIGUREOPTS \
+	--enable-gold	\
+	--enable-ld=default	\
+	--enable-plugins	\
+	--with-system-zlib	\
+	--enable-shared \
+	--disable-werror \
+	--enable-64-bit-bfd 
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

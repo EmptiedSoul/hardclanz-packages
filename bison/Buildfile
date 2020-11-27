@@ -1,0 +1,30 @@
+PACKAGE="bison"
+VER="999git"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(glibc m4 bash)
+CONFLICTS=()
+
+SRCURL="https://git.savannah.gnu.org/git/bison.git"
+SRCDIR="bison"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__preparesrc(){
+	./bootstrap
+	git submodule update --init
+	./bootstrap
+	autopoint --force
+	autoreconf -f -i
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

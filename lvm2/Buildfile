@@ -1,0 +1,35 @@
+PACKAGE="lvm2"
+VER="2.03.10"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="https://sourceware.org/ftp/lvm2/"
+SRCDIR="LVM2.${VER}"
+SRCTGZ="${SRCDIR}.tgz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS \
+	--exec-prefix=	\
+	--enable-cmdlib	\
+	--enable-pkgconfig	\
+	--enable-udev_sync
+
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,29 @@
+PACKAGE="attr"
+VER="999git"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(glibc)
+CONFLICTS=()
+
+SRCURL="https://git.savannah.nongnu.org/git/attr.git"
+SRCDIR="attr"
+
+__getsrc(){
+	git clone $SRCURL
+}
+
+__preparesrc(){
+	./autogen.sh
+	./configure $CONFIGUREOPTS
+}
+
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

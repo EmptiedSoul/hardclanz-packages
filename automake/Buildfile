@@ -1,0 +1,28 @@
+PACKAGE="automake"
+VER="999git"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(perl bash)
+CONFLICTS=()
+
+SRCURL="git://git.savannah.gnu.org/automake.git"
+SRCDIR="automake"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__preparesrc(){
+	./bootstrap
+	autopoint --force
+	autoreconf -f -i
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

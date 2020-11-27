@@ -1,0 +1,37 @@
+PACKAGE="libcap"
+VER="2.42"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(glibc attr)
+CONFLICTS=()
+
+URL="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    #./configure $CONFIGUREOPTS
+    true
+}
+__compilesrc(){
+    make $MAKEOPTS lib=lib CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS lib=lib DESTDIR="$DEST" install
+	mkdir -p $DEST/usr/lib
+	ln -sfv $DEST/lib/libcap.so.2 $DEST/usr/lib/libcap.so
+	chmod -v 755 $DEST/lib/libcap.so.2.42
+	mv -v $DEST/lib/libpsx.a $DEST/usr/lib
+	rm -v $DEST/lib/libcap.so
+
+}

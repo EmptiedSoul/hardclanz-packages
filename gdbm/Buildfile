@@ -1,0 +1,32 @@
+PACKAGE="gdbm"
+VER="1.18.1"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(bash glibc)
+CONFLICTS=()
+
+URL="http://ftp.gnu.org/gnu/gdbm/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    sed -i '258,259s/^/extern /' src/parseopt.c >&2
+    ./configure $CONFIGUREOPTS	\
+	--enable-libgdbm-compat 
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

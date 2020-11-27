@@ -1,0 +1,27 @@
+PACKAGE="check"
+VER="999git"
+
+ACCESS="restricted"
+ARCH="installer"
+CRYPT="key"
+
+DEPENDS=(gawk)
+CONFLICTS=()
+
+SRCURL="https://github.com/libcheck/check.git"
+SRCDIR="check"
+
+__getsrc(){
+	git clone $SRCURL
+}
+__preparesrc(){
+	autopoint --force
+	autoreconf -f -i
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR=$DEST install
+}

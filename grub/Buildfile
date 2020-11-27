@@ -1,0 +1,31 @@
+PACKAGE="grub"
+VER="2.04"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(sh xz gettext)
+CONFLICTS=()
+
+SRCURL="https://git.savannah.gnu.org/git/grub.git"
+SRCDIR="grub"
+
+__getsrc(){
+    git clone $SRCURL
+}
+__preparesrc(){
+    ./bootstrap
+    ./autogen.sh
+    ./configure $CONFIGUREOPTS	\
+	--sbindir=/sbin	\
+	--disable-efiemu	\
+	--disable-werror	
+
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS"  CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

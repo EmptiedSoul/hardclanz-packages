@@ -1,0 +1,34 @@
+PACKAGE="openssl"
+VER="1.1.1g"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(perl)
+CONFLICTS=()
+
+URL="https://www.openssl.org/source/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./config --prefix=/usr	\
+	--openssldir=/etc/ssl	\
+	--libdir=lib	\
+	shared	\
+	zlib-dynamic
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

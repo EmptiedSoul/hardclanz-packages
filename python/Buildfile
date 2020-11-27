@@ -1,0 +1,34 @@
+PACKAGE="python"
+VER="3.8.5"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(bzip2 expat gdbm libffi openssl zlib)
+CONFLICTS=()
+
+URL="https://www.python.org/ftp/python/${VER}/"
+SRCDIR="Python-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS \
+	--enable-shared	\
+	--without-ensurepip	\
+	--with-system-expat	\
+	--with-system-ffi
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

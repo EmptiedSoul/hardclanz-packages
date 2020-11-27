@@ -1,0 +1,31 @@
+PACKAGE="xml-parser"
+VER="2.46"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(expat)
+CONFLICTS=()
+
+URL="https://cpan.metacpan.org/authors/id/T/TO/TODDR/"
+SRCDIR="XML-Parser-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    #./configure $CONFIGUREOPTS
+    perl Makefile.PL
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

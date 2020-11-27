@@ -1,0 +1,38 @@
+PACKAGE="perl"
+VER="5.32.0"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(gdbm glibc)
+CONFLICTS=()
+
+URL="https://www.cpan.org/src/5.0/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    sh Configure -des	\
+	     -Dprefix=/usr                               \
+             -Dvendorprefix=/usr                         \
+             -Dprivlib=/usr/lib/perl5/5.32/core_perl     \
+             -Darchlib=/usr/lib/perl5/5.32/core_perl     \
+             -Dsitelib=/usr/lib/perl5/5.32/site_perl     \
+             -Dsitearch=/usr/lib/perl5/5.32/site_perl    \
+             -Dvendorlib=/usr/lib/perl5/5.32/vendor_perl \
+             -Dvendorarch=/usr/lib/perl5/5.32/vendor_perl
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
