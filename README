@@ -1,0 +1,65 @@
+--- HarDClanZ Package Collection ---
+
+* This repository contains all software adopted by HarDClanZ Linux 
+* Every directory contains a Buildfile - script used to create .hard package
+* HarDClanZ adopts only free software (published under terms or FSF or OSI approved licenses or public domain)
+
+--- Creating Packages ---
+
+* Buildfile - shell script used to create .hard package
+* contains:
+* predefined:
+	$CONFIGUREOPTS - default options for ./configure
+	$DEST	 - resulting directory
+	$MAKEOPTS - make options defined in /etc/hpkg/make.conf
+	$CFLAGS	 - C compile flags defined in /etc/hpkg/make.conf
+	$CXXFLAGS - CXX compile flags defined in /etc/hpkg/make.conf
+* user-defined:
+	$PACKAGE - package name
+	$VER	 - package version
+	$ARCH	 - hard archive type (mostly installer)
+	$ACCESS	 - hard archive access (mostly restricted)
+	$CRYPT	 - hard archive encrypt (mostly key)
+(@)	$DEPENDS - space-separated array of dependencies
+(@)	$CONFLICTS - space-separated array of conflicts
+	$SRCURL	 - URL to be fetched
+	$SRCTGZ	 - file that will be fetched
+	$SRCDIR	 - dir entered after $SRCTGZ unpacking
+	__getsrc - function fetching $SRCURL
+	__unpacksrc - function unpacking $SRCTGZ
+	__preparesrc - function preparing $SRCDIR (./configure, applying patches, etc)
+	__compilesrc - function compiling $SRCDIR (make, etc)
+	__installsrc - function installing $SRCDIR in $DEST (make install, etc)
+
+# Note: hmake automatically enters $SRCDIR before calling __preparesrc
+#	hmake automatically safely strips static, shared libs and executables
+
+* Use Buildfile-example as example 
+
+* hmake - tool to create .hard packages using related Buildfile
+	cd ./<desired-package>
+	hmake build	# Create package
+	hmake install	# Install package
+	hmake distclean	# Clean directory
+* buildrepo - tool to build entire repository
+	# root of repository dir
+	buildrepo
+	# 1. Cast 'hmake distclean' for every package
+	# 2. Cast 'hmake build' for every package
+	# 3. Copy packages in 'repo' directory
+	# 4. Write entries in repo/ROADMAP
+
+* For additional information read documentation that can be found in hpkg/packing repo
+
+--- Contributing ---
+
+* 1. Clone repository, create new work branch and switch on it
+* 2. Look TODO file and choose package that need to be adopted
+* 3. mkdir <chosen-package> && cd <chosen-package>
+* 4. Create Buildfile (you may use Buildfile-example as example)
+* 5. Make sure your package builds successfully
+* 6. Make sure your package is correct and installable
+* 7. Make sure your package have suitable license
+* 8. Form and send pull-request
+
+* considered free software

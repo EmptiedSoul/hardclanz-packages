@@ -1,0 +1,42 @@
+networking:
+* pump (dhcp client)
+* bind9 (dns client)
+(later)
+* nm (??)
+* wicd (?)
+* wan-supplicant (wireless)
+
+utilities:
+* neofetch (with HarDClanZ)
+* curl (ASAP (need for hardman))
+* wget (download)
+(later)
+* imagemagick
+
+Audio:
+* ALSA
+* PulseAudio
+
+X11:
+* xorg + libs (graphics server)
+* fonts including asian
+* suckless' dwm (Tiling WM)
+* suckless' dmenu (menu)
+* Mozilla Firefox (web-browser)
+* Mozilla Thunderbird (mail)
+* Openbox + obconf (Stack WM)
+* PCManFM (file manager)
+* VLC, mplayer (media)
+* QT5 + GTK2,3 (general X11 toolkits)
+(later)
+* KDE 
+* Xfce
+* LXDE/LXQt
+
+Editors:
+* vim 
+* emacs
+* kate
+
+freedesktop.org:
+* dbus
