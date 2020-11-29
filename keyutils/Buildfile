@@ -1,0 +1,32 @@
+PACKAGE="keyutils"
+VER="1.6.1"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(bash glibc)
+CONFLICTS=()
+
+URL="http://people.redhat.com/%7Edhowells/keyutils/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xjf $SRCTGZ
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    mkdir -p $DEST/usr/{lib,bin}
+    install -D *.so   $DEST/usr/lib/
+    install -D *.so.* $DEST/usr/lib/
+    install -D keyctl $DEST/usr/bin/
+    install -D key.dns_resolver $DEST/usr/bin/
+    install -D request-key $DEST/usr/bin/
+}
