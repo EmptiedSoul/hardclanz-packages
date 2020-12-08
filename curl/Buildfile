@@ -20,7 +20,9 @@ __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+    ./configure $CONFIGUREOPTS	\
+	--without-brotli	\
+	--without-librtmp
 }
 __compilesrc(){
     make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
