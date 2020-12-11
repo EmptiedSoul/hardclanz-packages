@@ -1,0 +1,30 @@
+PACKAGE="pcre2"
+VER="10.36"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(gcc readline bash zlib bzip2)
+CONFLICTS=()
+
+URL="https://ftp.pcre.org/pub/pcre/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
