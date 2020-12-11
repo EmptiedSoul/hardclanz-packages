@@ -1,0 +1,35 @@
+PACKAGE="libxcrypt"
+VER="4.4.17"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(glibc)
+CONFLICTS=()
+
+URL="https://github.com/besser82/libxcrypt/archive/v${VER}.tar.gz"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="v${VER}.tar.gz"
+SRCURL="${URL}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    	./autogen.sh
+	./configure $CONFIGUREOPTS \
+	--disable-static \
+	--enable-hashes=strong,glibc \
+	--enable-obsolete-api=no \
+	--disable-failure-tokens
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
