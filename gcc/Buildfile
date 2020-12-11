@@ -22,6 +22,7 @@ __unpacksrc(){
 __preparesrc(){
     ./configure $CONFIGUREOPTS	\
 	LD=ld	\
+	--disable-bootstrap \
 	--with-system-zlib
 }
 __compilesrc(){
