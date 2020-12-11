@@ -28,6 +28,6 @@ __compilesrc(){
     make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
 __installsrc(){
-    mkdir -p $DEST/usr/sbin $DEST/usr/share/man/man8
-    make $MAKEOPTS prefix="$DEST" install --ignore-errors
+    mkdir -p $DEST/sbin $DEST/usr/share/man/man8
+    make $MAKEOPTS prefix="$DEST" BINDIR="$DEST/sbin" install --ignore-errors
 }
