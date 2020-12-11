@@ -1,0 +1,36 @@
+PACKAGE="sysvinit"
+VER="2.98"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(bash glibc)
+CONFLICTS=()
+
+URL="https://download-mirror.savannah.gnu.org/releases/sysvinit/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+sed -i 's@Sending processes@& started by init@g' \
+	src/init.c
+sed -i -e 's@/dev/initctl@$(ROOT)&@g' \
+    -e 's@\(mknod \)-m \([0-9]* \)\(.* \)p@\1\3p; chmod \2\3@g' \
+    -e 's@/usr/lib@$(ROOT)&@' \
+    src/Makefile
+}
+__compilesrc(){
+make -C src clobber LDLIBS="-lcrypt -lutil"
+make -C src ROOT="$DEST" LDLIBS="-lcrypt -lutil"
+}
+__installsrc(){
+make $MAKEOPTS -C src ROOT="$DEST" INSTALL="install" install
+}
