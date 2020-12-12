@@ -1,0 +1,32 @@
+PACKAGE="xf86-video-nouveau"
+VER="1.0.16"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(libdrm xorgproto)
+CONFLICTS=()
+
+URL="https://x.org/releases/individual/driver/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xjf $SRCTGZ
+}
+__preparesrc(){
+    	patch -p1 < ../patches/rootless-nouveau.patch
+	export LDFLAGS="-Wl,-z,lazy"
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS -fcommon" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

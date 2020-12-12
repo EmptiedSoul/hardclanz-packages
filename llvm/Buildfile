@@ -1,0 +1,43 @@
+PACKAGE="llvm"
+VER="11.0.0"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(zlib)
+CONFLICTS=()
+
+URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${VER}/"
+SRCDIR="${PACKAGE}-${VER}.src"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	cmake -B build \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DLLVM_BUILD_LLVM_DYLIB=ON \
+	-DLLVM_LINK_LLVM_DYLIB=ON \
+	-DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
+	-DLLVM_ENABLE_RTTI=ON \
+	-DLLVM_HOST_TRIPLE="$(cc -dumpmachine)" \
+	-DLLVM_BUILD_EXAMPLES=OFF \
+	-DLLVM_BUILD_DOCS=OFF \
+	-DLLVM_BUILD_TESTS=OFF \
+	-DLLVM_ENABLE_LIBXML2=OFF \
+	-Wno-dev
+}
+__compilesrc(){
+cmake --build build
+}
+__installsrc(){
+cmake --install build
+}

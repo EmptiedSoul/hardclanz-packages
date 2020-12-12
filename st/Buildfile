@@ -1,0 +1,32 @@
+PACKAGE="st"
+VER="0.8.4"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(fontconfig libX11 libXft)
+CONFLICTS=()
+
+URL="https://dl.suckless.org/st/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's/Liberation Mono/Monospace/g' config.def.h
+	export TERMINFO="$DEST/usr/share/terminfo"
+	mkdir -p "$TERMINFO"
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS PREFIX="/usr" DESTDIR="$DEST" install
+}

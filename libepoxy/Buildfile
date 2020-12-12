@@ -1,0 +1,36 @@
+PACKAGE="libepoxy"
+VER="1.5.4"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="https://github.com/anholt/libepoxy/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	meson \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+	--mandir=/usr/share/man \
+	-Dhas-dlvsym=false \
+	. output
+}
+__compilesrc(){
+	ninja -C output
+}
+__installsrc(){
+	ninja -C output install
+}

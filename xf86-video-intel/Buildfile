@@ -1,0 +1,38 @@
+PACKAGE="xf86-video-intel"
+VER="846b53dacd96981329bcb9ef348e6acba0b53e94"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(libXScrnSaver libXcursir libXinerama libXrandr libXtst xorg-server)
+CONFLICTS=()
+
+URL="https://gitlab.freedesktop.org/xorg/driver/xf86-video-intel/-/archive/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	export LDFLAGS="-Wl,-z,lazy"
+	meson \
+	--prefix=/usr \
+	--libexecdir=/usr/lib \
+	-Ddefault-dri=3 \
+	-Dxvmc=false \
+	-Dvalgrind=false \
+	. build
+}
+__compilesrc(){
+	ninja -C build
+}
+__installsrc(){
+	ninja -C build install
+}

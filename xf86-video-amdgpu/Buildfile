@@ -1,0 +1,31 @@
+PACKAGE="xf86-video-amdgpu"
+VER="19.1.0"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(expat libdrm libpciaccess mesa xorgproto)
+CONFLICTS=()
+
+URL="https://x.org/releases/individual/driver/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xjf $SRCTGZ
+}
+__preparesrc(){
+    patch -p1 < ../patches/rootless-amdgpu.patch
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS -fcommon" CXXFLAGS="$CXXFLAGS" LDFLAGS="-Wl,-z,lazy"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

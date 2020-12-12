@@ -1,0 +1,32 @@
+PACKAGE="freetype-harfbuzz"
+VER="2.10.2"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(bzip2 expat glib libX11 libXau libXdamage libXext libXfixes libXrender libXxf86vm libdrm libpng libxcb libxshmfence mesa pixman zlib)
+CONFLICTS=()
+
+URL="https://download-mirror.savannah.gnu.org/releases/freetype/"
+SRCDIR="${PACKAGE%-harfbuzz}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	
+   CFLAGS="$CFLAGS -DDEFAULT_TT_INTERPRETER_VERSION=TT_INTERPRETER_VERSION_40" ./configure $CONFIGUREOPTS \
+	--enable-freetype-config
+}
+__compilesrc(){
+    make 
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

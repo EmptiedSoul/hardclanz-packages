@@ -1,0 +1,36 @@
+PACKAGE="libxkbcommon"
+VER="1.0.3"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="https://xkbcommon.org/download/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    export DESTDIR="$DEST"
+    meson \
+	--prefix=/usr \
+	-Denable-wayland=false \
+	-Denable-docs=false \
+	-Denable-xkbregistry=false \
+	. output
+}
+__compilesrc(){
+    ninja -C output
+}
+__installsrc(){
+    ninja -C output install
+}

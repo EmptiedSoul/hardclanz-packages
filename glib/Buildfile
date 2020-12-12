@@ -1,0 +1,44 @@
+PACKAGE="glib"
+VER="2.66.3"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(zlib libffi)
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/glib/2.66/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	sed -i 's/HAVE_LIBELF/HAVE_KISS/' gio/meson.build
+	sed -i 's/libmount_dep.found()/false/' meson.build
+	find . -type f -name meson.build -exec \
+	sed -i "/subdir('tests')/d;/subdir('fuzzing')/d" {} +
+
+	meson \
+	--prefix=/usr \
+	-Dlibmount=disabled \
+	-Dinstalled_tests=false \
+	-Ddefault_library=both \
+	-Dman=false \
+	-Dfam=false \
+	-Dinternal_pcre=true \
+	. build
+}
+__compilesrc(){
+	ninja -C build
+}
+__installsrc(){
+	ninja -C build install
+}

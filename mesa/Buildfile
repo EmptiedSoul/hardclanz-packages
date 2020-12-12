@@ -1,0 +1,39 @@
+PACKAGE="mesa"
+VER="20.2.3"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(expat libX11 libXdamage libXext libXrandr libXrender libXxf86vm libdrm libxcb libxshmfence llvm xorgproto zlib)
+CONFLICTS=()
+
+URL="https://archive.mesa3d.org/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    curl -LO $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	sed -i "/pre_args += '-DUSE_ELF_TLS'/d" meson.build
+	meson \
+	--prefix=/usr \
+	--mandir=/usr/share/man \
+	--localstatedir=/var \
+	--buildtype=release \
+	-Dplatforms=x11,drm \
+	-Dzstd=false \
+	. output
+}
+__compilesrc(){
+	ninja -C output
+}
+__installsrc(){
+	ninja -C output install
+}

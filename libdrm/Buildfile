@@ -1,0 +1,33 @@
+PACKAGE="libdrm"
+VER="2.4.103"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(libpciaccess)
+CONFLICTS=()
+
+URL="https://dri.freedesktop.org/libdrm/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	meson \
+	--prefix=/usr \
+	. build
+}
+__compilesrc(){
+	ninja -C build
+}
+__installsrc(){
+	ninja -C build install
+}

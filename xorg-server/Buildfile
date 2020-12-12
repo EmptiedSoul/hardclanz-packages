@@ -1,0 +1,44 @@
+PACKAGE="xorg-server"
+VER="1.20.9"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfrontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib)
+CONFLICTS=()
+
+URL="https://x.org/releases/individual/xserver/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xjf $SRCTGZ
+}
+__preparesrc(){
+    	patch -p1 < ../patches/rootless_modesetting.patch
+	patch -p1 < ../patches/fix-crash.patch
+	./configure $CONFIGUREOPTS \
+	--localstatedir=/var \
+	--disable-systemd-logind \
+	--disable-xwayland \
+	--disable-unit-tests \
+	--enable-glx \
+	--enable-dri \
+	--enable-dri2 \
+	--enable-dri3 \
+	--enable-glamor \
+	--enable-xorg \
+	--with-sha1=libcrypto \
+	--with-systemd-daemon=off
+}
+__compilesrc(){
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

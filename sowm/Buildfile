@@ -1,0 +1,30 @@
+PACKAGE="sowm"
+VER="1.6"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(libX11)
+CONFLICTS=()
+
+URL="https://github.com/dylanaraps/sowm/archive/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${VER}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+#__preparesrc(){
+    #./configure $CONFIGUREOPTS
+#}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
