@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfrontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib)
+DEPENDS=(fontconfig bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib brotli graphite2 libunwind)
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/xserver/"

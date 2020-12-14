@@ -1,14 +1,14 @@
-PACKAGE="zstd"
-VER="1.4.5"
+PACKAGE="gc"
+VER="8.0.4"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(zlib xz)
+DEPENDS=(libatomic_ops)
 CONFLICTS=()
 
-URL="https://github.com/facebook/zstd/releases/download/v${VER}/"
+URL="https://www.hboehm.info/gc/gc_source/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
@@ -20,12 +20,13 @@ __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
-    #./configure $CONFIGUREOPTS
-    true
+    ./configure $CONFIGUREOPTS \
+	--enable-cplusplus \
+	--disable-static
 }
 __compilesrc(){
     make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" prefix=/usr install
+    make $MAKEOPTS DESTDIR="$DEST" install
 }

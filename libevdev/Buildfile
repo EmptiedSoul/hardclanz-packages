@@ -1,31 +1,31 @@
-PACKAGE="zstd"
-VER="1.4.5"
+PACKAGE="libevdev"
+VER="1.10.0"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(zlib xz)
+DEPENDS=()
 CONFLICTS=()
 
-URL="https://github.com/facebook/zstd/releases/download/v${VER}/"
+URL="https://www.freedesktop.org/software/libevdev/"
 SRCDIR="${PACKAGE}-${VER}"
-SRCTGZ="${SRCDIR}.tar.gz"
+SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
     wget -q $SRCURL
 }
 __unpacksrc(){
-    tar xzf $SRCTGZ
+    tar xJf $SRCTGZ
 }
 __preparesrc(){
-    #./configure $CONFIGUREOPTS
-    true
+    ./configure $CONFIGUREOPTS \
+	--disable-gcov
 }
 __compilesrc(){
     make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" prefix=/usr install
+    make $MAKEOPTS DESTDIR="$DEST" install
 }

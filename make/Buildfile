@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(glibc guile)
+DEPENDS=(gc glibc guile)
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/make/"

@@ -1,0 +1,41 @@
+PACKAGE="libinput"
+VER="1.16.3"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(libevdev mtdev)
+CONFLICTS=()
+
+URL="https://github.com/wayland-project/libinput/archive/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${VER}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	meson \
+	--prefix=/usr \
+	--sysconfdi/etc \
+	--mandir=/usr/share/man \
+	--libexecdir=/usr/lib \
+	-Ddebug-gui=false \
+	-Ddocumentation=false \
+	-Dtests=false \
+	-Dlibwacom=false \
+	-Dudev=true \
+	. output
+}
+__compilesrc(){
+	ninja -C output
+}
+__installsrc(){
+	ninja -C output install
+}

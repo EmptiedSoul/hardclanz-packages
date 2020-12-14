@@ -1,5 +1,5 @@
 PACKAGE="freetype-harfbuzz"
-VER="2.10.2"
+VER="2.10.4"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -15,17 +15,47 @@ SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
     wget -q $SRCURL
+    wget -q "https://github.com/harfbuzz/harfbuzz/archive/2.7.2.tar.gz" # harfbuzz
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
+    tar xzf 2.7.2.tar.gz -C "$SRCDIR"/
+    mv "$SRCDIR"/harfbuzz-2.7.2 "$SRCDIR"/harfbuzz
 }
 __preparesrc(){
 	
    CFLAGS="$CFLAGS -DDEFAULT_TT_INTERPRETER_VERSION=TT_INTERPRETER_VERSION_40" ./configure $CONFIGUREOPTS \
-	--enable-freetype-config
+	--enable-freetype-config \
+	--with-harfbuzz="no"
+   make $MAKEOPTS
+   make $MAKEOPTS DESTDIR="$DEST" install
+   cd harfbuzz
+   export DESTDIR="$DEST"
+   export CFLAGS="$CFLAGS -I$DEST/usr/include/freetype2"
+   export CXXFLAGS="$CXXFLAGS -I$DEST/usr/include/freetype2"
+   export LDFLAGS="$LDFLAGS -L$DEST/usr/lib"
+   meson \
+	--prefix=/usr \
+	-Dpkg_config_path="$DEST/usr/lib/pkgconfig" \
+	-Ddefault_library=both \
+	-Dglib=enabled \
+	-Dfreetype=enabled \
+	-Dcairo=disabled \
+	-Dicu=disabled \
+	-Dbenchmark=disabled \
+	-Dtest=disabled \
+	. output
+   ninja -C output
+   ninja -C output install
+   cd ..
+   export HARFBUZZ_CFLAGS="-I$PWD/harfbuzz/src"
+   export HARFBUZZ_LIBS="-L$PWD/harfbuzz/output/src -lharfbuzz"
+   CFLAGS="$CFLAGS -DDEFAULT_TT_INTERPRETER_VERSION=TT_INTERPRETER_VERSION_40" ./configure $CONFIGUREOPTS \
+	--enable-freetype-config \
+	--with-harfbuzz="yes"
 }
 __compilesrc(){
-    make 
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

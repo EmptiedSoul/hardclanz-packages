@@ -1,29 +1,29 @@
-PACKAGE="gettext"
-VER="0.21"
+PACKAGE="dwm"
+VER="6.2"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(gcc acl bash)
+DEPENDS=()
 CONFLICTS=()
 
-URL="http://ftp.gnu.org/gnu/gettext/"
+URL="https://dl.suckless.org/dwm/"
 SRCDIR="${PACKAGE}-${VER}"
-SRCTGZ="${SRCDIR}.tar.xz"
+SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
     wget -q $SRCURL
 }
 __unpacksrc(){
-    tar xJf $SRCTGZ
+    tar xzf $SRCTGZ
 }
-__preparesrc(){
-    ./configure $CONFIGUREOPTS
-}
+#__preparesrc(){
+#    ./configure $CONFIGUREOPTS
+#}
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" CC=gcc
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

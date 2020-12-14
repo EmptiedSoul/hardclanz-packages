@@ -1,14 +1,14 @@
-PACKAGE="zstd"
-VER="1.4.5"
+PACKAGE="libunwind"
+VER="1.5.0"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(zlib xz)
+DEPENDS=()
 CONFLICTS=()
 
-URL="https://github.com/facebook/zstd/releases/download/v${VER}/"
+URL="https://github.com/libunwind/libunwind/releases/download/v1.5/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
@@ -20,12 +20,11 @@ __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
-    #./configure $CONFIGUREOPTS
-    true
+    ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
     make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" prefix=/usr install
+    make $MAKEOPTS DESTDIR="$DEST" install
 }

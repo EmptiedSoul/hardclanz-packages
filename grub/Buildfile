@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(sh xz gettext)
+DEPENDS=(bash xz gettext)
 CONFLICTS=()
 
 SRCURL="https://git.savannah.gnu.org/git/grub.git"

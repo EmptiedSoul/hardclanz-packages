@@ -1,5 +1,5 @@
 PACKAGE="bison"
-VER="999git"
+VER="3.7.1"
 
 ACCESS="restricted"
 ARCH="installer"
@@ -8,18 +8,18 @@ CRYPT="key"
 DEPENDS=(glibc m4 bash)
 CONFLICTS=()
 
-SRCURL="https://git.savannah.gnu.org/git/bison.git"
-SRCDIR="bison"
+URL="http://ftp.gnu.org/gnu/bison/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xJf $SRCTGZ
 }
 __preparesrc(){
-	./bootstrap
-	git submodule update --init
-	./bootstrap
-	autopoint --force
-	autoreconf -f -i
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){

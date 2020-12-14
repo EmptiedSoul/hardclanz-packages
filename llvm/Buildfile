@@ -36,7 +36,7 @@ __preparesrc(){
 	-Wno-dev
 }
 __compilesrc(){
-cmake --build build
+cmake --build build $MAKEOPTS
 }
 __installsrc(){
 cmake --install build

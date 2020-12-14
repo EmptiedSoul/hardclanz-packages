@@ -1,5 +1,5 @@
 PACKAGE="attr"
-VER="999git"
+VER="2.4.48"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -8,22 +8,23 @@ CRYPT="key"
 DEPENDS=(glibc)
 CONFLICTS=()
 
-SRCURL="https://git.savannah.nongnu.org/git/attr.git"
-SRCDIR="attr"
+URL="http://download.savannah.gnu.org/releases/attr/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
 }
-
+__unpacksrc(){
+	tar xzf $SRCTGZ 
+}
 __preparesrc(){
-	./autogen.sh
 	./configure $CONFIGUREOPTS
 }
-
 __compilesrc(){
 	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
-
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install
 }

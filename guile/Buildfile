@@ -27,4 +27,5 @@ __compilesrc(){
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
+	find "$DEST/usr/lib" -name "*-scm*" -delete
 }

@@ -1,5 +1,5 @@
 PACKAGE="bc"
-VER="999git"
+VER="3.1.5"
 
 ACCESS="restricted"
 ARCH="installer"
@@ -9,10 +9,15 @@ DEPENDS=(readline)
 CONFLICTS=()
 
 SRCURL="https://git.yzena.com/gavin/bc.git"
-SRCDIR="bc"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xJF $SRCTGZ
 }
 __preparesrc(){
 	./configure --prefix=/usr

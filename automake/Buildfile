@@ -1,5 +1,5 @@
 PACKAGE="automake"
-VER="999git"
+VER="1.16.2"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -8,16 +8,18 @@ CRYPT="key"
 DEPENDS=(perl bash)
 CONFLICTS=()
 
-SRCURL="git://git.savannah.gnu.org/automake.git"
-SRCDIR="automake"
+URL="http://ftp.gnu.org/gnu/automake/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	 tar xJf $SRCTGZ
 }
 __preparesrc(){
-	./bootstrap
-	autopoint --force
-	autoreconf -f -i
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){

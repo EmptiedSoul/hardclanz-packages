@@ -1,23 +1,25 @@
 PACKAGE="autoconf"
-VER="999git"
+VER="2.69"
 
 ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
 
-DEPENDS=(gawk m4 diffutils perl sh)
+DEPENDS=(gawk m4 diffutils perl bash)
 CONFLICTS=()
 
-SRCURL="git://git.sv.gnu.org/autoconf"
-SRCDIR="autoconf"
+URL="http://ftp.gnu.org/gnu/autoconf/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xJf $SRCTGZ
 }
 __preparesrc(){
-	po/update-potfiles
-	autopoint --force
-	autoreconf -f -i
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){

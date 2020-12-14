@@ -1,5 +1,5 @@
 PACKAGE="dejagnu"
-VER="999git"
+VER="1.6.2"
 
 ACCESS="restricted"
 ARCH="installer"
@@ -8,17 +8,22 @@ CRYPT="key"
 DEPENDS=(bash expect)
 CONFLICTS=()
 
-SRCURL="git://git.savannah.gnu.org/dejagnu.git"
-SRCDIR="dejagnu"
+URL="http://ftp.gnu.org/gnu/dejagnu/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xzf $SRCTGZ
 }
 __preparesrc(){
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="CFLAGS="$CFLAGS"" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install --keep-going --ignore-errors

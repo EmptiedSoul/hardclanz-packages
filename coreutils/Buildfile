@@ -1,34 +1,29 @@
 PACKAGE="coreutils"
-VER="999git"
+VER="8.32"
+
 ARCH="installer"
 ACCESS="restricted"
+
 DEPENDS=(glibc acl attr gmp libcap openssl)
 CONFLICTS=()
-SRCURL="git://git.sv.gnu.org/coreutils"
-SRCDIR="coreutils"
+
+URL="http://ftp.gnu.org/gnu/coreutils/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
 CRYPT="key"
 
 __getsrc(){
-
-git clone $SRCURL
-
+	wget -q $SRCURL
 }
-
+__unpacksrc(){
+	tar xJf $SRCTGZ
+}
 __preparesrc(){
-
-./bootstrap
-./configure $CONFIGUREOPTS
-
+	./configure $CONFIGUREOPTS
 }
-
 __compilesrc(){
-
-make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
-
+	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
-
 __installsrc(){
-
-make $MAKEOPTS DESTDIR="$DEST" install
-
+	make $MAKEOPTS DESTDIR="$DEST" install
 }

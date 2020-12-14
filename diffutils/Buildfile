@@ -1,5 +1,5 @@
 PACKAGE="diffutils"
-VER="999git"
+VER="3.7"
 
 ACCESS="restricted"
 ARCH="installer"
@@ -8,14 +8,18 @@ CRYPT="key"
 DEPENDS=(glibc bash)
 CONFLICTS=()
 
-SRCURL="git://git.savannah.gnu.org/diffutils.git"
-SRCDIR="diffutils"
+URL="http://ftp.gnu.org/gnu/diffutils/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xJf $SRCTGZ
 }
 __preparesrc(){
-	./bootstrap
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){

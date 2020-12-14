@@ -1,31 +1,30 @@
-PACKAGE="zstd"
-VER="1.4.5"
+PACKAGE="mtdev"
+VER="1.1.6"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(zlib xz)
+DEPENDS=()
 CONFLICTS=()
 
-URL="https://github.com/facebook/zstd/releases/download/v${VER}/"
+URL="https://bitmath.org/code/mtdev/"
 SRCDIR="${PACKAGE}-${VER}"
-SRCTGZ="${SRCDIR}.tar.gz"
+SRCTGZ="${SRCDIR}.tar.bz2"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
     wget -q $SRCURL
 }
 __unpacksrc(){
-    tar xzf $SRCTGZ
+    tar xjf $SRCTGZ
 }
 __preparesrc(){
-    #./configure $CONFIGUREOPTS
-    true
+    ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
     make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" prefix=/usr install
+    make $MAKEOPTS DESTDIR="$DEST" install
 }

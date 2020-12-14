@@ -1,5 +1,5 @@
 PACKAGE="check"
-VER="999git"
+VER="0.15.2"
 
 ACCESS="restricted"
 ARCH="installer"
@@ -8,15 +8,17 @@ CRYPT="key"
 DEPENDS=(gawk)
 CONFLICTS=()
 
-SRCURL="https://github.com/libcheck/check.git"
-SRCDIR="check"
-
+URL="https://github.com/libcheck/check/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
 __getsrc(){
-	git clone $SRCURL
+	wget -q $SRCURL
+}
+__unpacksrc(){
+	tar xzf $SRCTGZ
 }
 __preparesrc(){
-	autopoint --force
-	autoreconf -f -i
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){

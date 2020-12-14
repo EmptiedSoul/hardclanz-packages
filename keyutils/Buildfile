@@ -25,7 +25,8 @@ __compilesrc(){
 __installsrc(){
     mkdir -p $DEST/usr/{lib,bin}
     install -D *.so   $DEST/usr/lib/
-    install -D *.so.* $DEST/usr/lib/
+    ln -s $DEST/usr/lib/*.so $DEST/usr/lib/*.so.1
+    ln -s $DEST/usr/lib/*.so $DEST/usr/lib/*.so.1.6.1
     install -D keyctl $DEST/usr/bin/
     install -D key.dns_resolver $DEST/usr/bin/
     install -D request-key $DEST/usr/bin/

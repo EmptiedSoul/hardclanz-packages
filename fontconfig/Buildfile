@@ -1,0 +1,32 @@
+PACKAGE="fontconfig"
+VER="2.13.1"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(freetype-harfbuzz)
+CONFLICTS=()
+
+URL="https://www.freedesktop.org/software/fontconfig/release/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xjf $SRCTGZ
+}
+__preparesrc(){
+	rm -f src/fcobjshash.h    
+	./configure $CONFIGUREOPTS \
+		--disable-docs
+}
+__compilesrc(){
+    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="-lpthread"
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

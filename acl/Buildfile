@@ -1,5 +1,5 @@
 PACKAGE="acl"
-VER="999git"
+VER="2.2.53"
 CRYPT="key"
 
 ARCH="installer"
@@ -8,24 +8,22 @@ ACCESS="restricted"
 DEPENDS=(attr)
 CONFLICTS=()
 
-SRCURL="https://git.savannah.nongnu.org/git/acl.git"
-SRCDIR="acl"
-
+URL="http://download.savannah.gnu.org/releases/acl/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
 __getsrc(){
-	git clone "$SRCURL"
+	wget -q $SRCURL
 }
-
+__unpacksrc(){
+	tar xvzf $SRCTGZ
+}
 __preparesrc(){
-	./autogen.sh
-	autoreconf
 	./configure $CONFIGUREOPTS
 }
-
 __compilesrc(){
 	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
-
 __installsrc(){
-	make $MAKEOPTS DESTDIR=$DEST install install-lib
-	true
+	make $MAKEOPTS DESTDIR=$DEST install
 }
