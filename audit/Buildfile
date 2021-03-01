@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Security audit"
+
 DEPENDS=()
 CONFLICTS=()
 
@@ -21,11 +23,11 @@ __unpacksrc(){
 }
 __preparesrc(){
 ./autogen.sh    
-./configure $CONFIGUREOPTS
+./configure $CONFIGUREOPTS --disable-remote
 sed -i '53s/^/extern /' src/ausearch-common.h
 }
 __compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

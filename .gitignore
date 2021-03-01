@@ -1,2 +1,6 @@
 repo/
 .HARDS/
+.done
+.failed
+*.failed
+

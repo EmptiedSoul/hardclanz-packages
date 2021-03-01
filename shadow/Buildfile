@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(acl libcap)
 CONFLICTS=()
 
+DESCRIPTION="Password utils"
+
 URL="https://github.com/shadow-maint/shadow/releases/download/${VER}/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -35,7 +37,7 @@ sed -i 's/1000/999/' etc/useradd                      &&
 
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

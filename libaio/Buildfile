@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=()
 CONFLICTS=()
 
+DESCRIPTION="Linux Kernel AIO Access library"
+
 URL="http://ftp.de.debian.org/debian/pool/main/liba/libaio/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${PACKAGE}_${VER}.orig.tar.xz"
@@ -23,7 +25,7 @@ __preparesrc(){
 	sed -i '/install.*libaio.a/s/^/#/' src/Makefile
 }
 __compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

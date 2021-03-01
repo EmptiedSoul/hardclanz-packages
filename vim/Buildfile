@@ -8,6 +8,8 @@ CRYPT="key"
 CONFLICTS=()
 DEPENDS=(gmp glibc zlib libffi)
 
+DESCRIPTION="VI Improved text editor"
+
 URL="http://anduin.linuxfromscratch.org/LFS/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -20,13 +22,16 @@ __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
+	cd src
     ./configure $CONFIGUREOPTS \
-	--with-features=small  \
-	--disable-gui 
+	--with-features=large  \
+	--disable-gui \
+	--with-x=no
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
+    cd ..
 }

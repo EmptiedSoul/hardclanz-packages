@@ -6,6 +6,8 @@ ACCESS="restricted"
 DEPENDS=(bash gettext glibc coreutils binutils)
 CONFLICTS=()
 
+DESCRIPTION="Ext2/3/4 filesystem utilities"
+
 SRCURL="https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.45.6/e2fsprogs-1.45.6.tar.gz"
 SRCTGZ="e2fsprogs-1.45.6.tar.gz"
 SRCDIR="e2fsprogs-1.45.6"
@@ -29,7 +31,7 @@ __preparesrc(){
              --disable-fsck
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

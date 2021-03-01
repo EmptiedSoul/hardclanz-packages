@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=()
 CONFLICTS=()
 
+DESCRIPTION="Xorg Protocol description"
+
 URL="https://xorg.freedesktop.org/archive/individual/proto/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -24,7 +26,7 @@ __preparesrc(){
 	--enable-legacy
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

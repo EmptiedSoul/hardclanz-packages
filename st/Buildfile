@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(fontconfig libX11 libXft)
 CONFLICTS=()
 
+DESCRIPTION="Suckless terminal"
+
 URL="https://dl.suckless.org/st/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -25,7 +27,7 @@ __preparesrc(){
 	mkdir -p "$TERMINFO"
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS PREFIX="/usr" DESTDIR="$DEST" install

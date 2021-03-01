@@ -5,10 +5,12 @@ ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
 
+DESCRIPTION="Basic Calculator"
+
 DEPENDS=(readline)
 CONFLICTS=()
 
-SRCURL="https://git.yzena.com/gavin/bc.git"
+URL="https://github.com/gavinhoward/bc/releases/download/${VER}/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
@@ -17,14 +19,14 @@ __getsrc(){
 	wget -q $SRCURL
 }
 __unpacksrc(){
-	tar xJF $SRCTGZ
+	tar xJf $SRCTGZ
 }
 __preparesrc(){
-	./configure --prefix=/usr
+	PREFIX=/usr DESTDIR="$DEST" CC=gcc CFLAGS="-std=c99" ./configure.sh -G -O3
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS
 }
 __installsrc(){
-	make $MAKEOPTS DESTDIR=$DEST install 
+	make DESTDIR=$DEST install 
 }

@@ -1,0 +1,36 @@
+PACKAGE="expect"
+VER="5.45.4"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DESCRIPTION="Test suite"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="https://prdownloads.sourceforge.net/expect/"
+SRCDIR="${PACKAGE}${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS \
+	--with-tcl=/usr/lib64 \
+	--enable-shared \
+	--with-tclinclude=/usr/include
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+    #install -v expect5.45.4/libexpect.5.45.4.so $DEST/usr/lib
+}

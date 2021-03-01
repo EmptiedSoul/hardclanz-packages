@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(readline glibc ncurses)
 CONFLICTS=()
 
+DESCRIPTION="Bourne-Again SHell"
+
 URL="https://ftp.gnu.org/gnu/bash/"
 SRCTGZ="${PACKAGE}-${VER}.tar.gz"
 SRCDIR="${PACKAGE}-${VER}"
@@ -22,17 +24,20 @@ __unpacksrc(){
 __preparesrc(){
 	./configure $CONFIGUREOPTS	\
 	--without-bash-malloc	\
-	--with-installed-readline	\
+	--with-installed-readline \
+	--with-curses \
 	--enable-job-control
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install
 	mkdir -p $DEST/bin
 	mv $DEST/usr/bin/bash $DEST/bin/bash
 	pushd $DEST
-	ln -s bin/bash bin/sh
+	ln -s /bin/bash bin/sh
+	ln -s /bin/bash usr/bin/bash
+	ln -s /bin/bash usr/bin/sh
 	popd
 }

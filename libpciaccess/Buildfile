@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Library for accessing PCI bus"
+
 DEPENDS=()
 CONFLICTS=()
 
@@ -23,7 +25,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

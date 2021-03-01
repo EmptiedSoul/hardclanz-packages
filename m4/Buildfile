@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="GNU m4 preprocessor"
+
 DEPENDS=(bash glibc)
 CONFLICTS=()
 
@@ -25,7 +27,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

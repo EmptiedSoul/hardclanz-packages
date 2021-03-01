@@ -4,6 +4,8 @@ VER="3.2.9"
 ARCH="installer"
 ACCESS="restricted"
 
+DESCRIPTION="Gentoo's fork of udev"
+
 DEPENDS=(acl libcap kbd kmod util-linux elfutils)
 CONFLICTS=()
 
@@ -31,7 +33,7 @@ __preparesrc(){
             --disable-static
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

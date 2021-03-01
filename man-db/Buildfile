@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Manual page viewer"
+
 DEPENDS=(bash gdbm zlib groff libpipeline less)
 CONFLICTS=()
 
@@ -31,7 +33,7 @@ __preparesrc(){
 
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install --ignore-errors

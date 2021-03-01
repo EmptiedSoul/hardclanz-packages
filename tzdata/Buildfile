@@ -1,0 +1,45 @@
+PACKAGE="tzdata"
+VER="2020a"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=()
+CONFLICTS=()
+
+DESCRIPTION="Timezone data"
+
+URL="https://www.iana.org/time-zones/repository/releases/"
+SRCDIR="${PACKAGE}${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -q $SRCURL
+}
+__unpacksrc(){
+    	mkdir $SRCDIR
+	tar xzf $SRCTGZ -C $SRCDIR
+}
+#__preparesrc(){
+#    ./configure $CONFIGUREOPTS
+#}
+#__compilesrc(){
+#    make $MAKEOPTS
+#}
+__installsrc(){
+    ZONEINFO=$DEST/usr/share/zoneinfo
+mkdir -pv $ZONEINFO/{posix,right}
+
+for tz in etcetera southamerica northamerica europe africa antarctica  \
+          asia australasia backward pacificnew systemv; do
+    zic -L /dev/null   -d $ZONEINFO       ${tz}
+    zic -L /dev/null   -d $ZONEINFO/posix ${tz}
+    zic -L leapseconds -d $ZONEINFO/right ${tz}
+done
+
+cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+zic -d $ZONEINFO -p America/New_York
+unset ZONEINFO
+}

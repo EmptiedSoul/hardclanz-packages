@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(gcc readline bash zlib bzip2)
 CONFLICTS=()
 
+DESCRIPTION="Perl Compatable Regular Expressions"
+
 URL="https://ftp.pcre.org/pub/pcre/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -23,7 +25,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

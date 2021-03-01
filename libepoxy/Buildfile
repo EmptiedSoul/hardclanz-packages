@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Library for handling OpenGL function pointer management"
+
 DEPENDS=()
 CONFLICTS=()
 

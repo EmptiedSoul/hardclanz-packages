@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(libX11)
 CONFLICTS=()
 
+DESCRIPTION="Launching Xorg"
+
 URL="https://x.org/releases/individual/app/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -24,7 +26,7 @@ __preparesrc(){
 	--with-xinitdir=/etc/X11/xinit
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

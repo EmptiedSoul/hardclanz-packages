@@ -5,6 +5,9 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Linux Kernel man-pages"
+
+
 DEPENDS=()
 CONFLICTS=()
 
@@ -24,7 +27,7 @@ __preparesrc(){
     true
 }
 __compilesrc(){
-#    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" --ignore-errors
+#    make $MAKEOPTS
     true
 }
 __installsrc(){

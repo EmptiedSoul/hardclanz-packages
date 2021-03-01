@@ -4,6 +4,8 @@ VER="2.69"
 ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
+ 
+DESCRIPTION="GNU Autoconf. Part of Autotools"
 
 DEPENDS=(gawk m4 diffutils perl bash)
 CONFLICTS=()
@@ -23,7 +25,7 @@ __preparesrc(){
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install

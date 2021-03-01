@@ -5,8 +5,10 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(mpc binutils)
+DEPENDS=(mpc binutils zstd)
 CONFLICTS=()
+
+DESCRIPTION="GNU Compiler Collection"
 
 URL="http://ftp.gnu.org/gnu/gcc/gcc-${VER}/"
 SRCDIR="${PACKAGE}-${VER}"
@@ -25,7 +27,7 @@ __preparesrc(){
 	--with-system-zlib
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

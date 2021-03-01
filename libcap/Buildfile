@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(glibc attr)
 CONFLICTS=()
 
+DESCRIPTION="CAPability LIBrary"
+
 URL="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -24,14 +26,12 @@ __preparesrc(){
     true
 }
 __compilesrc(){
-    make $MAKEOPTS lib=lib CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS lib=lib DESTDIR="$DEST" install
 	mkdir -p $DEST/usr/lib
-	ln -sfv $DEST/lib/libcap.so.2 $DEST/usr/lib/libcap.so
+	ln -sfv /lib/libcap.so.2 $DEST/usr/lib/libcap.so
 	chmod -v 755 $DEST/lib/libcap.so.2.42
 	mv -v $DEST/lib/libpsx.a $DEST/usr/lib
-	rm -v $DEST/lib/libcap.so
-
 }

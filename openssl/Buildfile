@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="General SSL library"
+
 DEPENDS=(perl)
 CONFLICTS=()
 
@@ -27,7 +29,7 @@ __preparesrc(){
 	zlib-dynamic
 }
 __compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

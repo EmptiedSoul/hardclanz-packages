@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Properties of installed libraries"
+
 DEPENDS=(glibc bash)
 CONFLICTS=()
 
@@ -25,7 +27,7 @@ __preparesrc(){
 	--disable-host-tool
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

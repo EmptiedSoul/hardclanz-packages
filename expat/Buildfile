@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="C XML Parser"
+
 DEPENDS=(glibc)
 CONFLICTS=()
 
@@ -19,10 +21,10 @@ __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+    ./configure $CONFIGUREOPTS --without-docbook
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(libXau libxcb)
 CONFLICTS=()
 
+DESCRIPTION="XCB RenderUtil"
+
 URL="https://xcb.freedesktop.org/dist/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -24,7 +26,7 @@ __preparesrc(){
 	--disable-static
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

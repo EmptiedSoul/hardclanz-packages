@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(libX11 libXmu libXi libXinerama)
 CONFLICTS=()
 
+DESCRIPTION="X11 Input"
+
 URL="https://x.org/releases/individual/app/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -26,7 +28,7 @@ __preparesrc(){
 
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Python3 interpreted general-purpose programing language"
+
 DEPENDS=(bzip2 expat gdbm libffi openssl zlib)
 CONFLICTS=()
 
@@ -27,7 +29,7 @@ __preparesrc(){
 	--with-system-ffi
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

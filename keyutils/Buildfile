@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Linux Kernel Key Utils"
+
 DEPENDS=(bash glibc)
 CONFLICTS=()
 
@@ -20,14 +22,9 @@ __unpacksrc(){
     tar xjf $SRCTGZ
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    sed -i 's:$(LIBDIR)/$(PKGCONFIG_DIR):/usr/lib/pkgconfig:' Makefile
+    make $MAKEOPTS
 }
 __installsrc(){
-    mkdir -p $DEST/usr/{lib,bin}
-    install -D *.so   $DEST/usr/lib/
-    ln -s $DEST/usr/lib/*.so $DEST/usr/lib/*.so.1
-    ln -s $DEST/usr/lib/*.so $DEST/usr/lib/*.so.1.6.1
-    install -D keyctl $DEST/usr/bin/
-    install -D key.dns_resolver $DEST/usr/bin/
-    install -D request-key $DEST/usr/bin/
+    make $MAKEOPTS DESTDIR="$DEST" install
 }

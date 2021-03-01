@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(ncurses gzip perl bash)
 CONFLICTS=()
 
+DESCRIPTION="Documentation viewer"
+
 URL="http://ftp.gnu.org/gnu/texinfo/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -23,7 +25,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

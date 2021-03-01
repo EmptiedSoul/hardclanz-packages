@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(audit)
 CONFLICTS=()
 
+DESCRIPTION="Pluggable Authentication Modules"
+
 URL="https://github.com/linux-pam/linux-pam/releases/download/v${VER}/"
 SRCDIR="Linux-PAM-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -24,7 +26,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

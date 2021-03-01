@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(expat)
 CONFLICTS=()
 
+DESCRIPTION="Perl XML Parser"
+
 URL="https://cpan.metacpan.org/authors/id/T/TO/TODDR/"
 SRCDIR="XML-Parser-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -24,7 +26,7 @@ __preparesrc(){
     perl Makefile.PL
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

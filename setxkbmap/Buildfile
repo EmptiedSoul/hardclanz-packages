@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(libX11 libxkbfile)
 CONFLICTS=()
 
+DESCRIPTION="Set X11 KeyBoarD map"
+
 URL="https://x.org/archive//individual/app/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -25,7 +27,7 @@ __preparesrc(){
 	--localstatedir=/var
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

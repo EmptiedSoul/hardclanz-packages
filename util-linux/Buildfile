@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(coreutils shadow libcap)
 CONFLICTS=()
 
+DESCRIPTION="Non-gnu coreutils"
+
 URL="https://www.kernel.org/pub/linux/utils/util-linux/v${VER}/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -34,7 +36,7 @@ __preparesrc(){
 	    --without-systemdsystemunitdir
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install --ignore-errors

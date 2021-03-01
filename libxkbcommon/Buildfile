@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="X11 KeyBoarD"
+
 DEPENDS=()
 CONFLICTS=()
 

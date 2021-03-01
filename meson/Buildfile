@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="build system"
+
 DEPENDS=(python ninja)
 CONFLICTS=()
 
@@ -24,7 +26,7 @@ __preparesrc(){
     true
 }
 __compilesrc(){
-    #make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    #make $MAKEOPTS
     python setup.py build
 }
 __installsrc(){

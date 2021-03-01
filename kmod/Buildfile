@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(openssl glibc zlib xz)
 CONFLICTS=()
 
+DESCRIPTION="Kernel Modules utility"
+
 URL="https://www.kernel.org/pub/linux/utils/kernel/kmod/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -27,12 +29,12 @@ __preparesrc(){
 	--with-zlib	
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
 	mkdir $DEST/sbin
 for target in depmod insmod lsmod modinfo modprobe rmmod; do
-  ln -sfv $DEST/bin/kmod $DEST/sbin/$target
+  ln -sfv /bin/kmod $DEST/sbin/$target
 done
 }

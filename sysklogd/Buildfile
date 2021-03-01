@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Daemons and Kernel logging utility"
+
 DEPENDS=()
 CONFLICTS=()
 
@@ -25,7 +27,7 @@ __preparesrc(){
     true
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     mkdir -p $DEST/sbin $DEST/usr/share/man/man8

@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="X11 Shared memory fence"
+
 DEPENDS=()
 CONFLICTS=()
 
@@ -24,7 +26,7 @@ __preparesrc(){
 	--with-shared-memory-dir=/dev/shm
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Networking utilities"
+
 DEPENDS=(libcap)
 CONFLICTS=()
 
@@ -24,10 +26,10 @@ __preparesrc(){
     sed -i '93d' ftpd/extern.h 
     sed -i '138a jmp_buf errcatch;' ftpd/ftpd.c
     sed -i '109a extern jmp_buf errcatch;' ftpd/ftpcmd.y
-    ./configure $CONFIGUREOPTS
+    ./configure $CONFIGUREOPTS LDFLAGS="-ltinfo"
 }
 __compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

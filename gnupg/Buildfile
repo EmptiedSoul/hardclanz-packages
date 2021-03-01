@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="GNU Policy Guard"
+
 DEPENDS=(libassuan libgcrypt libksba npth pinentry)
 CONFLICTS=()
 
@@ -25,7 +27,7 @@ __preparesrc(){
 	--enable-symcryptrun
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

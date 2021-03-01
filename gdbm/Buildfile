@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(bash glibc)
 CONFLICTS=()
 
+DESCRIPTION="GNU Database Manager"
+
 URL="http://ftp.gnu.org/gnu/gdbm/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -25,7 +27,7 @@ __preparesrc(){
 	--enable-libgdbm-compat 
 }
 __compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

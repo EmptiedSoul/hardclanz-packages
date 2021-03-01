@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=()
 CONFLICTS=()
 
+DESCRIPTION="Font rendering engine"
+
 URL="https://github.com/silnrsi/graphite/releases/download/${VER}/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tgz"

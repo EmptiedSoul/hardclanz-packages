@@ -5,6 +5,8 @@ ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
 
+DESCRIPTION="Test suite"
+
 DEPENDS=(gawk)
 CONFLICTS=()
 
@@ -22,7 +24,7 @@ __preparesrc(){
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install

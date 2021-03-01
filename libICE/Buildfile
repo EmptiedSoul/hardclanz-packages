@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=()
 CONFLICTS=()
 
+DESCRIPTION="Inter-Client-Exchange library"
+
 URL="https://x.org/releases/individual/lib/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -23,7 +25,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

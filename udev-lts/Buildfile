@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=()
 CONFLICTS=()
 
+DESCRIPTION="udev rules from LFS"
+
 URL="http://anduin.linuxfromscratch.org/LFS/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -25,7 +27,7 @@ __preparesrc(){
     true
 }
 __compilesrc(){
-    #make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    #make $MAKEOPTS
     true
 }
 __installsrc(){

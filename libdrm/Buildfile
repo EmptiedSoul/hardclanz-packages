@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(libpciaccess)
 CONFLICTS=()
 
+DESCRIPTION="Linux Direct Rendering Manager library"
+
 URL="https://dri.freedesktop.org/libdrm/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"

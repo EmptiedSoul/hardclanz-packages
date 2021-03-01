@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(glibc acl attr)
 CONFLICTS=()
 
+DESCRIPTION="Tape archiver"
+
 URL="http://ftp.gnu.org/gnu/tar/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
@@ -23,7 +25,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

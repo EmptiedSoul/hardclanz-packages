@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(zlib)
 CONFLICTS=()
 
+DESCRIPTION="Command script language"
+
 URL="https://downloads.sourceforge.net/tcl/"
 SRCDIR="${PACKAGE}${VER}"
 SRCTGZ="${SRCDIR}-src.tar.gz"
@@ -25,7 +27,7 @@ __preparesrc(){
 	--enable-64bit
 }
 __compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

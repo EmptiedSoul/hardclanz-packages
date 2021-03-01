@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="XCB Cursor"
+
 DEPENDS=(xcb-util xcb-util-image xcb-util-renderutil libxcb libXau)
 CONFLICTS=()
 
@@ -24,7 +26,7 @@ __preparesrc(){
 	--disable-static
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Low-Level Virtual Machine"
+
 DEPENDS=(zlib)
 CONFLICTS=()
 
@@ -36,6 +38,7 @@ __preparesrc(){
 	-Wno-dev
 }
 __compilesrc(){
+
 cmake --build build $MAKEOPTS
 }
 __installsrc(){

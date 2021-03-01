@@ -4,6 +4,8 @@ VER="0.182"
 ARCH="installer"
 ACCESS="restricted"
 
+DESCRIPTION="Executable & Linkable File Utilities"
+
 DEPENDS=(glibc xz zlib)
 CONFLICTS=()
 
@@ -20,10 +22,10 @@ __unpacksrc(){
     tar xjf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+    ./configure $CONFIGUREOPTS --disable-debuginfod
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

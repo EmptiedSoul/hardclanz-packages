@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(zlib libffi)
 CONFLICTS=()
 
+DESCRIPTION="Kind of C++ std for C"
+
 URL="https://download.gnome.org/sources/glib/2.66/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"

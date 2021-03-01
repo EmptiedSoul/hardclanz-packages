@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Process managing utilities (next-gen)"
+
 DEPENDS=(ncurses)
 CONFLICTS=()
 
@@ -28,7 +30,7 @@ __preparesrc(){
             --disable-kill
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

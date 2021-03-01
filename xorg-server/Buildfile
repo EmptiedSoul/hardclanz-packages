@@ -8,6 +8,9 @@ CRYPT="key"
 DEPENDS=(fontconfig bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib brotli graphite2 libunwind)
 CONFLICTS=()
 
+DESCRIPTION="X11 Server"
+
+LAUNCHDIR="$(pwd)"
 URL="https://x.org/releases/individual/xserver/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -20,8 +23,8 @@ __unpacksrc(){
     tar xjf $SRCTGZ
 }
 __preparesrc(){
-    	patch -p1 < ../patches/rootless_modesetting.patch
-	patch -p1 < ../patches/fix-crash.patch
+    	patch -p1 < $LAUNCHDIR/patches/rootless_modesetting.patch
+	patch -p1 < $LAUNCHDIR/patches/fix-crash.patch
 	./configure $CONFIGUREOPTS \
 	--localstatedir=/var \
 	--disable-systemd-logind \
@@ -37,7 +40,7 @@ __preparesrc(){
 	--with-systemd-daemon=off
 }
 __compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

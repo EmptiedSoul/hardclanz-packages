@@ -5,8 +5,10 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libXScrnSaver libXcursir libXinerama libXrandr libXtst xorg-server)
+DEPENDS=(libXScrnSaver libXcursor libXinerama libXrandr libXtst xorg-server)
 CONFLICTS=()
+
+DESCRIPTION="X11 Intel GPU Driver"
 
 URL="https://gitlab.freedesktop.org/xorg/driver/xf86-video-intel/-/archive/${VER}/"
 SRCDIR="${PACKAGE}-${VER}"

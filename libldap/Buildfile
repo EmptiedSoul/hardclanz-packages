@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="LDAP protocol library"
+
 DEPENDS=(libsasl)
 CONFLICTS=()
 
@@ -26,7 +28,7 @@ __preparesrc(){
     make depend
 }
 __compilesrc(){
-    make #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make DESTDIR="$DEST" install

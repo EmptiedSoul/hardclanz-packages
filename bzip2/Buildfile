@@ -5,6 +5,8 @@ ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
 
+DESCRIPTION="bzip2 compressor"
+
 DEPENDS=(glibc bash)
 CONFLICTS=()
 

@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="X11 font library"
+
 DEPENDS=(freetype-harfbuzz libfontenc)
 CONFLICTS=()
 
@@ -21,9 +23,10 @@ __unpacksrc(){
 }
 __preparesrc(){
     ./configure $CONFIGUREOPTS
+    sed -i Makefile -e 's/-Werror.*/ /g'
 }
 __compilesrc(){
-    make $MAKEOPTS CWARNFLAGS="" STRICTFLAGS="" BASE_CFLAGS="" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

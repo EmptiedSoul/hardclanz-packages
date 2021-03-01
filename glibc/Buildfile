@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="GNU C Library"
+
 DEPENDS=(tzdata)
 CONFLICTS=()
 
@@ -20,17 +22,18 @@ __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    mkdir build
-    cd build
-    ../configure $CONFIGUREOPTS	\
+    true
+}
+__compilesrc(){
+    mkdir ../build-libc
+    cd ../build-libc
+   ../${SRCDIR}/configure $CONFIGUREOPTS	\
 	--disable-werror	\
 	--enable-stack-protector=strong	\
 	--with-headers=/usr/include	\
 	libc_cv_slibdir=/lib
+    make $MAKEOPTS DESTDIR="$DEST"
 }
-__compilesrc(){
-    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
-}
-__installsrc(){
+__installsrc(){ 
     make $MAKEOPTS DESTDIR="$DEST" install
 }

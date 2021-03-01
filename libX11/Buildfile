@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="X11 client-side library"
+
 DEPENDS=(xorgproto libXau libxcb)
 CONFLICTS=()
 
@@ -27,7 +29,7 @@ CFLAGS_FOR_BUILD=-fPIC \
 	--enable-static
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

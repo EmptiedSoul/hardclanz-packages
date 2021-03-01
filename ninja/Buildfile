@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(gcc)
 CONFLICTS=()
 
+DESCRIPTION="Fast build system"
+
 URL="https://github.com/ninja-build/ninja/archive/v${VER}/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
@@ -26,7 +28,7 @@ __preparesrc(){
     cmake ..
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     #make $MAKEOPTS DESTDIR="$DEST" install

@@ -8,6 +8,9 @@ CRYPT="key"
 DEPENDS=(libdrm xorgproto)
 CONFLICTS=()
 
+DESCRIPTION="X11 Nvidia GPU Driver"
+
+LAUNCHDIR="$(pwd)"
 URL="https://x.org/releases/individual/driver/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -20,12 +23,12 @@ __unpacksrc(){
     tar xjf $SRCTGZ
 }
 __preparesrc(){
-    	patch -p1 < ../patches/rootless-nouveau.patch
+    	patch -p1 < $LAUNCHDIR/patches/rootless-nouveau.patch
 	export LDFLAGS="-Wl,-z,lazy"
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS -fcommon" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

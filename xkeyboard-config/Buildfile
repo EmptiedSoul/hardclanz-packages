@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(xkbcomp)
 CONFLICTS=()
 
+DESCRIPTION="X11 Keyboard config"
+
 URL="https://x.org/releases/individual/data/xkeyboard-config/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -27,7 +29,7 @@ __preparesrc(){
 	--disable-nls
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

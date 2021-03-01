@@ -2,6 +2,8 @@ PACKAGE="acl"
 VER="2.2.53"
 CRYPT="key"
 
+DESCRIPTION="Access Control Lists"
+
 ARCH="installer"
 ACCESS="restricted"
 
@@ -22,7 +24,7 @@ __preparesrc(){
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS 
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install

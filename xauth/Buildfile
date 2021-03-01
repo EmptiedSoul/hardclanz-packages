@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(libXmu)
 CONFLICTS=()
 
+DESCRIPTION="Xorg initiation"
+
 URL="https://x.org/releases/individual/app/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -25,7 +27,7 @@ __preparesrc(){
 	--localstatedir=/var
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

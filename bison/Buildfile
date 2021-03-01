@@ -5,6 +5,10 @@ ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
 
+DESCRIPTION="Modern yacc"
+
+DEPENDS=(glibc m4 bash)
+DEPENDS=(glibc m4 bash)
 DEPENDS=(glibc m4 bash)
 CONFLICTS=()
 
@@ -23,7 +27,7 @@ __preparesrc(){
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install

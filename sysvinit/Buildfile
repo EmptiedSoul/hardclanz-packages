@@ -8,6 +8,8 @@ CRYPT="key"
 DEPENDS=(bash glibc)
 CONFLICTS=()
 
+DESCRIPTION="Init subsystem"
+
 URL="https://download-mirror.savannah.gnu.org/releases/sysvinit/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"

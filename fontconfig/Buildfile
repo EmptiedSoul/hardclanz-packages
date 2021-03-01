@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Managing xorg fonts"
+
 DEPENDS=(freetype-harfbuzz)
 CONFLICTS=()
 
@@ -25,7 +27,7 @@ __preparesrc(){
 		--disable-docs
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="-lpthread"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

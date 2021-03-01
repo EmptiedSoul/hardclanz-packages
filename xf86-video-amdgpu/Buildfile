@@ -5,9 +5,12 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="X11 AMD GPU Driver"
+
 DEPENDS=(expat libdrm libpciaccess mesa xorgproto)
 CONFLICTS=()
 
+LAUNCHDIR="$(pwd)"
 URL="https://x.org/releases/individual/driver/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.bz2"
@@ -20,11 +23,11 @@ __unpacksrc(){
     tar xjf $SRCTGZ
 }
 __preparesrc(){
-    patch -p1 < ../patches/rootless-amdgpu.patch
+    patch -p1 < $LAUNCHDIR/patches/rootless-amdgpu.patch
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS -fcommon" CXXFLAGS="$CXXFLAGS" LDFLAGS="-Wl,-z,lazy"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

@@ -5,6 +5,8 @@ ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
 
+DESCRIPTION="Create patches"
+
 DEPENDS=(glibc bash)
 CONFLICTS=()
 
@@ -23,7 +25,7 @@ __preparesrc(){
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" WERROR_CFLAGS="-Wall -Wextra"
+	make $MAKEOPTS
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install

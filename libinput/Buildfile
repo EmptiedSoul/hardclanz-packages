@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Library for handling input devices"
+
 DEPENDS=(libevdev mtdev)
 CONFLICTS=()
 
@@ -23,7 +25,7 @@ __preparesrc(){
 	export DESTDIR="$DEST"
 	meson \
 	--prefix=/usr \
-	--sysconfdi/etc \
+	--sysconfdir=/etc \
 	--mandir=/usr/share/man \
 	--libexecdir=/usr/lib \
 	-Ddebug-gui=false \

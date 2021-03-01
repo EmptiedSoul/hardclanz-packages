@@ -8,22 +8,24 @@ CRYPT="key"
 DEPENDS=()
 CONFLICTS=()
 
+DESCRIPTION="classic TUI library"
+
 URL="http://ftp.gnu.org/gnu/ncurses/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS --with-shared --without-debug --enable-widec --enable-shared
+    ./configure $CONFIGUREOPTS --with-shared --without-debug --enable-widec --with-terminfo --enable-shared
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

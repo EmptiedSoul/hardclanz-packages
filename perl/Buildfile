@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="Practical Extraction and Report Language"
+
 DEPENDS=(gdbm glibc)
 CONFLICTS=()
 
@@ -31,7 +33,7 @@ __preparesrc(){
              -Dvendorarch=/usr/lib/perl5/5.32/vendor_perl
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="CURL Downloader"
+
 DEPENDS=(krb5 libssh2 libpsl libnghttp2 libidn2)
 CONFLICTS=()
 
@@ -20,12 +22,11 @@ __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS	\
-	--without-brotli	\
+    ./configure $CONFIGUREOPTS \
 	--without-librtmp
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

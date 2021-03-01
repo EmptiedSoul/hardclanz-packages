@@ -5,6 +5,8 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
+DESCRIPTION="OpenGL & Vulkan implementation"
+
 DEPENDS=(expat libX11 libXdamage libXext libXrandr libXrender libXxf86vm libdrm libxcb libxshmfence llvm xorgproto zlib)
 CONFLICTS=()
 

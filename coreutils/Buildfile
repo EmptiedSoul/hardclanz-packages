@@ -7,9 +7,12 @@ ACCESS="restricted"
 DEPENDS=(glibc acl attr gmp libcap openssl)
 CONFLICTS=()
 
+DESCRIPTION="Core utilities, supposed to be installed on every system"
+
 URL="http://ftp.gnu.org/gnu/coreutils/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
 CRYPT="key"
 
 __getsrc(){
@@ -22,7 +25,7 @@ __preparesrc(){
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-	make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+	make $MAKEOPTS
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR="$DEST" install
