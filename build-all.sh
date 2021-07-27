@@ -2,6 +2,10 @@
 
 gpg-agent --daemon
 
+opwd=$(pwd)
+logsd="$opwd/logs/"
+mkdir -pv $logsd
+
 for dir in $(ls -1)
 do
 	grep -qr $dir .done && continue
@@ -9,9 +13,9 @@ do
 	echo "Making $dir"
 	echo
 	pushd $dir &>/dev/null
-		hmake mrproper
-		{ hmake build && echo $dir >> ../.done; } || { echo $dir >> ../.failed
-		cp /var/log/hmake ../$dir.failed
+		hpkg-make clean
+		{ hpkg-make build && echo $dir >> $opwd/.done; } || { echo $dir >> $opwd/.failed
+		cp /var/log/hmake $logsd/$dir.failed
 		}
 	popd
 done
