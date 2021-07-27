@@ -1,0 +1,9 @@
+libaudit.so.1
+libauparse.so.0
+libcap-ng.so.0
+libc.so.6
+liblber-2.4.so.2
+libldap-2.4.so.2
+libm.so.6
+libpthread.so.0
+librt.so.1

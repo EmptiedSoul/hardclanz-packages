@@ -1,0 +1,6 @@
+ld-linux-x86-64.so.2
+libcgroup.so.1
+libc.so.6
+libpam.so.0
+libpthread.so.0
+librt.so.1

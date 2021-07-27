@@ -1,0 +1,7 @@
+libc.so.6
+libdl.so.2
+libgmp.so.10
+libmpfr.so.6
+libm.so.6
+libreadline.so.8
+libsigsegv.so.2

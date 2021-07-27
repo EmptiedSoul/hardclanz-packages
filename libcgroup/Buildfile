@@ -1,22 +1,16 @@
-PACKAGE="less"
-VER="551"
+PACKAGE="libcgroup"
+VER="2.0"
 
-ARCH="installer"
-ACCESS="restricted"
-CRYPT="key"
-
-DESCRIPTION="Long output pager"
-
-DEPENDS=(glibc ncurses)
+DEPENDS=()
 CONFLICTS=()
 
-URL="http://www.greenwoodsoftware.com/less/"
+URL="https://github.com/libcgroup/libcgroup/releases/download/v${VER}/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget  $SRCURL
+    wget -q $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
@@ -25,7 +19,7 @@ __preparesrc(){
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){
-    make $MAKEOPTS
+    make $MAKEOPTS #CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
