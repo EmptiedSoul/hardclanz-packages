@@ -1,5 +1,5 @@
 PACKAGE="texinfo"
-VER="6.7"
+VER="6.8"
 
 ARCH="installer"
 ACCESS="restricted"

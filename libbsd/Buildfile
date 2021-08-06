@@ -1,5 +1,5 @@
 PACKAGE="libbsd"
-VER="0.10.0"
+VER="0.11.3"
 
 ARCH="installer"
 ACCESS="restricted"

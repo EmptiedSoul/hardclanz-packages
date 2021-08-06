@@ -1,5 +1,5 @@
 PACKAGE="xf86-input-libinput"
-VER="0.30.0"
+VER="1.1.0"
 
 ARCH="installer"
 ACCESS="restricted"

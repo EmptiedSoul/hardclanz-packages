@@ -1,5 +1,5 @@
 PACKAGE="man-db"
-VER="2.9.3"
+VER="2.9.4"
 
 ARCH="installer"
 ACCESS="restricted"

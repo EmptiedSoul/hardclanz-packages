@@ -1,5 +1,5 @@
 PACKAGE="xorg-server"
-VER="1.20.9"
+VER="21.0.99.1"
 
 ARCH="installer"
 ACCESS="restricted"

@@ -1,5 +1,5 @@
 PACKAGE="libgpg-error"
-VER="1.38"
+VER="1.42"
 
 ARCH="installer"
 ACCESS="restricted"

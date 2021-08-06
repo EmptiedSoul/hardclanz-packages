@@ -1,5 +1,5 @@
 PACKAGE="bash"
-VER="5.0"
+VER="5.1.8"
 
 ACCESS="restricted"
 ARCH="installer"

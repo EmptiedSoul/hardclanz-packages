@@ -1,5 +1,5 @@
 PACKAGE="libXi"
-VER="1.7.10"
+VER="1.7.99.2"
 
 ARCH="installer"
 ACCESS="restricted"

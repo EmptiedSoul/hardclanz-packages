@@ -1,5 +1,5 @@
 PACKAGE="libXfont2"
-VER="2.0.4"
+VER="2.0.5"
 
 ARCH="installer"
 ACCESS="restricted"

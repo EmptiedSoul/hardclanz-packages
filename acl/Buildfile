@@ -1,5 +1,5 @@
 PACKAGE="acl"
-VER="2.2.53"
+VER="2.3.1"
 CRYPT="key"
 
 DESCRIPTION="Access Control Lists"

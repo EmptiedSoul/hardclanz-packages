@@ -1,5 +1,5 @@
 PACKAGE="fontconfig"
-VER="2.13.1"
+VER="2.13.94"
 
 ARCH="installer"
 ACCESS="restricted"

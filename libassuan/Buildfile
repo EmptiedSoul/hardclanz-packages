@@ -1,5 +1,5 @@
 PACKAGE="libassuan"
-VER="2.5.3"
+VER="2.5.5"
 
 ARCH="installer"
 ACCESS="restricted"

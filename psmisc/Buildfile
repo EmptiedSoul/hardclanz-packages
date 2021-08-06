@@ -1,5 +1,5 @@
 PACKAGE="psmisc"
-VER="23.3"
+VER="23.4"
 
 ARCH="installer"
 ACCESS="restricted"

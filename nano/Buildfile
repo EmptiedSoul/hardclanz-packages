@@ -1,5 +1,5 @@
 PACKAGE="nano"
-VER="5.2"
+VER="5.8"
 
 ARCH="installer"
 ACCESS="restricted"

@@ -1,5 +1,5 @@
 PACKAGE="libxkbcommon"
-VER="1.0.3"
+VER="1.3.0"
 
 ARCH="installer"
 ACCESS="restricted"

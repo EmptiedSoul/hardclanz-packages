@@ -1,5 +1,5 @@
 PACKAGE="xf86-video-amdgpu"
-VER="19.1.0"
+VER="21.0.0"
 
 ARCH="installer"
 ACCESS="restricted"

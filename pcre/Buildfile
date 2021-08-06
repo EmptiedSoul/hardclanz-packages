@@ -1,5 +1,5 @@
 PACKAGE="pcre"
-VER="8.44"
+VER="8.45"
 
 ARCH="installer"
 ACCESS="restricted"

@@ -1,5 +1,5 @@
 PACKAGE="automake"
-VER="1.16.2"
+VER="1.16.4"
 
 ARCH="installer"
 ACCESS="restricted"

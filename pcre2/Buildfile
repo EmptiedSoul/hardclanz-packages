@@ -1,5 +1,5 @@
 PACKAGE="pcre2"
-VER="10.36"
+VER="10.37"
 
 ARCH="installer"
 ACCESS="restricted"

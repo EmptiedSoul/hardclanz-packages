@@ -1,5 +1,5 @@
 PACKAGE="libdrm"
-VER="2.4.103"
+VER="2.4.107"
 
 ARCH="installer"
 ACCESS="restricted"

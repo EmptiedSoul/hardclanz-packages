@@ -1,5 +1,5 @@
 PACKAGE="binutils"
-VER="2.35.1"
+VER="2.37"
 
 ACCESS="restricted"
 ARCH="installer"

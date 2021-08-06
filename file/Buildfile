@@ -1,5 +1,5 @@
 PACKAGE="file"
-VER="5.39"
+VER="5.40"
 
 ARCH="installer"
 ACCESS="restricted"

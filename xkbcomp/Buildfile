@@ -1,5 +1,5 @@
 PACKAGE="xkbcomp"
-VER="1.4.4"
+VER="1.4.5"
 
 ARCH="installer"
 ACCESS="restricted"

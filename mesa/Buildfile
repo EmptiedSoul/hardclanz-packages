@@ -1,5 +1,5 @@
 PACKAGE="mesa"
-VER="20.2.3"
+VER="21.2.0"
 
 ARCH="installer"
 ACCESS="restricted"

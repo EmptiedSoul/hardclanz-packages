@@ -1,5 +1,5 @@
 PACKAGE="libX11"
-VER="1.7.0"
+VER="1.7.2"
 
 ARCH="installer"
 ACCESS="restricted"

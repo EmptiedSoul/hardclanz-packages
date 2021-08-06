@@ -1,5 +1,5 @@
 PACKAGE="sysvinit"
-VER="2.98"
+VER="2.99"
 
 ARCH="installer"
 ACCESS="restricted"

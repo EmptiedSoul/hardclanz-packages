@@ -1,5 +1,5 @@
 PACKAGE="xkeyboard-config"
-VER="2.31"
+VER="2.33"
 
 ARCH="installer"
 ACCESS="restricted"

@@ -1,5 +1,5 @@
 PACKAGE="libcap-ng"
-VER="0.8.1"
+VER="v0.8.2"
 
 ARCH="installer"
 ACCESS="restricted"

@@ -1,5 +1,5 @@
 PACKAGE="libXft"
-VER="2.3.3"
+VER="2.3.4"
 
 ARCH="installer"
 ACCESS="restricted"

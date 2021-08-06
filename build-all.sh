@@ -6,7 +6,7 @@ opwd=$(pwd)
 logsd="$opwd/logs/"
 mkdir -pv $logsd
 
-for dir in $(ls -1)
+for dir in $(ls --hide=*.sh --hide=README --hide=TODO --hide=Buildfile-example -1)
 do
 	grep -qr $dir .done && continue
 	echo

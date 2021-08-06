@@ -1,5 +1,5 @@
 PACKAGE="gmp"
-VER="6.2.0"
+VER="6.2.1"
 
 ARCH="installer"
 ACCESS="restricted"
