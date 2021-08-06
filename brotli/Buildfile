@@ -34,3 +34,4 @@ __compilesrc(){
 __installsrc(){
 	cmake --install out
 }
+GITHUB_CHECK=1

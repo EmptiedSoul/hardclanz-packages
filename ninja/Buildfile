@@ -40,3 +40,4 @@ __installsrc(){
     cp -v ninja* manifest_parser_perftest hash_collision_bench build_log_perftest canon_perftest depfile_parser_perftest $DEST/usr/bin/ >&2
 	popd
 }
+GITHUB_CHECK=1

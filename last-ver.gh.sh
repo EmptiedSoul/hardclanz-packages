@@ -2,7 +2,6 @@
 . /usr/lib/hpkglib.sh
 . $1/Buildfile || error "No such package: $1" 2
 
-is_true $GITHUB_CHECK && exec ./last-ver.gh.sh $1
 
 ver_compare(){
 	{ [[ -z "$newver" ]] || grep " " <<<"$newver"; } && {
@@ -26,7 +25,10 @@ ver_compare(){
 
 pointer "Current version: $VER"
 
-newver=$(curl -s $URL | grep "$PACKAGE-" | sed -e "s/^.*$PACKAGE-//" -e 's/\.tar.*$//' -e 's/\.zip.*$//' -e 's/\.cpio.*$//' | sort | uniq | sort -V | tail -1)
+owner="$(echo $URL | cut -d/ -f4)"
+repo="$(echo $URL | cut -d/ -f5)"
+
+newver=$(curl -sH "Accept: application/vnd.github.v3+json" https://api.github.com/repos/$owner/$repo/tags | grep name -w | sed -e 's/^.*\"name\": //' -e 's/\"//' -e 's/\",$//' | sort -V | tail -n1)
 
 pointer "New version: $newver"
 

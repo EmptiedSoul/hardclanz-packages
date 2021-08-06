@@ -33,3 +33,4 @@ __installsrc(){
     #make $MAKEOPTS DESTDIR="$DEST" install
     python setup.py install --prefix usr --root $DEST
 }
+GITHUB_CHECK=1

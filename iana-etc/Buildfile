@@ -31,3 +31,4 @@ __installsrc(){
     mkdir $DEST/etc
     cp protocols services $DEST/etc/
 }
+GITHUB_CHECK=1

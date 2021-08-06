@@ -166,3 +166,4 @@ do
     sed -i "s/chage/$PROGRAM/" $DEST/etc/pam.d/${PROGRAM}
 done
 }
+GITHUB_CHECK=1

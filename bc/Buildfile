@@ -30,3 +30,4 @@ __compilesrc(){
 __installsrc(){
 	make DESTDIR=$DEST install 
 }
+GITHUB_CHECK=1

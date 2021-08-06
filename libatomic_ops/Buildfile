@@ -32,3 +32,4 @@ __compilesrc(){
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
 }
+GITHUB_CHECK=1
