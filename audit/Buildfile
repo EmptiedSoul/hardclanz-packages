@@ -16,7 +16,7 @@ SRCTGZ="v${VER}.tar.gz"
 SRCURL="https://github.com/linux-audit/audit-userspace/archive/v${VER}.tar.gz"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
@@ -24,7 +24,6 @@ __unpacksrc(){
 __preparesrc(){
 ./autogen.sh    
 ./configure $CONFIGUREOPTS --disable-remote
-sed -i '53s/^/extern /' src/ausearch-common.h
 }
 __compilesrc(){
     make $MAKEOPTS

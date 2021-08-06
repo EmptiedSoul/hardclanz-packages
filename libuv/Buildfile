@@ -1,0 +1,34 @@
+#!/bin/bash
+PACKAGE="libuv"
+VER="1.41.0"
+
+DEPENDS=()
+CONFLICTS=()
+
+DESCRIPTION="Asynchronous I/O library"
+
+URL="https://dist.libuv.org/dist/v${VER}/"
+SRCDIR="${PACKAGE}-v${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+
+__unpacksrc(){
+	tar xf ${SRCTGZ}
+}
+
+__preparesrc(){
+	sh autogen.sh
+	./configure --prefix=/usr --disable-static
+}
+
+__compilesrc(){
+	make $MAKEOPTS
+}
+
+__installsrc(){
+	make install DESTDIR="$DEST"
+}

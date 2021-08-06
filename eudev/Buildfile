@@ -16,7 +16,7 @@ SRCTGZ="eudev-3.2.9.tar.gz"
 SRCDIR="eudev-3.2.9"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ

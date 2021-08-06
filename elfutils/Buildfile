@@ -16,7 +16,7 @@ SRCDIR="elfutils-0.182"
 CRYPT="key"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xjf $SRCTGZ

@@ -1,11 +1,9 @@
-libcrypt.so.2
 libc.so.6
-libdb-5.3.so
+libcrypt.so.2
 libdl.so.2
-libgdbm_compat.so.4
 libgdbm.so.6
+libgdbm_compat.so.4
 libm.so.6
-libnsl.so.2
 libpthread.so.0
 librt.so.1
 libutil.so.1

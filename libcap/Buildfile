@@ -1,5 +1,5 @@
 PACKAGE="libcap"
-VER="2.42"
+VER="2.48"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -16,7 +16,7 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
@@ -26,12 +26,14 @@ __preparesrc(){
     true
 }
 __compilesrc(){
-    make $MAKEOPTS
+    make $MAKEOPTS prefix=/usr lib=lib
 }
 __installsrc(){
-    make $MAKEOPTS lib=lib DESTDIR="$DEST" install
-	mkdir -p $DEST/usr/lib
-	ln -sfv /lib/libcap.so.2 $DEST/usr/lib/libcap.so
-	chmod -v 755 $DEST/lib/libcap.so.2.42
-	mv -v $DEST/lib/libpsx.a $DEST/usr/lib
+    make $MAKEOPTS lib=lib prefix=/usr DESTDIR="$DEST" install
+	mkdir -pv $DEST/usr/lib $DEST/lib
+for libname in cap psx; do
+    mv -v $DEST/usr/lib/lib${libname}.so.* $DEST/lib
+    ln -sfv ../../lib/lib${libname}.so.2 $DEST/usr/lib/lib${libname}.so
+    chmod -v 755 $DEST/lib/lib${libname}.so.2.48
+done
 }

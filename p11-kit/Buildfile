@@ -1,0 +1,45 @@
+#!/bin/bash
+PACKAGE="p11-kit"
+VER="0.23.22"
+
+DESCRIPTION="PKCS#11 Implementation"
+
+DEPENDS=(libtasn1 make-ca nss)
+CONFLICTS=()
+
+URL="https://github.com/p11-glue/p11-kit/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+
+__preparesrc(){
+	sed '20,$ d' -i trust/trust-extract-compat &&
+cat >> trust/trust-extract-compat << "EOF"
+# Copy existing anchor modifications to /etc/ssl/local
+/usr/libexec/make-ca/copy-trust-modifications
+
+# Generate a new trust store
+/usr/sbin/make-ca -f -g
+EOF
+	./configure --prefix=/usr --sysconfdir=/etc --with-trust-paths=/etc/pki/anchors 
+}
+
+__compilesrc(){
+	make $MAKEOPTS
+}
+
+__installsrc(){
+	make install DESTDIR="$DEST" && ln -sfv /usr/libexec/p11-kit/trust-extract-compat \
+        	$DEST/usr/bin/update-ca-certificates && \
+	ln -sfv ./pkcs11/p11-kit-trust.so $DEST/usr/lib/libnssckbi.so
+}
+
+

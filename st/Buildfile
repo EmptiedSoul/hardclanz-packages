@@ -16,7 +16,7 @@ SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
@@ -27,7 +27,7 @@ __preparesrc(){
 	mkdir -p "$TERMINFO"
 }
 __compilesrc(){
-    make $MAKEOPTS
+    make $MAKEOPTS CC=gcc
 }
 __installsrc(){
     make $MAKEOPTS PREFIX="/usr" DESTDIR="$DEST" install

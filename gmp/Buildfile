@@ -16,14 +16,17 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS	\
-	--enable-cxx	
+    	cp -v configfsf.guess config.guess
+	cp -v configfsf.sub   config.sub
+	./configure $CONFIGUREOPTS	\
+	--enable-cxx	\
+	--disable-static
 }
 __compilesrc(){
     make $MAKEOPTS

@@ -15,7 +15,7 @@ SRCTAR="bzip2-1.0.8.tar.gz"
 SRCDIR="bzip2-1.0.8"
 
 __getsrc(){
-	wget $SRCURL
+	wget -c $SRCURL
 }
 __unpacksrc(){
 	tar xzf $SRCTAR

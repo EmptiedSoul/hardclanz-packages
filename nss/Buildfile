@@ -1,0 +1,53 @@
+#!/bin/bash
+PACKAGE="nss"
+VER="3.61"
+
+DESCRIPTION="Network Security Services"
+
+DEPENDS=(nspr p11-kit sqlite)
+CONFLICTS=()
+
+URL="https://archive.mozilla.org/pub/security/nss/releases/NSS_3_61_RTM/src/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+FILESDIR="$(pwd)"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+
+__preparesrc(){
+	patch -Np1 -i $FILESDIR/nss-3.61-standalone-1.patch
+}
+
+__compilesrc(){
+	cd nss
+	make -j1 BUILD_OPT=1                  \
+  NSPR_INCLUDE_DIR=/usr/include/nspr  \
+  USE_SYSTEM_ZLIB=1                   \
+  ZLIB_LIBS=-lz                       \
+  NSS_ENABLE_WERROR=0                 \
+  $([ $(uname -m) = x86_64 ] && echo USE_64=1) \
+  $([ -f /usr/include/sqlite3.h ] && echo NSS_USE_SYSTEM_SQLITE=1)
+}
+
+__installsrc(){
+	cd ../dist
+	mkdir -pv $DEST/usr/lib/pkgconfig $DEST/usr/include/nss
+install -v -m755 Linux*/lib/*.so              $DEST/usr/lib              && \
+install -v -m644 Linux*/lib/{*.chk,libcrmf.a} $DEST/usr/lib              && \
+install -v -m755 -d                           $DEST/usr/include/nss      && \
+cp -v -RL {public,private}/nss/*              $DEST/usr/include/nss      && \
+chmod -v 644                                  $DEST/usr/include/nss/*    && \
+install -v -m755 Linux*/bin/{certutil,nss-config,pk12util} $DEST/usr/bin && \
+install -v -m644 Linux*/lib/pkgconfig/nss.pc  $DEST/usr/lib/pkgconfig
+ln -sfv ./pkcs11/p11-kit-trust.so $DEST/usr/lib/libnssckbi.so
+}
+
+

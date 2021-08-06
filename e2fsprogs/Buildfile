@@ -15,7 +15,7 @@ SRCDIR="e2fsprogs-1.45.6"
 CRYPT="key"
 
 __getsrc(){
-    wget $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ

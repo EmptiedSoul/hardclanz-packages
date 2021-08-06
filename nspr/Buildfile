@@ -1,0 +1,43 @@
+#!/bin/bash
+PACKAGE="nspr"
+VER="4.29"
+
+DESCRIPTION="NetScape Portable Runtime"
+
+DEPENDS=()
+CONFLICTS=()
+
+URL="https://archive.mozilla.org/pub/nspr/releases/v${VER}/src/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+
+__preparesrc(){
+	cd nspr
+	sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in &&
+	sed -i 's#$(LIBRARY) ##'            config/rules.mk         &&
+	./configure --prefix=/usr --with-mozilla --with-pthreads --enable-64bit
+	cd ..
+}
+
+__compilesrc(){
+	cd nspr
+	make $MAKEOPTS
+	cd ..
+}
+
+__installsrc(){
+	cd nspr
+	make install DESTDIR="$DEST"
+	cd ..
+}
+
+

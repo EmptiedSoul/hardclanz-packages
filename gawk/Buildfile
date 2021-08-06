@@ -16,13 +16,14 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+	sed -i 's/extras//' Makefile.in
+    ./configure $CONFIGUREOPTS --build=$(./config.guess)
 }
 __compilesrc(){
     make $MAKEOPTS

@@ -17,14 +17,15 @@ SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
 	patch -p1 < $LAUNCHDIR/patches/rootless-ati.patch
-    ./configure $CONFIGUREOPTS
+	patch -p1 < $LAUNCHDIR/patches/link-failure.patch    
+./configure $CONFIGUREOPTS
 }
 __compilesrc(){
     make $MAKEOPTS

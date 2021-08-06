@@ -1,0 +1,38 @@
+#!/bin/bash
+PACKAGE="cmake"
+VER="3.19.5"
+
+DESCRIPTION="Cross-platform build system"
+
+URL="https://cmake.org/files/v3.19/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+
+__preparesrc(){
+	sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+}
+
+__compilesrc(){
+	
+./bootstrap --prefix=/usr        \
+            --system-libs        \
+            --no-system-libarchive \
+            --no-system-jsoncpp  \
+            --no-system-librhash \
+	    --parallel=${MAKEOPTS/-j/} 
+
+make $MAKEOPTS
+}
+
+__installsrc(){
+	make install DESTDIR="$DEST"
+}

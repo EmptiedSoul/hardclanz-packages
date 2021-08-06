@@ -16,7 +16,7 @@ SRCDIR="${PACKAGE}-${VER}"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	wget -q $SRCURL
+	wget -c $SRCURL
 }
 __unpacksrc(){
 	tar xzf $SRCTGZ
@@ -29,6 +29,7 @@ __preparesrc(){
 	--enable-job-control
 }
 __compilesrc(){
+	sed -i 's/-lcurses/-lncursesw/' Makefile
 	make $MAKEOPTS
 }
 __installsrc(){
