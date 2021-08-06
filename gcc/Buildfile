@@ -1,5 +1,5 @@
 PACKAGE="gcc"
-VER="10.3.0"
+VER="11.1.0"
 
 ARCH="installer"
 ACCESS="restricted"

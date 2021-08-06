@@ -10,7 +10,7 @@ mkdir -pv $logsd
 
 trap exit INT
 
-for dir in $(ls -1)
+for dir in $(ls -1 --hide=*.sh)
 do
 	grep -qr "^$dir$" .done && continue
 	echo
