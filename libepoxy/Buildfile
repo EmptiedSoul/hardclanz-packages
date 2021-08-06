@@ -36,3 +36,4 @@ __compilesrc(){
 __installsrc(){
 	ninja -C output install
 }
+GITHUB_CHECK=1

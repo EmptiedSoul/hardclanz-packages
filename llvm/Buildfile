@@ -44,3 +44,4 @@ cmake --build build $MAKEOPTS
 __installsrc(){
 cmake --install build
 }
+GITHUB_CHECK=1

@@ -32,3 +32,4 @@ __compilesrc(){
 __installsrc(){
 	cmake --install build
 }
+GITHUB_CHECK=1
