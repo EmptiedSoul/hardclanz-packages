@@ -16,14 +16,15 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
     ./configure $CONFIGUREOPTS	\
-	--enable-thread-safe
+	--enable-thread-safe \
+	--disable-static
 }
 __compilesrc(){
     make $MAKEOPTS

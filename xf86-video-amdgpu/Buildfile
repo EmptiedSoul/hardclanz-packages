@@ -17,14 +17,15 @@ SRCTGZ="${SRCDIR}.tar.bz2"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xjf $SRCTGZ
 }
 __preparesrc(){
     patch -p1 < $LAUNCHDIR/patches/rootless-amdgpu.patch
-    ./configure $CONFIGUREOPTS
+    patch -p1 < $LAUNCHDIR/patches/link-failure.patch
+	./configure $CONFIGUREOPTS --enable-glamor
 }
 __compilesrc(){
     make $MAKEOPTS

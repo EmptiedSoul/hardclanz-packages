@@ -4,7 +4,7 @@ libunwind-ptrace.so.0
 libunwind-ptrace.so.0.0.0
 libunwind-setjmp.so.0
 libunwind-setjmp.so.0.0.0
-libunwind.so.8
-libunwind.so.8.0.1
 libunwind-x86_64.so.8
 libunwind-x86_64.so.8.0.1
+libunwind.so.8
+libunwind.so.8.0.1

@@ -1,16 +1,1 @@
-libcares.so.2
-libcrypto.so.1.1
 libc.so.6
-libdl.so.2
-libev.so.4
-libgcc_s.so.1
-libjansson.so.4
-libjemalloc.so.2
-libm.so.6
-libnghttp2.so.14
-libpthread.so.0
-libssl.so.1.1
-libstdc++.so.6
-libsystemd.so.0
-libxml2.so.2
-libz.so.1

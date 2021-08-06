@@ -16,7 +16,7 @@ SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
@@ -31,4 +31,11 @@ __compilesrc(){
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
+	mv $DEST/usr/bin/pkg-config $DEST/usr/bin/pkg-config-vanilla
+cat >> $DEST/usr/bin/pkg-config <<EOF
+#!/bin/bash
+export PKG_CONFIG_PATH+="/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig"
+exec pkg-config-vanilla \$@
+EOF
+	chmod -v +x $DEST/usr/bin/pkg-config
 }

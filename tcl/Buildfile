@@ -16,7 +16,7 @@ SRCTGZ="${SRCDIR}-src.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
@@ -25,10 +25,38 @@ __preparesrc(){
     cd unix
     ./configure $CONFIGUREOPTS \
 	--enable-64bit
+    cd ..
 }
 __compilesrc(){
-    make $MAKEOPTS
+    	cd unix
+SRCDIR=$(pwd)
+	make $MAKEOPTS
+sed -e "s|$SRCDIR/unix|/usr/lib|" \
+    -e "s|$SRCDIR|/usr/include|"  \
+    -i tclConfig.sh
+sed -e "s|$SRCDIR/unix|/usr/lib|" \
+    -e "s|$SRCDIR|/usr/include|"  \
+    -i tclConfig.sh
+
+sed -e "s|$SRCDIR/unix/pkgs/tdbc1.1.2|/usr/lib/tdbc1.1.2|" \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.2/generic|/usr/include|"    \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.2/library|/usr/lib/tcl8.6|" \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.2|/usr/include|"            \
+    -i pkgs/tdbc1.1.2/tdbcConfig.sh
+
+sed -e "s|$SRCDIR/unix/pkgs/itcl4.2.1|/usr/lib/itcl4.2.1|" \
+    -e "s|$SRCDIR/pkgs/itcl4.2.1/generic|/usr/include|"    \
+    -e "s|$SRCDIR/pkgs/itcl4.2.1|/usr/include|"            \
+    -i pkgs/itcl4.2.1/itclConfig.sh
+	cd ..
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" install
+	cd unix    
+	make $MAKEOPTS DESTDIR="$DEST" install
+	mkdir -pv $DEST/usr/lib64/ $DEST/usr/bin $DEST/usr/lib
+	chmod -v u+w $DEST/usr/lib/libtcl8.6.so
+	make install-private-headers DESTDIR="$DEST"
+	ln -sv tclsh8.6 $DEST/usr/bin/tclsh
+	ln -sv /usr/lib/tclConfig.sh $DEST/usr/lib64/tclConfig.sh
+	cd ..
 }

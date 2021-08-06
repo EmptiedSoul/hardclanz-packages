@@ -16,17 +16,13 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    sed -i -e '69d' -e '68a extern int not42;' telnetd/state.c
-    sed -i '93d' ftpd/extern.h 
-    sed -i '138a jmp_buf errcatch;' ftpd/ftpd.c
-    sed -i '109a extern jmp_buf errcatch;' ftpd/ftpcmd.y
-    ./configure $CONFIGUREOPTS LDFLAGS="-ltinfo"
+    ./configure $CONFIGUREOPTS 
 }
 __compilesrc(){
     make $MAKEOPTS

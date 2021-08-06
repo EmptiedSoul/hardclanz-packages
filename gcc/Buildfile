@@ -1,5 +1,5 @@
 PACKAGE="gcc"
-VER="11.1.0"
+VER="10.3.0"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -16,19 +16,32 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS	\
+	mkdir -pv buildZ && cd $_
+    ../configure $CONFIGUREOPTS	\
 	LD=ld	\
-	--with-system-zlib
+	--with-system-zlib \
+	--disable-multilib
+	cd ..
 }
 __compilesrc(){
+	cd buildZ
     make $MAKEOPTS
+	cd ..
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" install
+	cd buildZ
+    make $MAKEOPTS DESTDIR="$DEST" install && \
+	mkdir -pv $DEST/usr/lib/bfd-plugins $DEST/lib && \
+	ln -svf /usr/bin/cpp $DEST/lib/cpp && \
+	ln -svf /usr/bin/gcc $DEST/usr/bin/cc && \
+	install -v -dm755 $DEST/usr/lib/bfd-plugins && \
+	ln -svf ../../libexec/gcc/$(gcc -dumpmachine)/10.2.0/liblto_plugin.so $DEST/usr/lib/bfd-plugins/ 
+	cd ..
 }
+

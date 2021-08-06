@@ -16,17 +16,27 @@ SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS --with-shared --without-debug --enable-widec --with-terminfo --enable-shared
+    ./configure $CONFIGUREOPTS --with-shared --without-debug --enable-widec --enable-shared --without-normal --enable-pc-files
 }
 __compilesrc(){
     make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
+mkdir -pv $DEST/usr/lib/pkgconfig
+for lib in ncurses form panel menu ; do
+    rm -vf                    $DEST/usr/lib/lib${lib}.so
+    echo "INPUT(-l${lib}w)" > $DEST/usr/lib/lib${lib}.so
+    ln -sfv ${lib}w.pc        $DEST/usr/lib/pkgconfig/${lib}.pc
+done
+rm -vf                     $DEST/usr/lib/libcursesw.so
+echo "INPUT(-lncursesw)" > $DEST/usr/lib/libcursesw.so
+ln -sfv libncurses.so      $DEST/usr/lib/libcurses.so
+	
 }

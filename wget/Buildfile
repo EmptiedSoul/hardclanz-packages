@@ -1,0 +1,33 @@
+#!/bin/bash
+PACKAGE="wget"
+VER="1.21.1"
+
+DESCRIPTION="Non-interactive downloader"
+
+DEPENDS=( openssl make-ca )
+CONFLICTS=()
+
+URL="https://ftp.gnu.org/gnu/wget/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+
+__preparesrc(){
+	./configure $CONFIGUREOPTS --with-ssl=openssl
+}
+
+__compilesrc(){
+	make $MAKEOPTS
+}
+
+__installsrc(){
+	make install DESTDIR="$DEST"
+}

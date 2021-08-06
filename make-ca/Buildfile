@@ -1,0 +1,37 @@
+#!/bin/bash
+PACKAGE="make-ca"
+VER="1.7"
+
+DESCRIPTION="Create CA certs"
+
+DEPENDS=( nss p11-kit )
+CONFLICTS=()
+
+URL="https://github.com/djlucas/make-ca/releases/download/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+
+__installsrc(){
+	make install DESTDIR="$DEST" && \
+	install -vdm755 $DEST/etc/ssl/local
+	mkdir -pv $DEST/etc/cron.weekly	
+	cat > $DEST/etc/cron.weekly/update-pki.sh << "EOF" &&
+#!/bin/bash
+/usr/sbin/make-ca -g
+EOF
+	chmod 754 $DEST/etc/cron.weekly/update-pki.sh
+}
+
+pkg_postinstall(){
+	/sbin/ldconfig
+	/usr/sbin/make-ca -g	
+}

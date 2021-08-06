@@ -16,7 +16,7 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	wget -q $SRCURL
+	wget -c $SRCURL
 }
 __unpacksrc(){
 	tar xJf $SRCTGZ
@@ -36,4 +36,6 @@ __compilesrc(){
 }
 __installsrc(){
 	make $MAKEOPTS DESTDIR=$DEST install
+mkdir -pv $DEST/usr/lib
+install -vm755 libctf/.libs/libctf.so.0.0.0 $DEST/usr/lib
 }

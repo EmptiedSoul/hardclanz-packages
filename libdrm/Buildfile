@@ -16,20 +16,24 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
 	export DESTDIR="$DEST"
+	sed -i 's/lib64/lib/' meson.build
 	meson \
 	--prefix=/usr \
 	. build
 }
 __compilesrc(){
+	sed -i 's/lib64/lib/' build/build.ninja
 	ninja -C build
 }
 __installsrc(){
 	ninja -C build install
+	mkdir -pv $DEST/usr/lib
+	mv -vf $DEST/usr/lib64/* $DEST/usr/lib/
 }

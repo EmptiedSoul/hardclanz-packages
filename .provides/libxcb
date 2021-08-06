@@ -26,8 +26,6 @@ libxcb-shape.so.0
 libxcb-shape.so.0.0.0
 libxcb-shm.so.0
 libxcb-shm.so.0.0.0
-libxcb.so.1
-libxcb.so.1.1.0
 libxcb-sync.so.1
 libxcb-sync.so.1.0.0
 libxcb-xf86dri.so.0
@@ -42,7 +40,9 @@ libxcb-xkb.so.1
 libxcb-xkb.so.1.0.0
 libxcb-xtest.so.0
 libxcb-xtest.so.0.0.0
-libxcb-xvmc.so.0
-libxcb-xvmc.so.0.0.0
 libxcb-xv.so.0
 libxcb-xv.so.0.0.0
+libxcb-xvmc.so.0
+libxcb-xvmc.so.0.0.0
+libxcb.so.1
+libxcb.so.1.1.0

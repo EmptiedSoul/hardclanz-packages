@@ -16,18 +16,21 @@ SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
     ./configure $CONFIGUREOPTS	\
-	--with-curses	
+	--with-curses \
+	--disable-static \
+	--enable-shared	
 }
 __compilesrc(){
     make $MAKEOPTS
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" SHLIB_LIBS="-lncursesw" install
+    make $MAKEOPTS DESTDIR="$DEST" install
+    sed -i 's/-lreadline/-lreadline -lncursesw/' $DEST/usr/lib/pkgconfig/readline.pc 
 }

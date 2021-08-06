@@ -16,7 +16,7 @@ SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xzf $SRCTGZ
@@ -24,11 +24,15 @@ __unpacksrc(){
 __preparesrc(){
 	cd src
     ./configure $CONFIGUREOPTS
+	cd ..
 }
 __compilesrc(){
-    make $MAKEOPTS
+	cd src    
+	make $MAKEOPTS
+	cd ..	
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" install
+	cd src
+	make $MAKEOPTS DESTDIR="$DEST" install
 	cd ..
 }

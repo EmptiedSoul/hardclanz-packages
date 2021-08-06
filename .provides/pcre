@@ -1,3 +1,5 @@
+libpcre.so.1
+libpcre.so.1.2.12
 libpcre16.so.0
 libpcre16.so.0.2.12
 libpcre32.so.0
@@ -6,5 +8,3 @@ libpcrecpp.so.0
 libpcrecpp.so.0.0.2
 libpcreposix.so.0
 libpcreposix.so.0.0.7
-libpcre.so.1
-libpcre.so.1.2.12

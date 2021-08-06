@@ -16,7 +16,7 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-	wget -q $SRCURL
+	wget -c $SRCURL
 }
 __unpacksrc(){
 	tar xJf $SRCTGZ

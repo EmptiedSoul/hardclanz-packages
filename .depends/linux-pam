@@ -1,0 +1,6 @@
+libc.so.6
+libcrypt.so.2
+libdl.so.2
+libpam.so.0
+libtirpc.so.3
+libutil.so.1

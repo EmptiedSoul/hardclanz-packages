@@ -16,13 +16,14 @@ SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+	export FORCE_UNSAFE_CONFIGURE=1    
+./configure $CONFIGUREOPTS
 }
 __compilesrc(){
     make $MAKEOPTS
