@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="xcb-utils"
 
-DEPENDS=(libXau libxcb)
+DEPENDS=( libXau libxcb glibc   )
 CONFLICTS=()
 
 URL="https://xcb.freedesktop.org/dist/"

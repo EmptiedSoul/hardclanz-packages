@@ -1,5 +1,5 @@
 PACKAGE="autoconf"
-VER="2.69"
+VER="2.71"
 
 ACCESS="restricted"
 ARCH="installer"
@@ -7,7 +7,7 @@ CRYPT="key"
  
 DESCRIPTION="GNU Autoconf. Part of Autotools"
 
-DEPENDS=(gawk m4 diffutils perl bash)
+DEPENDS=( gawk m4 diffutils perl bash   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/autoconf/"

@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=()
+DEPENDS=( gcc glibc ncurses readline zlib   )
 CONFLICTS=()
 
 DESCRIPTION="Perl Compatible Regular Expressions"

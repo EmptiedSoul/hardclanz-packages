@@ -1,5 +1,5 @@
 PACKAGE="libidn2"
-VER="2.3.0"
+VER="2.3.2"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library for working with IDN"
 
-DEPENDS=(libunistring)
+DEPENDS=( libunistring glibc   )
 CONFLICTS=()
 
 URL="https://ftp.gnu.org/gnu/libidn/"

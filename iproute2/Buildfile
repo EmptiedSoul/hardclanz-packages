@@ -1,0 +1,33 @@
+PACKAGE="iproute2"
+VER="5.13.0"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DESCRIPTION="System routing"
+
+DEPENDS=( glibc binutils elfutils libcap libmnl  libbsd  )
+CONFLICTS=()
+
+URL="https://www.kernel.org/pub/linux/utils/net/iproute2/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

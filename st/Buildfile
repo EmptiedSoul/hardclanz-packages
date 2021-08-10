@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(fontconfig libX11 libXft)
+DEPENDS=( fontconfig libX11 libXft freetype-harfbuzz glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Suckless terminal"

@@ -1,5 +1,5 @@
 PACKAGE="dhcpcd"
-VER="9.3.4"
+VER="9.4.0"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="DHCP Daemon"
 
-DEPENDS=(bash glibc eudev)
+DEPENDS=( bash glibc eudev  libmd  )
 CONFLICTS=()
 
 URL="https://roy.marples.name/downloads/dhcpcd/"

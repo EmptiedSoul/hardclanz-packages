@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Reference implementation of PNG library"
 
-DEPENDS=(zlib)
+DEPENDS=( zlib glibc   )
 CONFLICTS=()
 
 URL="https://github.com/glennrp/libpng/archive/"

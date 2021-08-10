@@ -1,5 +1,5 @@
 PACKAGE="iana-etc"
-VER="20200821"
+VER="20210611"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Misc /etc files"
 
-DEPENDS=()
+DEPENDS=(    )
 CONFLICTS=()
 
 URL="https://github.com/Mic92/iana-etc/releases/download/${VER}/"

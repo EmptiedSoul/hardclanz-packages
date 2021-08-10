@@ -1,5 +1,5 @@
 libc.so.6
-libxcb-xkb.so.1
 libxcb.so.1
-libxkbcommon-x11.so.0
+libxcb-xkb.so.1
 libxkbcommon.so.0
+libxkbcommon-x11.so.0

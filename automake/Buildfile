@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Part of GNU Autotools"
 
-DEPENDS=(perl bash)
+DEPENDS=( perl bash   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/automake/"

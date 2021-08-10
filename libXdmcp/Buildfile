@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 Display Manager Control Protocol"
 
-DEPENDS=(xorgproto)
+DEPENDS=( xorgproto glibc  libbsd  )
 CONFLICTS=()
 
 URL="https://www.x.org/pub/individual/lib/"

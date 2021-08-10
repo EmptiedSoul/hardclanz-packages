@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU Perfect Hash Function Generator"
 
-DEPENDS=(gcc texinfo)
+DEPENDS=( gcc texinfo glibc   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/gperf/"

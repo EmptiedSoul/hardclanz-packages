@@ -1,0 +1,8 @@
+libc.so.6
+libfontconfig.so.1
+libfreetype.so.6
+libm.so.6
+librt.so.1
+libutil.so.1
+libX11.so.6
+libXft.so.2

@@ -1,5 +1,5 @@
 PACKAGE="libxcrypt"
-VER="4.4.17"
+VER="4.4.24"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library for one-way hashing"
 
-DEPENDS=(glibc)
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://github.com/besser82/libxcrypt/archive/v${VER}.tar.gz"

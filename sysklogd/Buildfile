@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Daemons and Kernel logging utility"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="http://www.infodrom.org/projects/sysklogd/download/"

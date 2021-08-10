@@ -5,10 +5,10 @@
 
 pointer "Scanning packages for needed shared libraries..."
 
-NPKGS=$(ls -1 | wc -l)
+NPKGS=$(ls -1 --hide=*.sh --hide=README --hide=TODO --hide=Buildfile-example --hide=\!* | wc -l)
 CURPKG=0
 
-for package in $(ls -1) 
+for package in $(ls -1 --hide=*.sh --hide=README --hide=TODO --hide=Buildfile-example --hide=\!* ) 
 do
 	(( CURPKG = CURPKG + 1 ))
 	pointer "($CURPKG/$NPKGS) Scaninng package $package..."

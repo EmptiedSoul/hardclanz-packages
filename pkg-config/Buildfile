@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Properties of installed libraries"
 
-DEPENDS=(glibc bash)
+DEPENDS=( glibc bash   )
 CONFLICTS=()
 
 URL="https://pkg-config.freedesktop.org/releases/"

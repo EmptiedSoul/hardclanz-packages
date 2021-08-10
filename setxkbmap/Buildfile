@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libX11 libxkbfile)
+DEPENDS=( libX11 libxkbfile glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Set X11 KeyBoarD map"

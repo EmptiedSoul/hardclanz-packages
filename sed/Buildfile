@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Stream-oriented ED(itor)"
 
-DEPENDS=(glibc acl attr)
+DEPENDS=( glibc acl attr   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/sed/"

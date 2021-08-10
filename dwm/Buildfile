@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Dynamic Window Manager by suckless.org"
 
-DEPENDS=()
+DEPENDS=( fontconfig glibc libX11 libXft libXinerama   )
 CONFLICTS=()
 
 URL="https://dl.suckless.org/dwm/"

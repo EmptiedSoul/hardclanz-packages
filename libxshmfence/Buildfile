@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 Shared memory fence"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

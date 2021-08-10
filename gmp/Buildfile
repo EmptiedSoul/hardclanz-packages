@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU MultiProcessing library"
 
-DEPENDS=(gcc bash)
+DEPENDS=( gcc bash glibc   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/gmp/"

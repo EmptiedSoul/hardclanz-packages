@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libpciaccess)
+DEPENDS=( libpciaccess glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Linux Direct Rendering Manager library"

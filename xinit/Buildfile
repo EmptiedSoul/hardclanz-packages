@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libX11)
+DEPENDS=( libX11 glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Launching Xorg"

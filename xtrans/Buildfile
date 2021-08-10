@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=()
+DEPENDS=(    )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

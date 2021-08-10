@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Python3 interpreted general-purpose programing language"
 
-DEPENDS=(bzip2 expat gdbm libffi openssl zlib)
+DEPENDS=( bzip2 expat gdbm libffi openssl zlib glibc libnsl libtirpc libxcrypt ncurses readline sqlite3 util-linux xz   )
 CONFLICTS=()
 
 URL="https://www.python.org/ftp/python/${VER}/"
@@ -33,5 +33,5 @@ __compilesrc(){
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
-    #ln -sv python3 $DEST/usr/bin/python
+    ln -sfv python3 $DEST/usr/bin/python
 }

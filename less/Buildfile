@@ -1,5 +1,5 @@
 PACKAGE="less"
-VER="551"
+VER="590"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Long output pager"
 
-DEPENDS=(glibc ncurses)
+DEPENDS=( glibc ncurses   )
 CONFLICTS=()
 
 URL="http://www.greenwoodsoftware.com/less/"

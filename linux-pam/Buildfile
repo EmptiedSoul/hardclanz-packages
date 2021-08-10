@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(audit)
+DEPENDS=( audit glibc libnsl libtirpc libxcrypt  pam  )
 CONFLICTS=()
 
 DESCRIPTION="Pluggable Authentication Modules"
@@ -27,7 +27,7 @@ __preparesrc(){
     autoreconf
     ./configure $CONFIGUREOPTS \
 	--libdir=/usr/lib \
-	--enable-securedir=/lib/security 
+	--enable-securedir=/lib/security --with-db-uniquename
 }
 __compilesrc(){
     make $MAKEOPTS

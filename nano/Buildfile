@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Nano's ANOther text editor"
 
-DEPENDS=()
+DEPENDS=( file glibc ncurses zlib   )
 CONFLICTS=()
 
 URL="https://www.nano-editor.org/dist/v5/"

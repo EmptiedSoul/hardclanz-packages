@@ -1,5 +1,5 @@
 PACKAGE="readline"
-VER="8.0"
+VER="8.1-rc3"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU Text Interface library"
 
-DEPENDS=(glibc ncurses)
+DEPENDS=( glibc ncurses   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/readline/"

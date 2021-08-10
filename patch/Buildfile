@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Apply patches"
 
-DEPENDS=(glibc attr)
+DEPENDS=( glibc attr   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/patch/"

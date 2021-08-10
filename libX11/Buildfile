@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 client-side library"
 
-DEPENDS=(xorgproto libXau libxcb)
+DEPENDS=( xorgproto libXau libxcb glibc   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="LDAP protocol library"
 
-DEPENDS=(libsasl)
+DEPENDS=( libsasl  glibc openssl util-linux  )
 CONFLICTS=()
 
 URL="http://mirror.eu.oneandone.net/software/openldap/openldap-release/"

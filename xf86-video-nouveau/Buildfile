@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libdrm xorgproto)
+DEPENDS=( libdrm xorgproto eudev glibc   )
 CONFLICTS=()
 
 DESCRIPTION="X11 Nvidia GPU Driver"
@@ -25,6 +25,8 @@ __unpacksrc(){
 __preparesrc(){
     	patch -p1 < $LAUNCHDIR/patches/rootless-nouveau.patch
 	export LDFLAGS="-Wl,-z,lazy"
+	enable globstar
+	sed -i -e 's/slave_dst/secondary_dst/g' -e 's/current_master/current_primary/g' -e 's/master_pixmap/primary_pixmap/g' */*.c */*.h
 	./configure $CONFIGUREOPTS
 }
 __compilesrc(){
@@ -33,3 +35,4 @@ __compilesrc(){
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
 }
+

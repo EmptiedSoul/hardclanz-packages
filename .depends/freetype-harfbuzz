@@ -3,10 +3,9 @@ libc.so.6
 libfreetype.so.6
 libglib-2.0.so.0
 libgobject-2.0.so.0
-libharfbuzz-subset.so.0
 libharfbuzz.so.0
+libharfbuzz-subset.so.0
 libm.so.6
 libpng16.so.16
-libpthread.so.0
 libstdc++.so.6
 libz.so.1

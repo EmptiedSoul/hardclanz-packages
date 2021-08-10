@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 KeyBoarD"
 
-DEPENDS=()
+DEPENDS=( glibc libxcb   )
 CONFLICTS=()
 
 URL="https://xkbcommon.org/download/"

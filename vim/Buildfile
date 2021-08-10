@@ -1,12 +1,12 @@
 PACKAGE="vim"
-VER="8.2.1361"
+VER="8.2.3001"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
 CONFLICTS=()
-DEPENDS=(gmp glibc zlib libffi)
+DEPENDS=( gmp glibc zlib libffi acl ncurses   )
 
 DESCRIPTION="VI Improved text editor"
 

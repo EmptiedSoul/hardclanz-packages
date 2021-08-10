@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="bzip2 compressor"
 
-DEPENDS=(glibc bash)
+DEPENDS=( glibc bash   )
 CONFLICTS=()
 
 SRCURL="https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz"

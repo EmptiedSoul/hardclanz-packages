@@ -3,7 +3,7 @@ VER="1.45.6"
 
 ARCH="installer"
 ACCESS="restricted"
-DEPENDS=(bash gettext glibc coreutils binutils)
+DEPENDS=( bash gettext glibc coreutils binutils util-linux   )
 CONFLICTS=()
 
 DESCRIPTION="Ext2/3/4 filesystem utilities"

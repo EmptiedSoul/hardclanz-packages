@@ -1,11 +1,11 @@
 PACKAGE="libcap"
-VER="2.48"
+VER="2.52"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(glibc attr)
+DEPENDS=( glibc attr   )
 CONFLICTS=()
 
 DESCRIPTION="CAPability LIBrary"
@@ -34,6 +34,6 @@ __installsrc(){
 for libname in cap psx; do
     mv -v $DEST/usr/lib/lib${libname}.so.* $DEST/lib
     ln -sfv ../../lib/lib${libname}.so.2 $DEST/usr/lib/lib${libname}.so
-    chmod -v 755 $DEST/lib/lib${libname}.so.2.48
+    chmod -v 755 $DEST/lib/lib${libname}.so.2.52
 done
 }

@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library for handling gpg errors"
 
-DEPENDS=(glibc bash)
+DEPENDS=( glibc bash   )
 CONFLICTS=()
 
 URL="https://www.gnupg.org/ftp/gcrypt/libgpg-error/"

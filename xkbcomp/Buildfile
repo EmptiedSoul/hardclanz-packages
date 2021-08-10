@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=()
+DEPENDS=( glibc libX11 libxkbfile   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/app/"

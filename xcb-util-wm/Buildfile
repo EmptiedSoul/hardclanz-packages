@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libxcb)
+DEPENDS=( libxcb glibc   )
 CONFLICTS=()
 
 DESCRIPTION="XCB WM "

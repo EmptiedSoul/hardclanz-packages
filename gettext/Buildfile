@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(gcc acl bash)
+DEPENDS=( gcc acl bash glibc libunistring ncurses   )
 CONFLICTS=()
 
 DESCRIPTION="GNU Localization library"

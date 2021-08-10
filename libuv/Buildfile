@@ -2,7 +2,7 @@
 PACKAGE="libuv"
 VER="1.41.0"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Asynchronous I/O library"

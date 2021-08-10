@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 Bitmaps"
 
-DEPENDS=()
+DEPENDS=(    )
 CONFLICTS=()
 
 URL="https://x.org/pub/individual/data/"

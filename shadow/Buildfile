@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(acl libcap)
+DEPENDS=( acl libcap attr glibc libxcrypt linux-pam audit  pam  )
 CONFLICTS=()
 
 DESCRIPTION="Password utils"

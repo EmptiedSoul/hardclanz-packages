@@ -1,0 +1,33 @@
+PACKAGE="libseccomp"
+VER="2.5.1"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DESCRIPTION="Secure syscalls"
+
+DEPENDS=( glibc   )
+CONFLICTS=()
+
+URL="https://github.com/seccomp/libseccomp/releases/download/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xzf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+GITHUB_CHECK=1

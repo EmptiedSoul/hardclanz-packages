@@ -1,5 +1,5 @@
 PACKAGE="libepoxy"
-VER="1.5.4"
+VER="1.5.8"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library for handling OpenGL function pointer management"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://github.com/anholt/libepoxy/releases/download/${VER}/"

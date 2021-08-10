@@ -4,7 +4,7 @@ VER="1.7"
 
 DESCRIPTION="Create CA certs"
 
-DEPENDS=( nss p11-kit )
+DEPENDS=( nss p11-kit   )
 CONFLICTS=()
 
 URL="https://github.com/djlucas/make-ca/releases/download/v${VER}/"

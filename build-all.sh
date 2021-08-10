@@ -10,7 +10,7 @@ mkdir -pv $logsd
 
 trap exit INT
 
-for dir in $(ls -1 --hide=*.sh)
+for dir in $(ls -1 --hide=*.sh --hide=README --hide=TODO --hide=Buildfile-example --hide=\!*  )
 do
 	grep -qr "^$dir$" .done && continue
 	echo

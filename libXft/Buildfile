@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 FreeType font drawing"
 
-DEPENDS=()
+DEPENDS=( fontconfig freetype-harfbuzz glibc libX11 libXrender   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

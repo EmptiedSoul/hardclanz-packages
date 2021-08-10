@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU New Portable Thread library"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://www.gnupg.org/ftp/gcrypt/npth/"

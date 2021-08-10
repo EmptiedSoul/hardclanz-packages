@@ -1,5 +1,5 @@
 PACKAGE="git"
-VER="2.29.2"
+VER="2.32.0"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Stupid CVS"
 
-DEPENDS=(curl expat perl shadow openssl pcre2)
+DEPENDS=( curl expat perl shadow openssl pcre2 glibc zlib   )
 CONFLICTS=()
 
 URL="https://www.kernel.org/pub/software/scm/git/"

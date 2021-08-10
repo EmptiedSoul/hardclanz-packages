@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="OpenGL & Vulkan implementation"
 
-DEPENDS=(expat libX11 libXdamage libXext libXrandr libXrender libXxf86vm libdrm libxcb libxshmfence llvm xorgproto zlib)
+DEPENDS=( expat libX11 libXdamage libXext libXrandr libXrender libXxf86vm libdrm libxcb libxshmfence llvm xorgproto zlib  elfutils gcc glibc libunwind libXfixes zstd  )
 CONFLICTS=()
 
 URL="https://archive.mesa3d.org/"
@@ -29,8 +29,8 @@ __preparesrc(){
 	--mandir=/usr/share/man \
 	--localstatedir=/var \
 	--buildtype=release \
-	-Dplatforms=x11,drm \
-	-Dzstd=false \
+	-Dplatforms=x11 \
+	-Dzstd=true \
 	. output
 }
 __compilesrc(){

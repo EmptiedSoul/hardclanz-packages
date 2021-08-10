@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="C Garbage Collector library"
 
-DEPENDS=(libatomic_ops)
+DEPENDS=( libatomic_ops gcc glibc   )
 CONFLICTS=()
 
 URL="https://www.hboehm.info/gc/gc_source/"

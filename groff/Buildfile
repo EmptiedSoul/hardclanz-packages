@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU Typesetting system"
 
-DEPENDS=(perl gcc)
+DEPENDS=( perl gcc glibc   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/groff/"

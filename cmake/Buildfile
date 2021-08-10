@@ -1,6 +1,9 @@
 #!/bin/bash
 PACKAGE="cmake"
-VER="3.19.5"
+VER="3.19.8"
+
+DEPENDS=(   curl expat gcc glibc libmd libuv ncurses xz zlib zstd  )
+CONFLICTS=()
 
 DESCRIPTION="Cross-platform build system"
 

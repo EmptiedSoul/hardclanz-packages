@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Linux Kernel evdev api library"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://www.freedesktop.org/software/libevdev/"

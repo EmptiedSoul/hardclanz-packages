@@ -7,7 +7,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(glibc)
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="http://download.savannah.gnu.org/releases/attr/"

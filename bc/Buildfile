@@ -1,5 +1,5 @@
 PACKAGE="bc"
-VER="3.1.5"
+VER="4.0.2"
 
 ACCESS="restricted"
 ARCH="installer"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Basic Calculator"
 
-DEPENDS=(readline)
+DEPENDS=( readline   )
 CONFLICTS=()
 
 URL="https://github.com/gavinhoward/bc/releases/download/${VER}/"

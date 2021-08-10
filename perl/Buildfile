@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Practical Extraction and Report Language"
 
-DEPENDS=(gdbm glibc)
+DEPENDS=( gdbm glibc libnsl libxcrypt   )
 CONFLICTS=()
 
 URL="https://www.cpan.org/src/5.0/"

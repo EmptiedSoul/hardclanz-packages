@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libldap keyutils)
+DEPENDS=( libldap keyutils glibc   )
 CONFLICTS=()
 
 DESCRIPTION="MIT Kerberos"

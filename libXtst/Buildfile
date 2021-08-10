@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 Record extension"
 
-DEPENDS=(libX11 libXau libXext libXi libxcb)
+DEPENDS=( libX11 libXau libXext libXi libxcb glibc   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

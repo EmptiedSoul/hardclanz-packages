@@ -1,11 +1,11 @@
 PACKAGE="texinfo"
-VER="6.8"
+VER="6.7"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(ncurses gzip perl bash)
+DEPENDS=( ncurses gzip perl bash glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Documentation viewer"

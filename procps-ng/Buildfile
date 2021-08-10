@@ -1,0 +1,39 @@
+PACKAGE="procps-ng"
+VER="3.3.17"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DESCRIPTION="Process managing utilities (next-gen)"
+
+DEPENDS=( ncurses glibc   )
+CONFLICTS=()
+
+URL="https://sourceforge.net/projects/procps-ng/files/Production/"
+_SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${_SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+SRCDIR="procps-${VER}"
+
+__getsrc(){
+    curl -LJO $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	./autogen.sh
+    ./configure $CONFIGUREOPTS	\
+	   --exec-prefix=                           \
+            --libdir=/usr/lib                        \
+            --docdir=/usr/share/doc/procps-ng-3.3.16 \
+            --disable-static                         \
+            --disable-kill
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

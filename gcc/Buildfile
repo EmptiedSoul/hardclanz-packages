@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(mpc binutils zstd)
+DEPENDS=( mpc binutils zstd glibc gmp mpfr zlib   )
 CONFLICTS=()
 
 DESCRIPTION="GNU Compiler Collection"

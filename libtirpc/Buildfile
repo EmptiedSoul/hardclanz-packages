@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Remote Procedure Call library"
 
-DEPENDS=(krb5)
+DEPENDS=( krb5 glibc   )
 CONFLICTS=()
 
 URL="http://git.linux-nfs.org/?p=steved/libtirpc.git;a=snapshot;h=70be47354154ea32e12af6dd9252fdc5c5e27815;sf=tgz"

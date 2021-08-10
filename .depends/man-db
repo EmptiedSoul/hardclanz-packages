@@ -1,6 +1,7 @@
 libc.so.6
 libgdbm.so.6
-libman-2.9.3.so
-libmandb-2.9.3.so
+libman-2.9.4.so
+libmandb-2.9.4.so
 libpipeline.so.1
+libseccomp.so.2
 libz.so.1

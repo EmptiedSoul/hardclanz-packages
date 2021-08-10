@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(gcc readline bash zlib bzip2)
+DEPENDS=( gcc readline bash zlib bzip2 glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Perl Compatable Regular Expressions"

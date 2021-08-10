@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Part of GNU Autotools"
 
-DEPENDS=(bash tar glibc)
+DEPENDS=( bash tar glibc   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/libtool/"

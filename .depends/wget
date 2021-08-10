@@ -1,5 +1,5 @@
-libc.so.6
 libcrypto.so.1.1
+libc.so.6
 libidn2.so.0
 libpcre2-8.so.0
 libpsl.so.5

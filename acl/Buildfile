@@ -7,7 +7,7 @@ DESCRIPTION="Access Control Lists"
 ARCH="installer"
 ACCESS="restricted"
 
-DEPENDS=(attr)
+DEPENDS=( attr glibc   )
 CONFLICTS=()
 
 URL="http://download.savannah.gnu.org/releases/acl/"

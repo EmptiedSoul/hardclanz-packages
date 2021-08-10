@@ -1,29 +1,25 @@
-PACKAGE=""
-VER=""
+PACKAGE="package"
+VER="v.e.r.s.i.o.n"
 
-ARCH="installer"
-ACCESS="restricted"
-CRYPT="key"
-
-DEPENDS=()
+DEPENDS=( package-dependency1 package-dependency2 )
 CONFLICTS=()
 
-URL=""
+URL="https://package-homepage.org/releases/"
 SRCDIR="${PACKAGE}-${VER}"
-SRCTGZ="${SRCDIR}.tar.??"
+SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
-    wget -q $SRCURL
+    wget -c $SRCURL
 }
 __unpacksrc(){
-    tar x?f $SRCTGZ
+    tar xf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+    ./configure $CONFIGUREOPTS --disable-bloat
 }
 __compilesrc(){
-    make $MAKEOPTS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+    make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install

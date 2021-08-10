@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(glibc mpfr)
+DEPENDS=( glibc mpfr gmp   )
 CONFLICTS=()
 
 DESCRIPTION="MultiPrecession"

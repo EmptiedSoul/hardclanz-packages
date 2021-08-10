@@ -4,7 +4,7 @@ VER="3.5.0"
 
 DESCRIPTION="Netlink library"
 
-DEPENDS=(  )
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://github.com/thom311/libnl/releases/download/libnl3_5_0/"

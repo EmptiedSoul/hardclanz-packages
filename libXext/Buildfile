@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 miscellaneous extensions"
 
-DEPENDS=(libX11)
+DEPENDS=( libX11 glibc   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

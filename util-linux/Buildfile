@@ -1,16 +1,16 @@
 PACKAGE="util-linux"
-VER="2.36"
+VER="2.37.1"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(coreutils shadow libcap)
+DEPENDS=( coreutils shadow libcap eudev file glibc libxcrypt ncurses pcre2 zlib   )
 CONFLICTS=()
 
 DESCRIPTION="Non-gnu coreutils"
 
-URL="https://www.kernel.org/pub/linux/utils/util-linux/v${VER}/"
+URL="https://www.kernel.org/pub/linux/utils/util-linux/v2.37/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"

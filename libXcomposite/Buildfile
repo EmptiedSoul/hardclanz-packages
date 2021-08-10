@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 compositing extension"
 
-DEPENDS=(libXfixes)
+DEPENDS=( libXfixes glibc libX11   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

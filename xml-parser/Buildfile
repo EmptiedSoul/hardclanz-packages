@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(expat)
+DEPENDS=( expat glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Perl XML Parser"

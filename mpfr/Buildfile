@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="MultiPrecision floating-point library"
 
-DEPENDS=(gmp)
+DEPENDS=( gmp glibc   )
 CONFLICTS=()
 
 URL="http://www.mpfr.org/${PACKAGE}-${VER}/"

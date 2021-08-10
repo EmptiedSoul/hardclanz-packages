@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Assuan protocol library"
 
-DEPENDS=(libgpg-error)
+DEPENDS=( libgpg-error glibc   )
 CONFLICTS=()
 
 URL="https://www.gnupg.org/ftp/gcrypt/libassuan/"

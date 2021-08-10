@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=()
+DEPENDS=(    )
 CONFLICTS=()
 
 DESCRIPTION="Timezone data"

@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libX11 libXrandr)
+DEPENDS=( libX11 libXrandr glibc   )
 CONFLICTS=()
 
 URL="https://xorg.freedesktop.org/archive/individual/app/"

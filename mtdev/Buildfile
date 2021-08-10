@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Multitouch Protocol Translation library"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://bitmath.org/code/mtdev/"

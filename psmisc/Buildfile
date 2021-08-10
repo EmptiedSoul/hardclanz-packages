@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Small /proc fs programs"
 
-DEPENDS=(ncurses)
+DEPENDS=( ncurses glibc   )
 CONFLICTS=()
 
 URL=" https://sourceforge.net/projects/psmisc/files/psmisc/"

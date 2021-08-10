@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="find and execute em"
 
-DEPENDS=(glibc bash)
+DEPENDS=( glibc bash   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/findutils/"

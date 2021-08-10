@@ -4,7 +4,7 @@ VER="8.32"
 ARCH="installer"
 ACCESS="restricted"
 
-DEPENDS=(glibc acl attr gmp libcap openssl)
+DEPENDS=( glibc acl attr gmp libcap openssl   )
 CONFLICTS=()
 
 DESCRIPTION="Core utilities, supposed to be installed on every system"

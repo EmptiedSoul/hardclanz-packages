@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU m4 preprocessor"
 
-DEPENDS=(bash glibc)
+DEPENDS=( bash glibc   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/m4/"

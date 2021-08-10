@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Pipeline manipulation library"
 
-DEPENDS=(glibc)
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="http://download.savannah.gnu.org/releases/libpipeline/"

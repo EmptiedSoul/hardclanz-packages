@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="BSD Functions library"
 
-DEPENDS=()
+DEPENDS=(   glibc libmd  )
 CONFLICTS=()
 
 URL="https://libbsd.freedesktop.org/releases/"

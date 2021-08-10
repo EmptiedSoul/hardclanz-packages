@@ -2,6 +2,6 @@ ld-linux-x86-64.so.2
 libc.so.6
 libgcc_s.so.1
 liblzma.so.5
-libunwind-x86_64.so.8
 libunwind.so.8
+libunwind-x86_64.so.8
 libz.so.1

@@ -1,5 +1,5 @@
 libassuan.so.0
-libc.so.6
 libcap.so.2
+libc.so.6
 libgpg-error.so.0
 libncursesw.so.6

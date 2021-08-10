@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="SSH2 Protocol library"
 
-DEPENDS=(openssl zlib)
+DEPENDS=( openssl zlib glibc   )
 CONFLICTS=()
 
 URL="https://github.com/libssh2/libssh2/releases/download/libssh2-${VER}/"

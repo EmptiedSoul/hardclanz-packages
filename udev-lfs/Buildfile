@@ -1,0 +1,35 @@
+PACKAGE="udev-lfs"
+VER="20171102"
+
+ARCH="installer"
+ACCESS="restricted"
+CRYPT="key"
+
+DEPENDS=(    )
+CONFLICTS=()
+
+DESCRIPTION="udev rules from LFS"
+
+URL="http://anduin.linuxfromscratch.org/LFS/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+    #./configure $CONFIGUREOPTS
+    sed -i 's/udev-lfs-$(VERSION)\///' Makefile.lfs
+    true
+}
+__compilesrc(){
+    #make $MAKEOPTS
+    true
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" -f Makefile.lfs install
+}

@@ -2,10 +2,12 @@ libc.so.6
 libcurl.so.4
 libdl.so.2
 libexpat.so.1
+libformw.so.6
 libgcc_s.so.1
 liblzma.so.5
+libmd.so.0
 libm.so.6
-libpthread.so.0
+libncursesw.so.6
 libstdc++.so.6
 libuv.so.1
 libz.so.1

@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Libinput for X11"
 
-DEPENDS=(libinput xorg-server)
+DEPENDS=( libinput xorg-server glibc   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/driver/"

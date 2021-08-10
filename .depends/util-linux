@@ -1,14 +1,12 @@
 ld-linux-x86-64.so.2
 libblkid.so.1
-libc.so.6
 libcrypt.so.2
+libc.so.6
 libfdisk.so.1
-libm.so.6
 libmagic.so.1
 libmount.so.1
+libm.so.6
 libncursesw.so.6
-libpcre2-8.so.0
-librt.so.1
 libsmartcols.so.1
 libudev.so.1
 libutil.so.1

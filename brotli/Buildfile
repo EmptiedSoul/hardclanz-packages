@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Cryptographic lib"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://github.com/google/brotli/archive/v${VER}/"

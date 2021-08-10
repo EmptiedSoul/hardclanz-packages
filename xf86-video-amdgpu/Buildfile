@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 AMD GPU Driver"
 
-DEPENDS=(expat libdrm libpciaccess mesa xorgproto)
+DEPENDS=( expat libdrm libpciaccess mesa xorgproto eudev glibc   )
 CONFLICTS=()
 
 LAUNCHDIR="$(pwd)"

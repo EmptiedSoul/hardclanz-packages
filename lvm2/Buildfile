@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Logical Volume Manager"
 
-DEPENDS=()
+DEPENDS=( eudev glibc libaio ncurses readline util-linux   )
 CONFLICTS=()
 
 URL="https://sourceware.org/ftp/lvm2/"

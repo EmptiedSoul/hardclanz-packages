@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Low-level software library for pixel manipulation"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

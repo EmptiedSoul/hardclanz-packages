@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="General-purpose cryptographic library based on gnupg code"
 
-DEPENDS=(libgpg-error)
+DEPENDS=( libgpg-error glibc   )
 CONFLICTS=()
 
 URL="https://www.gnupg.org/ftp/gcrypt/libgcrypt/"

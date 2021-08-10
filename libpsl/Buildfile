@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library for handling Public Suffix List"
 
-DEPENDS=(libidn2 libunistring)
+DEPENDS=( libidn2 libunistring glibc   )
 CONFLICTS=()
 
 URL="https://github.com/rockdaboot/libpsl/releases/download/${VER}/"

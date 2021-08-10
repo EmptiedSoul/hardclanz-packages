@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Grab Regular Expressions and Print em"
 
-DEPENDS=(glibc)
+DEPENDS=( glibc pcre   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/grep/"

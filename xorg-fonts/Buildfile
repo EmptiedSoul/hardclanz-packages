@@ -4,7 +4,7 @@ VER="11.0"
 
 DESCRIPTION="Non-interactive downloader"
 
-DEPENDS=( openssl make-ca )
+DEPENDS=( openssl make-ca glibc   )
 CONFLICTS=()
 
 URL="https://ftp.gnu.org/gnu/wget/"

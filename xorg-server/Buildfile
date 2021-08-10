@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(fontconfig bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib brotli graphite2 libunwind)
+DEPENDS=( fontconfig bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib brotli graphite2 libunwind eudev glibc libXdmcp  libbsd  )
 CONFLICTS=()
 
 DESCRIPTION="X11 Server"

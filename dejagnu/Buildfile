@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Test suite"
 
-DEPENDS=(bash expect)
+DEPENDS=( bash expect   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/dejagnu/"

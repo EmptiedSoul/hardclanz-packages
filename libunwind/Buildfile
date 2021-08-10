@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library to define a portable and efficient C API"
 
-DEPENDS=()
+DEPENDS=( gcc glibc xz zlib   )
 CONFLICTS=()
 
 URL="https://github.com/libunwind/libunwind/releases/download/v1.5/"

@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(bash glibc)
+DEPENDS=( bash glibc libxcrypt   )
 CONFLICTS=()
 
 DESCRIPTION="Init subsystem"

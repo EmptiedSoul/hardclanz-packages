@@ -1,5 +1,5 @@
 PACKAGE="curl"
-VER="7.73.0"
+VER="7.78.0"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="CURL Downloader"
 
-DEPENDS=(krb5 libssh2 libpsl libnghttp2 libidn2)
+DEPENDS=( krb5 libssh2 libpsl libnghttp2 libidn2 brotli glibc openssl zlib zstd  libldap  )
 CONFLICTS=()
 
 URL="https://curl.se/download/"
@@ -23,7 +23,7 @@ __unpacksrc(){
 }
 __preparesrc(){
     ./configure $CONFIGUREOPTS \
-	--without-librtmp
+	--without-librtmp --with-openssl
 }
 __compilesrc(){
     make $MAKEOPTS

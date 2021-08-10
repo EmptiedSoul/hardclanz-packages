@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU linker, assembler and other stuff"
 
-DEPENDS=(glibc zlib elfutils)
+DEPENDS=( glibc zlib elfutils flex gcc   )
 CONFLICTS=()
 
 URL="https://ftp.gnu.org/gnu/binutils/"

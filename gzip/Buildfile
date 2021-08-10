@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU DEFLATE Compressor"
 
-DEPENDS=(glibc bash less)
+DEPENDS=( glibc bash less   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/gzip/"

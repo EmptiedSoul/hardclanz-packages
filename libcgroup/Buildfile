@@ -1,7 +1,7 @@
 PACKAGE="libcgroup"
-VER="2.0"
+VER="2.0.rc1"
 
-DEPENDS=()
+DEPENDS=( glibc linux-pam pam   )
 CONFLICTS=()
 
 URL="https://github.com/libcgroup/libcgroup/releases/download/v${VER}/"

@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Minimalistic NetLink library"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://netfilter.org/projects/libmnl/files/"

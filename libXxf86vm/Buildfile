@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 XFree86 VideoMode"
 
-DEPENDS=()
+DEPENDS=( glibc libX11 libXext   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Atomic operations library"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://github.com/ivmai/libatomic_ops/releases/download/v${VER}/"

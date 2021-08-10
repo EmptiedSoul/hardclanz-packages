@@ -2,10 +2,10 @@ libasan.so.6
 libasan.so.6.0.0
 libatomic.so.1
 libatomic.so.1.2.0
-libcc1.so.0
-libcc1.so.0.0.0
 libcc1plugin.so.0
 libcc1plugin.so.0.0.0
+libcc1.so.0
+libcc1.so.0.0.0
 libcp1plugin.so.0
 libcp1plugin.so.0.0.0
 libgcc_s.so.1
@@ -17,8 +17,6 @@ libitm.so.1
 libitm.so.1.0.0
 liblsan.so.0
 liblsan.so.0.0.0
-liblto_plugin.so.0
-liblto_plugin.so.0.0.0
 libobjc.so.4
 libobjc.so.4.0.0
 libquadmath.so.0
@@ -26,8 +24,8 @@ libquadmath.so.0.0.0
 libssp.so.0
 libssp.so.0.0.0
 libstdc++.so.6
-libstdc++.so.6.0.28
-libstdc++.so.6.0.28-gdb.py
+libstdc++.so.6.0.29
+libstdc++.so.6.0.29-gdb.py
 libtsan.so.0
 libtsan.so.0.0.0
 libubsan.so.1

@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Test suite"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://prdownloads.sourceforge.net/expect/"

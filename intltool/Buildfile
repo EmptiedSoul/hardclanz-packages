@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(perl xml-parser)
+DEPENDS=( perl xml-parser   )
 CONFLICTS=()
 
 URL="https://launchpad.net/intltool/trunk/${VER}/+download/"

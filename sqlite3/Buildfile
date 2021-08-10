@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(readline zlib)
+DEPENDS=( readline zlib glibc ncurses   )
 CONFLICTS=()
 
 DESCRIPTION="sqlite3 database"

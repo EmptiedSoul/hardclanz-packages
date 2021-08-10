@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 cursos extension"
 
-DEPENDS=(libXfixes libXrender)
+DEPENDS=( libXfixes libXrender glibc libX11   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

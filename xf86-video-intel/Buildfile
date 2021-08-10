@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libXScrnSaver libXcursor libXinerama libXrandr libXtst xorg-server)
+DEPENDS=( libXScrnSaver libXcursor libXinerama libXrandr libXtst xorg-server eudev glibc libX11 libXdamage libXext libXfixes libXrender libdrm libpciaccess pixman   )
 CONFLICTS=()
 
 DESCRIPTION="X11 Intel GPU Driver"
@@ -24,6 +24,8 @@ __unpacksrc(){
 __preparesrc(){
 	export DESTDIR="$DEST"
 	export LDFLAGS="-Wl,-z,lazy"
+		enable globstar
+	sed -i -e 's/slave_dst/secondary_dst/g' -e 's/current_master/current_primary/g' -e 's/master_pixmap/primary_pixmap/g' */*.c */*.h */*/*.h */*/*.c
 	meson \
 	--prefix=/usr \
 	--libexecdir=/usr/lib \

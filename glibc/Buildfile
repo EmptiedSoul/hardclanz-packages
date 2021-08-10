@@ -1,5 +1,5 @@
 PACKAGE="glibc"
-VER="2.33"
+VER="2.34"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU C Library"
 
-DEPENDS=(tzdata)
+DEPENDS=( tzdata   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/glibc/"

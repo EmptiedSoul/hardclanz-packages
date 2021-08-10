@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="XCB Image"
 
-DEPENDS=(libXau libxcb xcb-util)
+DEPENDS=( libXau libxcb xcb-util glibc   )
 CONFLICTS=()
 
 URL="https://xcb.freedesktop.org/dist/"

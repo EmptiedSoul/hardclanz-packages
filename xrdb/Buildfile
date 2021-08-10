@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libX11 libXmu)
+DEPENDS=( libX11 libXmu glibc   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/app/"

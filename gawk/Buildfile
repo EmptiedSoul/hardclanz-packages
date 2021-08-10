@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU AWK"
 
-DEPENDS=(bash glibc mpfr)
+DEPENDS=( bash glibc mpfr gmp ncurses readline   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/gawk/"

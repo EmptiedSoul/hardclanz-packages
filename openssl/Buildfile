@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="General SSL library"
 
-DEPENDS=(perl)
+DEPENDS=( perl glibc   )
 CONFLICTS=()
 
 URL="https://www.openssl.org/source/"

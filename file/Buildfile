@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Retrieves what does file contain"
 
-DEPENDS=(glibc zlib xz bzip2)
+DEPENDS=( glibc zlib xz bzip2 libseccomp   )
 CONFLICTS=()
 
 URL="ftp://ftp.astron.com/pub/file/"

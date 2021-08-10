@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Network Services library"
 
-DEPENDS=(libtirpc)
+DEPENDS=( libtirpc glibc   )
 CONFLICTS=()
 
 URL="https://github.com/thkukuk/libnsl/releases/download/v${VER}/"

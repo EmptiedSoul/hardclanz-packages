@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(zlib)
+DEPENDS=( zlib glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Command script language"

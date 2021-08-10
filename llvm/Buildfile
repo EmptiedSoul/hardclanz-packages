@@ -1,5 +1,5 @@
 PACKAGE="llvm"
-VER="11.0.0"
+VER="12.0.1"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Low-Level Virtual Machine"
 
-DEPENDS=(zlib)
+DEPENDS=( zlib gcc glibc ncurses   )
 CONFLICTS=()
 
 URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${VER}/"

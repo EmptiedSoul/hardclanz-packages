@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(expat libdrm libpciaccess mesa xorgproto)
+DEPENDS=( expat libdrm libpciaccess mesa xorgproto eudev glibc   )
 CONFLICTS=()
 
 DESCRIPTION="X11 ATI GPU Driver"
@@ -16,20 +16,30 @@ SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
 
-__getsrc(){
-    wget -c $SRCURL
-}
-__unpacksrc(){
-    tar xzf $SRCTGZ
-}
-__preparesrc(){
-	patch -p1 < $LAUNCHDIR/patches/rootless-ati.patch
-	patch -p1 < $LAUNCHDIR/patches/link-failure.patch    
-./configure $CONFIGUREOPTS
-}
-__compilesrc(){
-    make $MAKEOPTS
-}
+#__getsrc(){
+#    wget -c $SRCURL
+#}
+#__unpacksrc(){
+#    tar xzf $SRCTGZ
+#}
+#__preparesrc(){
+#	patch -p1 < $LAUNCHDIR/patches/rootless-ati.patch
+#	./configure $CONFIGUREOPTS
+#	echo "#define slave_dst secondary_dst" >> src/config.h
+#	echo "#define current_master current_primary" >> src/config.h
+#	echo "#define master_pixmap primary_pixmap" >> src/config.h
+#}
+#__compilesrc(){
+#    make $MAKEOPTS
+#}
+#__installsrc(){
+#    make $MAKEOPTS DESTDIR="$DEST" install
+#}
+
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" install
+	true
+}
+
+pkg_postinstall(){
+echo "DRIVER IS BROKEN USE AMDGPU INSTEAD!"
 }

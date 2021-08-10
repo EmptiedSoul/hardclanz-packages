@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Linux Kernel Key Utils"
 
-DEPENDS=(bash glibc)
+DEPENDS=( bash glibc   )
 CONFLICTS=()
 
 URL="http://people.redhat.com/%7Edhowells/keyutils/"

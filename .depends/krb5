@@ -1,0 +1,15 @@
+libcom_err.so.3
+libc.so.6
+libgssapi_krb5.so.2
+libgssrpc.so.4
+libk5crypto.so.3
+libkadm5clnt_mit.so.12
+libkadm5srv_mit.so.12
+libkdb5.so.10
+libkeyutils.so.1
+libkrb5.so.3
+libkrb5support.so.0
+libpthread.so.0
+libresolv.so.2
+libutil.so.1
+libverto.so.0

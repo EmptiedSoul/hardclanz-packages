@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(bash)
+DEPENDS=( bash glibc   )
 CONFLICTS=()
 
 URL="https://tukaani.org/xz/"

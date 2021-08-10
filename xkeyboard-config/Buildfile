@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(xkbcomp)
+DEPENDS=( xkbcomp   )
 CONFLICTS=()
 
 DESCRIPTION="X11 Keyboard config"

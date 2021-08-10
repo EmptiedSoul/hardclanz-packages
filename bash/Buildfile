@@ -5,7 +5,7 @@ ACCESS="restricted"
 ARCH="installer"
 CRYPT="key"
 
-DEPENDS=(readline glibc ncurses)
+DEPENDS=( readline glibc ncurses   )
 CONFLICTS=()
 
 DESCRIPTION="Bourne-Again SHell"

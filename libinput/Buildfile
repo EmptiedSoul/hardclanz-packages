@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library for handling input devices"
 
-DEPENDS=(libevdev mtdev)
+DEPENDS=( libevdev mtdev eudev glibc   )
 CONFLICTS=()
 
 URL="https://github.com/wayland-project/libinput/archive/"

@@ -7,19 +7,19 @@ CRYPT="key"
 
 DESCRIPTION="Managing xorg fonts"
 
-DEPENDS=(freetype-harfbuzz)
+DEPENDS=( freetype-harfbuzz expat glibc   )
 CONFLICTS=()
 
 URL="https://www.freedesktop.org/software/fontconfig/release/"
 SRCDIR="${PACKAGE}-${VER}"
-SRCTGZ="${SRCDIR}.tar.bz2"
+SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
     wget -c $SRCURL
 }
 __unpacksrc(){
-    tar xjf $SRCTGZ
+    tar xf $SRCTGZ
 }
 __preparesrc(){
 	rm -f src/fcobjshash.h    

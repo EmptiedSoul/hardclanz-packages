@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Foreign Function Interface library"
 
-DEPENDS=(glibc)
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="ftp://sourceware.org/pub/libffi/"

@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(glibc)
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://zlib.net/"

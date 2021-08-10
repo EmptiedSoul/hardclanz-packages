@@ -4,7 +4,7 @@ VER="2.9"
 
 DESCRIPTION="WPA Auth daemon"
 
-DEPENDS=(  )
+DEPENDS=( glibc libnl ncurses openssl readline   )
 CONFLICTS=()
 
 URL="https://w1.fi/releases/"

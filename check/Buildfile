@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Test suite"
 
-DEPENDS=(gawk)
+DEPENDS=( gawk glibc   )
 CONFLICTS=()
 
 URL="https://github.com/libcheck/check/releases/download/${VER}/"

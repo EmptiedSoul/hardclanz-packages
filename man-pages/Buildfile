@@ -1,5 +1,5 @@
 PACKAGE="man-pages"
-VER="5.08"
+VER="5.12"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -8,7 +8,7 @@ CRYPT="key"
 DESCRIPTION="Linux Kernel man-pages"
 
 
-DEPENDS=()
+DEPENDS=(    )
 CONFLICTS=()
 
 URL="https://www.kernel.org/pub/linux/docs/man-pages/"

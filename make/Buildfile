@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU make - build system"
 
-DEPENDS=(gc glibc guile)
+DEPENDS=( gc glibc guile   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/make/"

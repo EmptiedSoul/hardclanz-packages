@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for pkg in $(ls -1d */ | sed 's;/;;')
+for pkg in $(ls -1d */ --hide=*.sh --hide=README --hide=TODO --hide=Buildfile-example --hide=\!* | sed 's;/;;')
 do
 	pushd $pkg &>/dev/null
 	. ./Buildfile &>/dev/null

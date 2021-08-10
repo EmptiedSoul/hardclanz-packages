@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(libXi)
+DEPENDS=( libXi glibc   )
 CONFLICTS=()
 
 DESCRIPTION="X11 VESA Driver"

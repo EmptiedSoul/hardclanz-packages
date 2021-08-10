@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="X11 bindings for C"
 
-DEPENDS=(libXau xcb-proto xorg-util-macros)
+DEPENDS=( libXau xcb-proto xorg-util-macros glibc libXdmcp   )
 CONFLICTS=()
 
 URL="https://xorg.freedesktop.org/archive/individual/lib/"

@@ -1,5 +1,5 @@
 PACKAGE="meson"
-VER="0.55.0"
+VER="0.58.2"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,10 +7,10 @@ CRYPT="key"
 
 DESCRIPTION="build system"
 
-DEPENDS=(python ninja)
+DEPENDS=( python ninja   )
 CONFLICTS=()
 
-URL="https://github.com/mesonbuild/meson/releases/download/${VER}/"
+URL="https://github.com/mesonbuild/meson/releases/download/${VER/.rc2/}/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"

@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=()
+DEPENDS=( glibc  libbsd  )
 CONFLICTS=()
 
 DESCRIPTION="Inter-Client-Exchange library"

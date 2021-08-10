@@ -4,7 +4,7 @@ VER="4.29"
 
 DESCRIPTION="NetScape Portable Runtime"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://archive.mozilla.org/pub/nspr/releases/v${VER}/src/"

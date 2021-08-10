@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="XKB File handling"
 
-DEPENDS=()
+DEPENDS=( glibc libX11   )
 CONFLICTS=()
 
 URL="https://x.org/releases/individual/lib/"

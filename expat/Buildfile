@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="C XML Parser"
 
-DEPENDS=(glibc)
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://github.com/libexpat/libexpat/releases/download/R_2_4_1/"

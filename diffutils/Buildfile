@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Create patches"
 
-DEPENDS=(glibc bash)
+DEPENDS=( glibc bash   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/diffutils/"

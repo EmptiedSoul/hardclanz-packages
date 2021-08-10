@@ -5,7 +5,7 @@ ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(gcc)
+DEPENDS=( gcc glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Fast build system"

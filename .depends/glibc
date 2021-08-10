@@ -1,13 +1,11 @@
 ld-linux-x86-64.so.2
 libCNS.so
+libc.so.6
 libGB.so
 libISOIR165.so
 libJIS.so
 libJISX0213.so
 libKSC.so
-libc.so.6
-libdl.so.2
 libm.so.6
 libnss_files.so.2
-libpthread.so.0
 libresolv.so.2

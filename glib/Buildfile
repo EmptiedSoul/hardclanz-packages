@@ -1,11 +1,11 @@
 PACKAGE="glib"
-VER="2.66.3"
+VER="2.66.8"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(zlib libffi)
+DEPENDS=( zlib libffi glibc   )
 CONFLICTS=()
 
 DESCRIPTION="Kind of C++ std for C"

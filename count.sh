@@ -1,10 +1,9 @@
 #!/bin/bash
 
-for dir in $(ls -1 --hide=README --hide=repo --hide=TODO --hide=Buildfile-example --hide=count.sh)
-do
-	pushd $dir &>/dev/null
-	find . -name "*.hard"|grep -q "." || echo "missing $dir"
+. /etc/hpkg/make.conf
 
-	popd &>/dev/null
+for dir in $(ls -1 --hide=README --hide=repo --hide=TODO --hide=Buildfile-example --hide=*.sh --hide=\!*)
+do
+	[[ -e "$DISTDIR/$dir/$dir.hard" ]] || echo "Missing $dir"
 done
 

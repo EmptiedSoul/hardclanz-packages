@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="XCB Cursor"
 
-DEPENDS=(xcb-util xcb-util-image xcb-util-renderutil libxcb libXau)
+DEPENDS=( xcb-util xcb-util-image xcb-util-renderutil libxcb libXau glibc   )
 CONFLICTS=()
 
 URL="https://xcb.freedesktop.org/dist/"

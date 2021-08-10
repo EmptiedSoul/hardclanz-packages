@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="XCB Protocol descriptions"
 
-DEPENDS=()
+DEPENDS=(    )
 CONFLICTS=()
 
 URL="https://xorg.freedesktop.org/archive/individual/proto/"

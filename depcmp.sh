@@ -28,14 +28,24 @@ echo "DEPENDS=(${DEPENDS[@]})"
 pointer "Suggested DEPENDS:"
 echo "DEPENDS=($nDEPS)"
 
+TO_ADJ=" "
+
 for dep in $(echo $nDEPS | tr ' ' '\n')
 do
-	 if  [[ "${DEPENDS[@]}" == *" $dep "* ]] || [[ "${DEPENDS[@]}" == "$dep "* ]] || [[ "${DEPENDS[@]}" == *" $dep" ]]; then
+	 if  [[ "${DEPENDS[@]}" == *" $dep "* ]] || [[ "${DEPENDS[@]}" == "$dep "* ]] || [[ "${DEPENDS[@]}" == *" $dep" ]] || [[ "${DEPENDS[@]}" == "$dep" ]]; then
 	 	true 
 	 else
 		warn "Mismatch: there is no \"$dep\" package in current DEPENDS, but its necessary"
 		BAD=y
+		TO_ADJ+="$dep "
 	 fi
 done
 
+[[ "$TO_ADJ" == " " ]] || {
+	is_true $AUTO_ADJUST && {
+		echo "Adjusting package dependencies"
+		newdeps=$(echo "${DEPENDS[@]} $TO_ADJ" | sort | uniq)
+		sed -i "s/DEPENDS.*$/DEPENDS=( $newdeps )/" $package/Buildfile
+	}
+}
 is_true $BAD && exit 111

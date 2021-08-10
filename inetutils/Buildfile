@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Networking utilities"
 
-DEPENDS=(libcap)
+DEPENDS=( libcap glibc libxcrypt ncurses readline   )
 CONFLICTS=()
 
 URL="http://ftp.gnu.org/gnu/inetutils/"

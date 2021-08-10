@@ -1,12 +1,12 @@
 PACKAGE="eudev"
-VER="3.2.9"
+VER="3.2.10"
 
 ARCH="installer"
 ACCESS="restricted"
 
 DESCRIPTION="Gentoo's fork of udev"
 
-DEPENDS=(acl libcap kbd kmod util-linux elfutils)
+DEPENDS=( acl libcap kbd kmod util-linux elfutils glibc   )
 CONFLICTS=()
 
 CRYPT="key"

@@ -1,5 +1,5 @@
 PACKAGE="audit"
-VER="2.8.5"
+VER="3.0.4"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Security audit"
 
-DEPENDS=()
+DEPENDS=(   glibc libcap-ng  )
 CONFLICTS=()
 
 #URL="https://github.com/linux-audit/audit-userspace/releases/download/v${VER}/"
@@ -23,7 +23,7 @@ __unpacksrc(){
 }
 __preparesrc(){
 ./autogen.sh    
-./configure $CONFIGUREOPTS --disable-remote
+./configure $CONFIGUREOPTS --disable-remote --disable-zos-remote --without-python --without-python3
 }
 __compilesrc(){
     make $MAKEOPTS

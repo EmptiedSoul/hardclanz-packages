@@ -6,7 +6,7 @@ ACCESS="restricted"
 
 DESCRIPTION="Executable & Linkable File Utilities"
 
-DEPENDS=(glibc xz zlib)
+DEPENDS=( glibc xz zlib curl gcc zstd   )
 CONFLICTS=()
 
 SRCURL="https://sourceware.org/ftp/elfutils/0.182/elfutils-0.182.tar.bz2"

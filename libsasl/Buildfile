@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Simple authorization and security layer library"
 
-DEPENDS=(openssl)
+DEPENDS=( openssl gdbm glibc krb5 libxcrypt linux-pam pam   )
 CONFLICTS=()
 
 URL="https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-${VER}/"

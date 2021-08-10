@@ -1,11 +1,11 @@
 PACKAGE="kmod"
-VER="27"
+VER="29"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=(openssl glibc zlib xz)
+DEPENDS=( openssl glibc zlib xz   )
 CONFLICTS=()
 
 DESCRIPTION="Kernel Modules utility"

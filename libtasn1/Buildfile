@@ -1,8 +1,8 @@
 #!/bin/bash
 PACKAGE="libtasn1"
-VER="4.16.0"
+VER="4.17.0"
 
-DEPENDS=()
+DEPENDS=( glibc   )
 CONFLICTS=()
 
 URL="https://ftp.gnu.org/gnu/libtasn1/"

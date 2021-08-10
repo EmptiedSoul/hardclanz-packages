@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Library for accessing X.509 certificates"
 
-DEPENDS=(libgpg-error)
+DEPENDS=( libgpg-error glibc   )
 CONFLICTS=()
 
 URL="https://www.gnupg.org/ftp/gcrypt/libksba/"
