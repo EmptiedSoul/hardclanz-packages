@@ -1,0 +1,26 @@
+PACKAGE="xfce4-screensaver"
+VER="4.16.0"
+
+DEPENDS=(   atk cairo dbus dbus-glib elogind freetype-harfbuzz garcon gdk-pixbuf glib glibc gtk3 libICE libSM libwnck libX11 libxcrypt libXext libxfce4ui libxfce4util libxklavier libXrandr libXScrnSaver libXxf86vm linux-pam mesa pam pango xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/apps/${PACKAGE}/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

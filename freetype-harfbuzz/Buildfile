@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="freetype and harfbuzz font aliasing libraries"
 
-DEPENDS=( bzip2 expat glib libX11 libXau libXdamage libXext libXfixes libXrender libXxf86vm libdrm libpng libxcb libxshmfence mesa pixman zlib brotli glibc  gcc  )
+DEPENDS=( bzip2 expat glib libX11 libXau libXdamage libXext libXfixes libXrender libXxf86vm libdrm libpng libxcb libxshmfence mesa pixman zlib brotli glibc gcc  cairo graphite2 icu  )
 CONFLICTS=()
 
 URL="https://download-mirror.savannah.gnu.org/releases/freetype/"
@@ -36,20 +36,23 @@ __preparesrc(){
    export CFLAGS="$CFLAGS -I$DEST/usr/include/freetype2"
    export CXXFLAGS="$CXXFLAGS -I$DEST/usr/include/freetype2"
    export LDFLAGS="$LDFLAGS -L$DEST/usr/lib"
-   meson \
+   	mkdir build
+	cd build
+	meson \
 	--prefix=/usr \
 	-Dpkg_config_path="$DEST/usr/lib/pkgconfig" \
 	-Ddefault_library=both \
 	-Dglib=enabled \
 	-Dfreetype=enabled \
-	-Dcairo=disabled \
-	-Dicu=disabled \
+	-Dcairo=enabled \
+	-Dgraphite=enabled \
+	-Dicu=enabled \
 	-Dbenchmark=disabled \
 	-Dtest=disabled \
-	. output
-   ninja -C output
-   ninja -C output install
-   cd ..
+	.. 
+   ninja 
+   ninja  install
+   cd ../..
    export HARFBUZZ_CFLAGS="-I$PWD/harfbuzz/src"
    export HARFBUZZ_LIBS="-L$PWD/harfbuzz/output/src -lharfbuzz"
    CFLAGS="$CFLAGS -DDEFAULT_TT_INTERPRETER_VERSION=TT_INTERPRETER_VERSION_40" ./configure $CONFIGUREOPTS \
@@ -61,5 +64,7 @@ __compilesrc(){
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
+	cd harfbuzz/build	
+ninja  install
 }
 GITHUB_CHECK=1

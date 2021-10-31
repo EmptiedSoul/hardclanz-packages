@@ -25,7 +25,7 @@ __unpacksrc(){
 __preparesrc(){
     patch -p1 < $LAUNCHDIR/patches/rootless-amdgpu.patch
     patch -p1 < $LAUNCHDIR/patches/link-failure.patch
-	./configure $CONFIGUREOPTS --enable-glamor
+	./configure $CONFIGUREOPTS --enable-glamor --enable-dri3
 }
 __compilesrc(){
     make $MAKEOPTS

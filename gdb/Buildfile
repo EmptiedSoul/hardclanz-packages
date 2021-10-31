@@ -1,0 +1,34 @@
+PACKAGE="gdb"
+VER="11.1"
+
+DESCRIPTION="GNU Debugger"
+
+DEPENDS=(   expat gc gcc glibc gmp guile libxcrypt mpfr ncurses python readline xz  )
+CONFLICTS=()
+
+URL="https://ftp.gnu.org/gnu/gdb/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xJf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+    	../configure $CONFIGUREOPTS --with-system-readline
+	cd ..
+}
+__compilesrc(){
+	cd build
+    make $MAKEOPTS
+	cd ..
+}
+__installsrc(){
+	cd build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

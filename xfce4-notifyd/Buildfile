@@ -1,0 +1,27 @@
+PACKAGE="xfce4-notifyd"
+VER="0.6.2"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libICE libnotify libSM libX11 libxfce4ui libxfce4util pango xfce4-panel xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/apps/${PACKAGE}/0.6/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -e -i "s/^systemd_user_in_files =.*/systemd_user_in_files =/" Makefile.in
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

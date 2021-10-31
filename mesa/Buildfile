@@ -1,5 +1,5 @@
 PACKAGE="mesa"
-VER="21.2.0"
+VER="21.2.3"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="OpenGL & Vulkan implementation"
 
-DEPENDS=( expat libX11 libXdamage libXext libXrandr libXrender libXxf86vm libdrm libxcb libxshmfence llvm xorgproto zlib  elfutils gcc glibc libunwind libXfixes zstd  )
+DEPENDS=( expat libX11 libXdamage libXext libXrandr libXrender libXxf86vm libdrm libxcb libxshmfence llvm xorgproto zlib elfutils gcc glibc libunwind libXfixes zstd  wayland  )
 CONFLICTS=()
 
 URL="https://archive.mesa3d.org/"
@@ -23,14 +23,19 @@ __unpacksrc(){
 }
 __preparesrc(){
 	export DESTDIR="$DEST"
-	sed -i "/pre_args += '-DUSE_ELF_TLS'/d" meson.build
 	meson \
 	--prefix=/usr \
 	--mandir=/usr/share/man \
 	--localstatedir=/var \
 	--buildtype=release \
-	-Dplatforms=x11 \
-	-Dzstd=true \
+	-Dplatforms=x11,wayland \
+	-Ddri3=enabled \
+	-Degl=enabled \
+	-Dgallium-va=enabled \
+	-Dgallium-vdpau=enabled \
+	-Dgbm=enabled \
+	-Dglx=dri \
+	-Dosmesa=true \
 	. output
 }
 __compilesrc(){

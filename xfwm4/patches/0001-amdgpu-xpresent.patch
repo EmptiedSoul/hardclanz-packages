@@ -1,0 +1,20 @@
+Desired fix was merged into amdgpu driver 2 month ago
+Now we can use XPresent on all amdgpus by default
+
+--- a/src/compositor.c	2021-01-09 20:01:31.000000000 +0300
++++ b/src/compositor.c	2021-10-09 13:47:51.898452468 +0300
+@@ -1117,12 +1117,8 @@
+ #if HAVE_PRESENT_EXTENSION
+     const char *prefer_xpresent[] = {
+         "Intel",
+-        /* Cannot add AMD and Radeon until the fix for
+-         * https://gitlab.freedesktop.org/xorg/driver/xf86-video-amdgpu/-/issues/10
+-         * is included in a release.
+-         */
+-        /* "AMD", */
+-        /* "Radeon", */
++        "AMD",
++        "Radeon",
+         NULL
+     };
+ #endif /* HAVE_PRESENT_EXTENSION */

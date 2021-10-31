@@ -1,0 +1,29 @@
+PACKAGE="squashfs-tools-ng"
+VER="1.1.3"
+
+DEPENDS=(   glibc xz zlib zstd  )
+CONFLICTS=()
+
+URL="https://github.com/AgentD/squashfs-tools-ng/archive/refs/tags/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="v${VER}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	./autogen.sh
+    	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=1

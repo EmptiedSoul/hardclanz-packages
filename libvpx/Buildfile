@@ -1,0 +1,33 @@
+PACKAGE="libvpx"
+VER="1.10.0"
+
+DEPENDS=(   gcc glibc  )
+CONFLICTS=()
+
+URL="https://github.com/webmproject/libvpx/archive/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir libvpx-build
+	cd libvpx-build
+   ../configure --prefix=/usr --enable-shared --disable-static
+   	cd ..
+}
+__compilesrc(){
+	cd libvpx-build
+    make $MAKEOPTS
+    	cd ..
+}
+__installsrc(){
+	cd libvpx-build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+GITHUB_CHECK=y

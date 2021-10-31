@@ -1,5 +1,5 @@
 PACKAGE="libxcrypt"
-VER="4.4.24"
+VER="4.4.26"
 
 ARCH="installer"
 ACCESS="restricted"

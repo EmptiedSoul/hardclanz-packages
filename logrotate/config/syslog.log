@@ -1,0 +1,9 @@
+/var/log/*log {
+	size 100k
+	rotate 5 
+	compress
+	weekly
+	postrotate
+		killall -HUP syslogd
+	endscript
+}

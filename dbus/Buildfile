@@ -1,0 +1,47 @@
+PACKAGE="dbus"
+VER="1.12.20"
+
+DEPENDS=(   audit elogind expat glibc libcap-ng libICE libSM libX11  )
+CONFLICTS=()
+
+URL="https://dbus.freedesktop.org/releases/dbus/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+export SRV="$(pwd)/initscripts"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --localstatedir=/var \
+	--enable-user-session \
+	--disable-doxygen-docs \
+	--disable-xml-docs \
+	--disable-static \
+	--enable-epoll	\
+	--with-systemduserunitdir=no \
+	--with-systemdsystemunitdir=no \
+	--with-console-auth-dir=/run/console \
+	--with-system-pid-file=/run/dbus/pid \
+	--with-system-socket=/run/dbus/system_bus_socket 
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	mkdir -pv $DEST/etc/init.d &&
+	install -vm755 "${SRV}/dbus-daemon" $DEST/etc/init.d &&
+	install -vm755 "${SRV}/dbus-socket" $DEST/etc/init.d &&
+	install -vm755 "${SRV}/dbus-uuidgen" $DEST/etc/init.d
+	rm -rf $DEST/var/run
+}
+
+pkg_preremove(){
+	service disable dbus-daemon 3 || \
+	service disable dbus-daemon 5
+}

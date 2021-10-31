@@ -1,0 +1,14 @@
+
+Fall back to /bin/bash instead of build failure
+
+--- a/python/mach/mach/mixin/process.py	2021-02-17 07:49:34.000000000 +0000
++++ b/python/mach/mach/mixin/process.py	2021-08-15 19:28:52.145997664 +0000
+@@ -28,7 +28,7 @@
+ elif 'COMSPEC' in os.environ:
+     _current_shell = os.environ['COMSPEC']
+ else:
+-    raise Exception('Could not detect environment shell!')
++    _current_shell = '/bin/bash'
+ 
+ _in_msys = False
+ 

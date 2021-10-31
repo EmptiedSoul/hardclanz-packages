@@ -1,0 +1,52 @@
+PACKAGE="fcron"
+VER="3.2.1"
+
+DEPENDS=(   audit glibc libxcrypt linux-pam ncurses pam readline  )
+CONFLICTS=()
+
+URL="http://fcron.free.fr/archives/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.src.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+export SCRIPTDIR="$(pwd)/scripts"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --localstatedir=/var \
+	    --without-sendmail \
+	    --with-boot-install=no \
+	    --with-systemdsystemunitdir=no \
+	    --with-editor=/usr/bin/vim
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+	mkdir -pv $DEST/etc/pam.d/ $DEST/etc/cron.{daily,hourly,weekly,monthly} $DEST/usr/bin $DEST/etc/init.d
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	    install -vm755 $SCRIPTDIR/run-parts $DEST/usr/bin/run-parts &&
+	    install -vm755 $SCRIPTDIR/fcron $DEST/etc/init.d/fcron
+
+	rm -rf $DEST/var/run    
+}
+
+pkg_preinstall(){
+groupadd -g 22 fcron &&
+useradd -d /dev/null -c "Fcron User" -g fcron -s /bin/false -u 22 fcron
+}
+
+pkg_postinstall(){
+mkdir -pv /var/spool/fcron/
+cat > /var/spool/fcron/systab.orig << "EOF"
+&bootrun 01 * * * * root run-parts /etc/cron.hourly
+&bootrun 02 4 * * * root run-parts /etc/cron.daily
+&bootrun 22 4 * * 0 root run-parts /etc/cron.weekly
+&bootrun 42 4 1 * * root run-parts /etc/cron.monthly
+EOF
+fcrontab -z -u systab
+}

@@ -1,0 +1,31 @@
+PACKAGE="libomxil-bellagio"
+VER="0.9.3"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/project/omxil/omxil/Bellagio%20${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i ${PATCHDIR}/fedora-fixes.patch
+	sed -i 's/-Werror//' configure.ac
+	autoreconf -ivf
+	export CFLAGS="-O2 -fcommon -pipe"
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

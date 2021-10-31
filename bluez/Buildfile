@@ -1,0 +1,35 @@
+PACKAGE="bluez"
+VER="5.61"
+
+DEPENDS=(   dbus eudev glib glibc libical ncurses readline  )
+CONFLICTS=()
+
+URL="https://www.kernel.org/pub/linux/bluetooth/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/0001-pause_name_conflict.patch
+  	sed -i 's/-lreadline/-lreadline -lncursesw/' Makefile.in Makefile.tools
+      	./configure $CONFIGUREOPTS --localstatedir=/var \
+	    --enable-library \
+	    --disable-systemd \
+	    --disable-manpages # rst2man needed
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+	mkdir -pv $DEST/etc/bluetooth $DEST/usr/sbin
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	    ln -svf /usr/libexec/bluetooth/bluetoothd $DEST/usr/sbin &&
+	    install -vm644 src/main.conf $DEST/etc/bluetooth/main.conf
+}

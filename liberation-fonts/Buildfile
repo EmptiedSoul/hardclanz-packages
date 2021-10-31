@@ -1,0 +1,25 @@
+PACKAGE="liberation-fonts"
+VER="2.1.4"
+
+DEPENDS=( )
+CONFLICTS=()
+
+URL="https://github.com/liberationfonts/liberation-fonts/files/6418984/"
+SRCDIR="${PACKAGE}-ttf-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__installsrc(){
+	mkdir -pv $DEST/usr/share/fonts/liberation
+	install -vm644 *.ttf $DEST/usr/share/fonts/liberation/
+}
+
+pkg_postinstall(){
+	fc-cache -v /usr/share/fonts/liberation
+}

@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Long output pager"
 
-DEPENDS=( glibc ncurses   )
+DEPENDS=( glibc ncurses  pcre2  )
 CONFLICTS=()
 
 URL="http://www.greenwoodsoftware.com/less/"
@@ -22,7 +22,7 @@ __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+    ./configure $CONFIGUREOPTS --with-regex=pcre2
 }
 __compilesrc(){
     make $MAKEOPTS

@@ -1,0 +1,28 @@
+PACKAGE="libusb"
+VER="1.0.24"
+
+DEPENDS=(   eudev glibc  )
+CONFLICTS=()
+
+URL="https://github.com/libusb/libusb/releases/download/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=y

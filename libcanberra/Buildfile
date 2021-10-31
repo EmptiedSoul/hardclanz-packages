@@ -1,0 +1,28 @@
+PACKAGE="libcanberra"
+VER="0.30"
+
+DEPENDS=(   alsa-lib atk cairo eudev fontconfig freetype-harfbuzz gdk-pixbuf glib glibc gstreamer gtk2 gtk3 libtool libvorbis libX11 pango pulseaudio  )
+CONFLICTS=()
+
+URL="http://0pointer.de/lennart/projects/libcanberra/" # Omg is it poettering's stuff?
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/libcanberra-0.30-wayland-1.patch
+    ./configure $CONFIGUREOPTS --disable-oss
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,27 @@
+PACKAGE="libtheora"
+VER="1.1.1"
+
+DEPENDS=(   glibc libogg  )
+CONFLICTS=()
+
+URL="https://downloads.xiph.org/releases/theora/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's/png_\(sizeof\)/\1/g' examples/png2theora.c
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,26 @@
+PACKAGE="libxklavier"
+VER="5.4"
+
+DEPENDS=(   glib glibc libX11 libXi libxkbfile libxml2  )
+CONFLICTS=()
+
+URL="https://people.freedesktop.org/~svu/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

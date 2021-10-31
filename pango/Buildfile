@@ -1,0 +1,33 @@
+PACKAGE="pango"
+VER="1.48.10"
+
+DEPENDS=(   cairo fontconfig freetype-harfbuzz fribidi glib glibc libX11 libXft libXrender  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/pango/1.48/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

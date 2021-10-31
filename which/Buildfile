@@ -1,0 +1,20 @@
+PACKAGE="which"
+VER="111"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+SRCDIR="${PACKAGE}-${VER}"
+
+__unpacksrc(){
+	mkdir $SRCDIR -pv
+}
+__installsrc(){
+	mkdir -pv $DEST/usr/bin/
+	cat > $DEST/usr/bin/which <<EOF
+#!/bin/bash
+type -pa "\$@" | head -n1; exit ${PIPESTATUS[0]}
+EOF
+	chmod -v 755 $DEST/usr/bin/which
+	chown -v root:root $DEST/usr/bin/which
+}

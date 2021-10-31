@@ -1,0 +1,32 @@
+PACKAGE="gtk3"
+VER="3.24.25"
+
+DEPENDS=(   atk at-spi2-atk cairo fontconfig freetype-harfbuzz fribidi gdk-pixbuf glib glibc libepoxy libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libxkbcommon libXrandr pango wayland  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/gtk+/3.24/"
+SRCDIR="gtk+-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --enable-broadway-backend --enable-x11-backend --enable-wayland-backend 
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_postinstall(){
+	ldconfig
+	gtk-query-immodules-3.0 --update-cache
+	glib-compile-schemas /usr/share/glib-2.0/schemas
+}

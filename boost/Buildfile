@@ -1,0 +1,27 @@
+PACKAGE="boost"
+VER="1.77.0"
+
+DEPENDS=(   gcc glibc icu xz zlib zstd  )
+CONFLICTS=()
+
+URL="https://boostorg.jfrog.io/artifactory/main/release/${VER}/source/"
+SRCDIR="${PACKAGE}_${VER//./_}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+export DESTDIR="$DEST"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./bootstrap.sh --prefix=$DEST/usr --with-python=python3
+}
+__compilesrc(){
+    ./b2 stage $MAKEOPTS threading=multi link=shared
+}
+__installsrc(){
+    ./b2 install threading=multi link=shared
+}

@@ -1,0 +1,26 @@
+PACKAGE="libsodium"
+VER="1.0.18-stable"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://download.libsodium.org/libsodium/releases/"
+SRCDIR="${PACKAGE}-stable"
+SRCTGZ="${SRCDIR/-stable}-${VER}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,26 @@
+PACKAGE="itstool"
+VER="2.0.7"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="http://files.itstool.org/itstool/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    PYTHON=/usr/bin/python3 ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

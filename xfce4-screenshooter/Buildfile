@@ -1,0 +1,27 @@
+PACKAGE="xfce4-screenshooter"
+VER="1.9.9"
+
+DEPENDS=(   atk cairo exo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libICE libSM libsoup libX11 libXext libxfce4ui libxfce4util libXfixes libxml2 pango xfce4-panel  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/apps/${PACKAGE}/1.9/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -e -i "s/^systemd_user_in_files =.*/systemd_user_in_files =/" Makefile.in
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

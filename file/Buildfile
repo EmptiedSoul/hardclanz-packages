@@ -22,11 +22,18 @@ __unpacksrc(){
     tar xzf $SRCTGZ
 }
 __preparesrc(){
-    ./configure $CONFIGUREOPTS
+    mkdir build
+    cd build
+	./configure $CONFIGUREOPTS
+	cd ..
 }
 __compilesrc(){
-    make $MAKEOPTS
+	cd build
+    make FILE_COMPILE=$(pwd)/build/src/file $MAKEOPTS
+    	cd ..
 }
 __installsrc(){
+	cd build
     make $MAKEOPTS DESTDIR="$DEST" install
+	cd ..
 }

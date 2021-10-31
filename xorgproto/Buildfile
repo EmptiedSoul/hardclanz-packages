@@ -1,5 +1,5 @@
 PACKAGE="xorgproto"
-VER="2021.4.99.2"
+VER="2021.5"
 
 ARCH="installer"
 ACCESS="restricted"

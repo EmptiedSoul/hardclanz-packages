@@ -1,0 +1,33 @@
+PACKAGE="icu"
+VER="69.1"
+
+DEPENDS=(   gcc glibc  )
+CONFLICTS=()
+
+URL="https://github.com/unicode-org/icu/releases/download/release-69-1/"
+SRCDIR="icu"
+SRCTGZ="icu4c-69_1-src.tgz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	cd source	
+export CC=gcc
+	export CXX=g++
+    ./configure $CONFIGUREOPTS
+cd ..
+}
+__compilesrc(){
+	cd source    
+	make $MAKEOPTS
+	cd ..
+}
+__installsrc(){
+	cd source    
+	make $MAKEOPTS DESTDIR="$DEST" install
+}

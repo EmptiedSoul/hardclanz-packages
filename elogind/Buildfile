@@ -1,0 +1,73 @@
+PACKAGE="elogind"
+VER="246.9.2"
+
+DEPENDS=( dbus  acl audit glibc libcap linux-pam )
+CONFLICTS=()
+
+URL="https://github.com/elogind/elogind/archive/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+export SRV="$(pwd)/initscripts"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr \
+	-Dpolkit=true \
+	-Dcgroup-controller=elogind \
+	-Ddbuspolicydir=/etc/dbus-1/system.d \
+	-Dpamlibdir=/lib/security \
+	-Drootlibdir=/lib \
+	-Ddefault-hierarchy=legacy \
+	-Dman=auto ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+    	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	mkdir -pv $DEST/usr/lib/pkgconfig $DEST/usr/include/ $DEST/etc/pam.d $DEST/etc/init.d
+	ninja install && \
+	ln -svf libelogind.pc $DEST/usr/lib64/pkgconfig/libsystemd.pc && \
+	ln -svf libelogind.pc $DEST/usr/lib64/pkgconfig/systemd.pc && \
+	ln -svf /usr/include/elogind/ $DEST/usr/include/systemd	&& \
+	install -vm755 $SRV/elogind $DEST/etc/init.d &&
+	cat >> $DEST/etc/pam.d/system-session <<EOF
+session	required	pam_loginuid.so
+session	optional	pam_elogind.so
+
+EOF
+	cat >> $DEST/etc/pam.d/elogind-user <<EOF
+account	required	pam_access.so
+account	include		system-account
+
+session	required	pam_env.so
+session	required	pam_limits.so
+session required	pam_unix.so
+session	required	pam_loginuid.so
+
+session	optional	pam_keyinit.so force revoke
+session optional	pam_elogind.so
+
+auth	required	pam_deny.so
+password required	pam_deny.so
+EOF
+}
+
+pkg_preremove(){
+	service disable elogind 3 || \
+	service disable elogind 5
+}
+
+GITHUB_CHECK=y

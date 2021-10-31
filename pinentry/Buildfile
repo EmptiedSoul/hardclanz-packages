@@ -1,5 +1,5 @@
 PACKAGE="pinentry"
-VER="1.1.1"
+VER="1.2.0"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="Collection of password dialogs"
 
-DEPENDS=( libassuan libgpg-error glibc libcap ncurses   )
+DEPENDS=( libassuan libgpg-error glibc libcap ncurses  atk cairo fontconfig freetype-harfbuzz gcr gdk-pixbuf glib gtk2 gtk3 libsecret p11-kit pango  )
 CONFLICTS=()
 
 URL="https://www.gnupg.org/ftp/gcrypt/pinentry/"

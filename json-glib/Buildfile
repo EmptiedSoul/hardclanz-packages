@@ -1,0 +1,33 @@
+PACKAGE="json-glib"
+VER="1.6.6"
+
+DEPENDS=(   glib glibc  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/json-glib/1.6/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

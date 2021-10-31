@@ -1,0 +1,35 @@
+PACKAGE="taglib"
+VER="1.12"
+
+DEPENDS=(   gcc glibc zlib  )
+CONFLICTS=()
+
+URL="https://taglib.github.io/releases/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DBUILD_SHARED_LIBS=ON \
+		-Wno-dev ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+    make $MAKEOPTS
+    	cd ..
+}
+__installsrc(){
+	cd build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,32 @@
+PACKAGE="gtk3mm"
+VER="3.24.3"
+
+DEPENDS=(   atkmm cairomm gcc gdk-pixbuf glib glibc glibmm gtk3 libsigc++ pangomm  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/gtkmm/3.24/"
+SRCDIR="gtkmm-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir gtk3-build
+	cd    gtk3-build
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd gtk3-build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd gtk3-build
+	DESTDIR="$DEST" ninja install
+}

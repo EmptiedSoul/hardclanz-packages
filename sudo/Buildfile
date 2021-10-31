@@ -1,0 +1,38 @@
+PACKAGE="sudo"
+VER="1.9.5p2"
+
+DEPENDS=(   glibc zlib  )
+CONFLICTS=()
+
+URL="http://www.sudo.ws/dist/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --libexecdir=/usr/lib \
+	--with-secure-path \
+	--with-all-insults \
+	--with-env-editor \
+	--with-passprompt="[sudo] password for %p: "
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+	mkdir -pv $DEST/usr/lib/sudo $DEST/etc/pam.d
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+ln -sfv libsudo_util.so.0.0.0 $DEST/usr/lib/sudo/libsudo_util.so.0 &&
+cat >> $DEST/etc/pam.d/sudo <<EOF
+auth	include	system-auth
+account	include	system-account
+session	required	pam_env.so
+session include	system-session
+EOF
+}

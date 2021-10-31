@@ -1,5 +1,5 @@
 PACKAGE="coreutils"
-VER="8.32"
+VER="9.0"
 
 ARCH="installer"
 ACCESS="restricted"

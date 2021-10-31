@@ -1,0 +1,27 @@
+PACKAGE="parted"
+VER="3.4"
+
+DEPENDS=(   glibc lvm2 ncurses readline util-linux  )
+CONFLICTS=()
+
+
+URL="http://ftp.gnu.org/gnu/parted/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+__preparesrc(){
+	./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+	make $MAKEOPTS
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR="$DEST" install
+}

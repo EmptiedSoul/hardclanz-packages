@@ -1,0 +1,26 @@
+PACKAGE="wv"
+VER="1.2.9"
+
+DEPENDS=(   glib glibc libgsf libpng libxml2 zlib  )
+CONFLICTS=()
+
+URL="https://www.abisource.com/downloads/wv/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -25,7 +25,7 @@ __preparesrc(){
 	export DESTDIR="$DEST"
 	export LDFLAGS="-Wl,-z,lazy"
 		enable globstar
-	sed -i -e 's/slave_dst/secondary_dst/g' -e 's/current_master/current_primary/g' -e 's/master_pixmap/primary_pixmap/g' */*.c */*.h */*/*.h */*/*.c
+#	sed -i -e 's/slave_dst/secondary_dst/g' -e 's/current_master/current_primary/g' -e 's/master_pixmap/primary_pixmap/g' */*.c */*.h */*/*.h */*/*.c
 	meson \
 	--prefix=/usr \
 	--libexecdir=/usr/lib \

@@ -1,0 +1,31 @@
+PACKAGE="glslang"
+VER="11.5.0"
+
+DEPENDS=(   gcc glibc  )
+CONFLICTS=()
+
+URL="https://github.com/KhronosGroup/glslang/archive/refs/tags/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+#SRCURL="${URL}${SRCTGZ}"
+
+SRCURL="https://github.com/KhronosGroup/glslang/archive/refs/tags/11.5.0.tar.gz"
+
+__getsrc(){
+    curl -JLO $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	cmake -G "Unix Makefiles" \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DBUILD_SHARED_LIBS=ON 
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

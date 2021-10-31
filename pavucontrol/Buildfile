@@ -1,0 +1,26 @@
+PACKAGE="pavucontrol"
+VER="5.0"
+
+DEPENDS=(   atk atkmm cairo cairomm freetype-harfbuzz gcc gdk-pixbuf glib glibc glibmm gtk3 gtk3mm json-glib libcanberra libsigc++ libX11 pango pangomm pulseaudio  )
+CONFLICTS=()
+
+URL="http://freedesktop.org/software/pulseaudio/pavucontrol/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

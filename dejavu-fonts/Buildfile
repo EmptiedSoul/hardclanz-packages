@@ -1,0 +1,25 @@
+PACKAGE="dejavu-fonts"
+VER="2.37"
+
+DEPENDS=( )
+CONFLICTS=()
+
+URL="https://sourceforge.net/projects/dejavu/files/dejavu/${VER}/"
+SRCDIR="${PACKAGE}-ttf-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__installsrc(){
+	mkdir -pv $DEST/usr/share/fonts/dejavu
+	install -vm644 ttf/*.ttf $DEST/usr/share/fonts/dejavu/
+}
+
+pkg_postinstall(){
+	fc-cache -v /usr/share/fonts/dejavu
+}

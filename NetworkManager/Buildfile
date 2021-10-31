@@ -1,0 +1,49 @@
+PACKAGE="NetworkManager"
+VER="1.30.6"
+
+DEPENDS=(   curl elogind eudev glib glibc jansson libndp libpsl ModemManager ncurses newt readline util-linux  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/NetworkManager/1.30/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+export INITSCRIPTS="$(pwd)/initscripts"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	sed -i "s/'-lreadline'/\['-lreadline', '-lncursesw'\]/" meson.build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr \
+		-Dselinux=false \
+		-Dlibaudit=no \
+	       -Dppp=false \
+	       -Dqt=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	mkdir -pv $DEST/etc/NetworkManager/conf.d $DEST/etc/init.d
+	cd build
+	cat >> $DEST/etc/NetworkManager/NetworkManager.conf << "EOF"
+[main]
+plugins=keyfile
+EOF
+cat > $DEST/etc/NetworkManager/conf.d/polkit.conf << "EOF"
+[main]
+auth-polkit=true
+EOF
+	ninja install &&
+		install -vm755 $INITSCRIPTS/NetworkManager $DEST/etc/init.d/NetworkManager
+}

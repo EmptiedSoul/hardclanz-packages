@@ -1,0 +1,26 @@
+PACKAGE="speex"
+VER="1.2.0"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://downloads.xiph.org/releases/speex/"
+SRCDIR="${PACKAGE}dsp-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

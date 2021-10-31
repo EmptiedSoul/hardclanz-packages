@@ -1,0 +1,27 @@
+PACKAGE="yasm"
+VER="1.3.0"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://www.tortall.net/projects/yasm/releases/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's#) ytasm.*#)#' Makefile.in
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

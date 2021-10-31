@@ -1,0 +1,62 @@
+PACKAGE="lightdm"
+VER="1.30.0"
+
+DEPENDS=( elogind  audit glib glibc libgcrypt libX11 libxcb libXdmcp libxklavier linux-pam pam  )
+CONFLICTS=()
+
+URL="https://github.com/CanonicalLtd/lightdm/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+export SRV="$(pwd)/initscripts"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+sed -i s/systemd/elogind/ data/pam/*
+    ./configure $CONFIGUREOPTS --libexecdir=/usr/lib/lightdm \
+	--localstatedir=/var \
+	--sbindir=/usr/bin \
+	--disable-static \
+	--disable-tests \
+	--with-greeter-user=lightdm \
+	--with-greeter-session=lightdm-gtk-greeter
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	cp tests/src/lightdm-session $DEST/usr/bin	 &&
+sed -i '1 s/sh/bash --login/' $DEST/usr/bin/lightdm-session        &&
+rm -rf $DEST/etc/init                                              &&
+install -v -dm755 -o lightdm -g lightdm $DEST/var/lib/lightdm      &&
+install -v -dm755 -o lightdm -g lightdm $DEST/var/lib/lightdm-data &&
+install -v -dm755 -o lightdm -g lightdm $DEST/var/cache/lightdm    &&
+install -v -dm770 -o lightdm -g lightdm $DEST/var/log/lightdm &&
+install -vdm755 $DEST/etc/init.d/
+install -vm755 $SRV/lightdm $DEST/etc/init.d/lightdm
+
+
+}
+
+pkg_preinstall(){
+groupadd -g 65 lightdm       &&
+useradd  -c "Lightdm Daemon" \
+         -d /var/lib/lightdm \
+         -u 65 -g lightdm    \
+	 -s /bin/false lightdm
+sed -i 's/500/999/' $DEST/etc/lightdm/users.conf
+true
+}
+
+pkg_preremove(){
+	service disable lightdm 3 || \
+	service disable lightdm 5
+}
+
+GITHUB_CHECK=y

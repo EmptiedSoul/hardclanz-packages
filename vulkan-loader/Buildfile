@@ -1,0 +1,46 @@
+PACKAGE="vulkan-loader"
+VER="1.2.189"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/"
+SRCDIR="v${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	cd Vulkan-Loader*
+	mkdir _build
+	cd _build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+    -DVULKAN_HEADERS_INSTALL_DIR=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_SYSCONFDIR=/etc \
+    -DCMAKE_INSTALL_DATADIR=/share \
+    -DCMAKE_SKIP_RPATH=True \
+    -DBUILD_TESTS=Off \
+    -DBUILD_WSI_XCB_SUPPORT=On \
+    -DBUILD_WSI_XLIB_SUPPORT=On \
+    -DBUILD_WSI_WAYLAND_SUPPORT=On \
+    -DCMAKE_BUILD_TYPE=Release \
+    ..
+	cd ../..
+}
+__compilesrc(){
+	cd Vulkan-Loader*/_build
+    make $MAKEOPTS
+    	cd ../..
+}
+__installsrc(){
+	cd Vulkan-Loader*/_build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=1

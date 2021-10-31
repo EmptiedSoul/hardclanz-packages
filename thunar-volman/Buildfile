@@ -1,0 +1,26 @@
+PACKAGE="thunar-volman"
+VER="4.16.0"
+
+DEPENDS=(   exo glib glibc gtk3 libgudev libnotify libxfce4ui libxfce4util pango xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/xfce/thunar-volman/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

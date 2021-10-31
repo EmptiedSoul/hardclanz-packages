@@ -1,0 +1,26 @@
+PACKAGE="lame"
+VER="3.100"
+
+DEPENDS=(   glibc ncurses  )
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/lame/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static --enable-mp3rtp --enable-nasm
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

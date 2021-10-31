@@ -1,0 +1,31 @@
+PACKAGE="cpio"
+VER="2.13"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+DESCRIPTION="Archiving utility"
+
+URL="http://ftp.gnu.org/gnu/cpio/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+	wget -c $SRCURL
+}
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i '/The name/,+2 d' src/global.c
+	export FORCE_UNSAFE_CONFIGURE=1
+	./configure $CONFIGUREOPTS --enable-mt --bindir=/bin \
+		--with-rmt=/usr/libexec/rmt
+}
+__compilesrc(){
+	make $MAKEOPTS
+}
+__installsrc(){
+	make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,74 @@
+PACKAGE="docbook-xsl-nons"
+VER="1.79.2"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="https://github.com/docbook/xslt10-stylesheets/releases/download/release/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/docbook-xsl-nons-1.79.2-stack_fix-1.patch
+}
+__installsrc(){
+install -v -m755 -d $DEST/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 &&
+
+cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+         highlighting html htmlhelp images javahelp lib manpages params  \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5                                          \
+    $DEST/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 &&
+
+ln -s VERSION $DEST/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/VERSION.xsl &&
+
+install -v -m644 -D README \
+                    $DEST/usr/share/doc/docbook-xsl-nons-1.79.2/README.txt &&
+install -v -m644    RELEASE-NOTES* NEWS* \
+                    $DEST/usr/share/doc/docbook-xsl-nons-1.79.2
+}
+
+pkg_postinstall(){
+	sed -i '/rewrite/d' /etc/xml/catalog
+if [ ! -d /etc/xml ]; then install -v -m755 -d /etc/xml; fi &&
+if [ ! -f /etc/xml/catalog ]; then
+    xmlcatalog --noout --create /etc/xml/catalog
+fi &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "https://cdn.docbook.org/release/xsl-nons/1.79.2" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "https://cdn.docbook.org/release/xsl-nons/1.79.2" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "https://cdn.docbook.org/release/xsl-nons/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "https://cdn.docbook.org/release/xsl-nons/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+    /etc/xml/catalog
+}

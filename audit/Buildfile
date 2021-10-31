@@ -29,7 +29,7 @@ __compilesrc(){
     make $MAKEOPTS
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" install
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	rm -rf $DEST/etc/rc.d
 }
-GITHUB_CHECK=1
 GITHUB_CHECK=1

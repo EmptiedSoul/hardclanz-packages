@@ -23,7 +23,7 @@ __unpacksrc(){
 }
 __preparesrc(){
 	export LDFLAGS="-Wl,-z,lazy"
-    ./configure $CONFIGUREOPTS
+    ./configure $CONFIGUREOPTS --enable-glamor --enable-dri3
 }
 __compilesrc(){
     make $MAKEOPTS

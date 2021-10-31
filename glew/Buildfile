@@ -1,0 +1,29 @@
+PACKAGE="glew"
+VER="2.2.0"
+
+DEPENDS=(   glibc libX11 mesa  )
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/glew/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tgz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's%lib64%lib%g' config/Makefile.linux &&
+sed -i -e '/glew.lib.static:/d' \
+       -e '/0644 .*STATIC/d'    \
+       -e 's/glew.lib.static//' Makefile  
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install.all
+}

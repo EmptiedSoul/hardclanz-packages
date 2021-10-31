@@ -1,0 +1,32 @@
+PACKAGE="xfwm4"
+VER="4.16.1"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libepoxy libICE libSM libwnck libX11 libXcomposite libXdamage libXext libxfce4ui libxfce4util libXfixes libXinerama libxpresent libXrandr libXrender pango startup-notification xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/xfce/xfwm4/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+export PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i ${PATCHDIR}/0001-amdgpu-xpresent.patch && \
+    ./configure $CONFIGUREOPTS --enable-startup-notification \
+	    --enable-randr \
+	    --enable-compositor \
+	    --enable-xsync \
+	    --disable-debug
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

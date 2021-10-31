@@ -1,0 +1,8 @@
+#!/bin/bash
+# rc: depends: dbus-daemon
+# rc: hd-opts: -no
+. /etc/rc.d/lib/functions.sh
+
+msg_pending "Waiting for DBus to become online..."
+require /run/dbus/system_bus_socket
+msg_ok "DBus is online"

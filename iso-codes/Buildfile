@@ -1,0 +1,27 @@
+PACKAGE="iso-codes"
+VER="4.6.0"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="http://anduin.linuxfromscratch.org/BLFS/iso-codes/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+sed -i '/^LN_S/s/s/sfvn/' */Makefile
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

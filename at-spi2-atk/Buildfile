@@ -1,0 +1,38 @@
+PACKAGE="at-spi2-atk"
+VER="2.38.0"
+
+DEPENDS=(   atk at-spi2-core dbus glib glibc  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/${PACKAGE}/2.38/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dtests=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install 
+}
+
+pkg_postinstall(){
+	glib-compile-schemas $DEST/usr/share/glib-2.0/schemas
+	true
+}

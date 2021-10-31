@@ -1,0 +1,33 @@
+PACKAGE="glibmm"
+VER="2.66.2"
+
+DEPENDS=(   gcc glib glibc libsigc++  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/glibmm/2.66/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

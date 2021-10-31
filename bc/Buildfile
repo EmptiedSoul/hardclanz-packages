@@ -1,5 +1,5 @@
 PACKAGE="bc"
-VER="4.0.2"
+VER="5.1.1"
 
 ACCESS="restricted"
 ARCH="installer"

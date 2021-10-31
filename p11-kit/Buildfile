@@ -4,7 +4,7 @@ VER="0.23.22"
 
 DESCRIPTION="PKCS#11 Implementation"
 
-DEPENDS=( libtasn1 make-ca nss glibc libffi   )
+DEPENDS=( libtasn1 make-ca nss glibc libffi  elogind  )
 CONFLICTS=()
 
 URL="https://github.com/p11-glue/p11-kit/releases/download/${VER}/"

@@ -1,13 +1,13 @@
 #!/bin/bash
 PACKAGE="nss"
-VER="3.61"
+VER="3.68"
 
 DESCRIPTION="Network Security Services"
 
 DEPENDS=( nspr p11-kit sqlite glibc sqlite3   )
 CONFLICTS=()
 
-URL="https://archive.mozilla.org/pub/security/nss/releases/NSS_3_61_RTM/src/"
+URL="https://archive.mozilla.org/pub/security/nss/releases/NSS_3_68_RTM/src/"
 SRCDIR="${PACKAGE}-${VER}"
 SRCTGZ="${SRCDIR}.tar.gz"
 SRCURL="${URL}${SRCTGZ}"
@@ -28,7 +28,7 @@ __preparesrc(){
 
 __compilesrc(){
 	cd nss
-	make -j1 BUILD_OPT=1                  \
+	make $MAKEOPTS  BUILD_OPT=1                  \
   NSPR_INCLUDE_DIR=/usr/include/nspr  \
   USE_SYSTEM_ZLIB=1                   \
   ZLIB_LIBS=-lz                       \
@@ -40,13 +40,13 @@ __compilesrc(){
 __installsrc(){
 	cd ../dist
 	mkdir -pv $DEST/usr/lib/pkgconfig $DEST/usr/include/nss
-install -v -m755 Linux*/lib/*.so              $DEST/usr/lib              && \
-install -v -m644 Linux*/lib/{*.chk,libcrmf.a} $DEST/usr/lib              && \
-install -v -m755 -d                           $DEST/usr/include/nss      && \
-cp -v -RL {public,private}/nss/*              $DEST/usr/include/nss      && \
+install -v -m755 Linux*/lib/*.so              $DEST/usr/lib/              && \
+install -v -m644 Linux*/lib/{*.chk,libcrmf.a} $DEST/usr/lib/              && \
+install -v -m755 -d                           $DEST/usr/include/nss/      && \
+cp -v -RL {public,private}/nss/*              $DEST/usr/include/nss/      && \
 chmod -v 644                                  $DEST/usr/include/nss/*    && \
-install -v -m755 Linux*/bin/{certutil,nss-config,pk12util} $DEST/usr/bin && \
-install -v -m644 Linux*/lib/pkgconfig/nss.pc  $DEST/usr/lib/pkgconfig
+cp -v Linux*/bin/{certutil,nss-config,pk12util} $DEST/usr/bin && \
+cp -v Linux*/lib/pkgconfig/nss.pc  $DEST/usr/lib/pkgconfig/
 ln -sfv ./pkcs11/p11-kit-trust.so $DEST/usr/lib/libnssckbi.so
 }
 

@@ -1,0 +1,33 @@
+PACKAGE="pangomm"
+VER="2.46.1"
+
+DEPENDS=(   cairomm gcc glib glibc glibmm libsigc++ pango  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/pangomm/2.46/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

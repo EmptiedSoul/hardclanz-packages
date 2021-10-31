@@ -1,0 +1,26 @@
+PACKAGE="libcdio"
+VER="2.1.0"
+
+DEPENDS=(   gcc glibc ncurses  )
+CONFLICTS=()
+
+URL="https://ftp.gnu.org/gnu/libcdio/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

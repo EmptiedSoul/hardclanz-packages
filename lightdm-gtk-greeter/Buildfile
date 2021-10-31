@@ -1,0 +1,35 @@
+PACKAGE="lightdm-gtk-greeter"
+VER="2.0.8"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libX11 libxklavier lightdm pango  )
+CONFLICTS=()
+
+URL="https://github.com/Xubuntu/lightdm-gtk-greeter/releases/download/${PACKAGE}-${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --libexecdir=/usr/lib/lightdm \
+	--sbindir=/usr/bin \
+	--with-libxklavier \
+	--enable-kill-on-sigterm \
+	--disable-libido \
+	--disable-libindicator \
+	--disable-static \
+	--disable-maintainer-mode
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=y

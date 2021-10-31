@@ -1,0 +1,28 @@
+PACKAGE="bash-completion"
+VER="2.11"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="https://github.com/scop/bash-completion/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=1

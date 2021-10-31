@@ -1,0 +1,28 @@
+PACKAGE="valgrind"
+VER="3.16.0"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://sourceware.org/ftp/valgrind/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's/arm64/amd64/' gdbserver_tests/nlcontrolc.vgtest
+	sed -i 's|/doc/valgrind||' docs/Makefile.in
+    ./configure $CONFIGUREOPTS --enable-lto=yes
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

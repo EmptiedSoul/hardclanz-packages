@@ -1,0 +1,33 @@
+PACKAGE="libnotify"
+VER="0.7.9"
+
+DEPENDS=(   gdk-pixbuf glib glibc  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/libnotify/0.7/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dgtk_doc=false -Dman=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

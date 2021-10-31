@@ -1,0 +1,33 @@
+PACKAGE="xarchiver"
+VER="0.5.4.17"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 pango  )
+CONFLICTS=()
+
+URL="https://github.com/ib/xarchiver/archive/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --libexecdir=/usr/lib/xfce4 --disable-gtk2
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_postinstall(){
+	gtk-update-icon-cache -qtf /usr/share/icons/hicolor &&
+	update-desktop-database -q
+}
+
+GITHUB_CHECK=1

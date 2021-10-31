@@ -1,0 +1,19 @@
+PACKAGE="mkinitramfs"
+VER="10.1"
+
+DEPENDS=( cpio )
+CONFLICTS=()
+
+export FILES=$(pwd)/files
+
+SRCDIR="${PACKAGE}-${VER}"
+
+__unpacksrc(){
+	mkdir $SRCDIR
+}
+
+__installsrc(){
+	mkdir -pv $DEST/sbin/ $DEST/usr/share/mkinitramfs
+	install -vm755 $FILES/mkinitramfs $DEST/sbin/mkinitramfs
+	install -vm755 $FILES/init.in $DEST/usr/share/mkinitramfs/init.in
+}

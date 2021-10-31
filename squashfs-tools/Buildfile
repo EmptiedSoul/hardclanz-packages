@@ -1,0 +1,30 @@
+PACKAGE="squashfs-tools"
+VER="4.5"
+
+DEPENDS=(   glibc xz zlib zstd  )
+CONFLICTS=()
+
+URL="https://sourceforge.net/projects/squashfs/files/squashfs/squashfs${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${PACKAGE/-tools}${VER}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	cd ${PACKAGE}
+	sed -i 's/#XZ_SUPPORT = 1/XZ_SUPPORT = 1/' Makefile
+	sed -i 's/#ZSTD_SUPPORT = 1/ZSTD_SUPPORT = 1/' Makefile
+	cd ..
+}
+__compilesrc(){
+    make $MAKEOPTS -C ${PACKAGE}
+}
+__installsrc(){
+    make $MAKEOPTS INSTALL_DIR="$DEST/usr/bin" install -C ${PACKAGE}
+}
+

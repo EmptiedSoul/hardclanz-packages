@@ -1,0 +1,18 @@
+--- a/src/posix-io.c	2020-07-15 13:14:17.000000000 +0300
++++ b/src/posix-io.c	2021-08-23 22:10:05.121812845 +0300
+@@ -570,15 +570,8 @@
+               if (fd_list[i].fd > fd)
+                 fd = fd_list[i].fd;
+             fd++;
+-#if defined(__sun) || defined(__FreeBSD__)
+             closefrom (fd);
+             max_fds = fd;
+-#else /*!__sun */
+-            while ((i = closefrom (fd)) && errno == EINTR)
+-              ;
+-            if (!i || errno == EBADF)
+-              max_fds = fd;
+-#endif /*!__sun*/
+           }
+ #endif /*HAVE_CLOSEFROM*/
+           if (max_fds == -1)

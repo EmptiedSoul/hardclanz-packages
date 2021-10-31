@@ -1,0 +1,31 @@
+PACKAGE="libwebp"
+VER="1.2.0"
+
+DEPENDS=(   freeglut giflib glibc libjpeg-turbo libpng mesa tiff  )
+CONFLICTS=()
+
+URL="http://downloads.webmproject.org/releases/webp/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --enable-libwebpmux \
+	    	--enable-libwebpdemux \
+		--enable-libwebpdecoder \
+		--enable-libwebpextras \
+		--enable-swap-16bit-csp \
+		--disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

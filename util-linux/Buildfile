@@ -1,5 +1,5 @@
 PACKAGE="util-linux"
-VER="2.37.1"
+VER="2.37.2"
 
 ARCH="installer"
 ACCESS="restricted"

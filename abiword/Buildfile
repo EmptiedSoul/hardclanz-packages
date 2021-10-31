@@ -1,0 +1,30 @@
+PACKAGE="abiword"
+VER="3.0.5"
+
+DEPENDS=( atk cairo fontconfig freetype-harfbuzz fribidi gcc gdk-pixbuf glib glibc goffice gtk3 libgcrypt libgpg-error libgsf libjpeg-turbo libpng librsvg libX11 libxml2 libxslt pango wv zlib  libical  )
+CONFLICTS=()
+
+URL="https://www.abisource.com/downloads/abiword/${VER}/source/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -e "s/free_suggestions/free_string_list/" \
+    -e "s/_to_personal//"                     \
+    -e "s/in_session/added/"                  \
+    -i src/af/xap/xp/enchant_checker.cpp
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

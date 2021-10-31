@@ -1,5 +1,5 @@
 PACKAGE="gzip"
-VER="1.10"
+VER="1.11"
 
 ARCH="installer"
 ACCESS="restricted"

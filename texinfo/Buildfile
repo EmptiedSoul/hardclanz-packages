@@ -1,5 +1,5 @@
 PACKAGE="texinfo"
-VER="6.7"
+VER="6.8"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -22,6 +22,8 @@ __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
+	sed -e 's/__attribute_nonnull__/__nonnull/' \
+    -i gnulib/lib/malloc/dynarray-skeleton.c
     ./configure $CONFIGUREOPTS
 }
 __compilesrc(){

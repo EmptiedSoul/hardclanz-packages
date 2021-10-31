@@ -2,9 +2,4 @@ repo/
 .HARDS/
 .done
 .failed
-*.failed
 logs/
-.needs_update/
-.needs_correction/
-.depends/
-.provides/

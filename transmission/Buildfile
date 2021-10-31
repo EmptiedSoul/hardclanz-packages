@@ -1,0 +1,29 @@
+PACKAGE="transmission"
+VER="3.00"
+
+DEPENDS=( atk cairo curl freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libevent openssl pango zlib  elogind  )
+CONFLICTS=()
+
+URL="https://raw.githubusercontent.com/transmission/transmission-releases/master/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --enable-cli
+}
+
+# There is no Qt now, so we're not building Qt gui
+
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

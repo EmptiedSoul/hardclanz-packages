@@ -1,0 +1,33 @@
+PACKAGE="hexchat"
+VER="2.16.0"
+
+DEPENDS=(   dbus-glib gdk-pixbuf glib glibc gtk2 libcanberra libX11 openssl pango python  )
+CONFLICTS=()
+
+URL="http://dl.hexchat.net/hexchat/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR=$DEST
+	meson --prefix=/usr -Dwith-libproxy=false -Dwith-lua=false -Dwith-perl=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

@@ -1,0 +1,33 @@
+PACKAGE="gst-plugins-base"
+VER="1.19.2"
+
+DEPENDS=(   alsa-lib cairo glib glibc gstreamer libdrm libgudev libjpeg-turbo libogg libpng libtheora libvorbis libX11 libxcb libXext mesa opus pango wayland zlib  )
+CONFLICTS=()
+
+URL="https://gstreamer.freedesktop.org/src/${PACKAGE}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dbuildtype=release ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

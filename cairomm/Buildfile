@@ -1,0 +1,33 @@
+PACKAGE="cairomm"
+VER="1.14.0"
+
+DEPENDS=(   cairo gcc glibc libsigc++  )
+CONFLICTS=()
+
+URL="https://www.cairographics.org/releases/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir _build
+	cd _build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Duse-network=true -Dboost-shared=true -Dbuild-test=false ..
+	cd ..
+}
+__compilesrc(){
+	cd _build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd _build
+	ninja install
+}

@@ -1,0 +1,30 @@
+PACKAGE="librsvg"
+VER="2.50.7"
+
+DEPENDS=(   cairo fontconfig freetype-harfbuzz gcc gdk-pixbuf glib glibc libpng libxml2 pango zlib  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/librsvg/2.50/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static 
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_postinstall(){
+gdk-pixbuf-query-loaders --update-cache
+}

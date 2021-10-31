@@ -1,0 +1,36 @@
+PACKAGE="iptables"
+VER="1.8.7"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="http://www.netfilter.org/projects/iptables/files/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --sbindir=/sbin --disable-nftables \
+	    --enable-libipq \
+	    --with-xlibdir=/lib/xtables
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+	mkdir -pv $DEST/lib $DEST/usr/{lib,bin}
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	    ln -sfv ../../sbin/xtables-legacy-multi $DEST/usr/bin/iptables-xml &&
+
+for file in ip4tc ip6tc ipq xtables
+do
+  mv -v $DEST/usr/lib/lib${file}.so.* $DEST/lib &&
+  ln -sfv ../../lib/$(readlink $DEST/usr/lib/lib${file}.so) $DEST/usr/lib/lib${file}.so
+done
+}

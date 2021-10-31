@@ -1,0 +1,27 @@
+PACKAGE="SDL2"
+VER="2.0.14"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://www.libsdl.org/release/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	    rm -vf $DEST/usr/lib/libSDL2*.a
+}

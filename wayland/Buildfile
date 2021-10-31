@@ -1,0 +1,26 @@
+PACKAGE="wayland"
+VER="1.19.0"
+
+DEPENDS=(   expat glibc libffi libxml2  )
+CONFLICTS=()
+
+URL="https://wayland.freedesktop.org/releases/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static --disable-documentation
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

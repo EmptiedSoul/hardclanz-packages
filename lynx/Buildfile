@@ -1,0 +1,30 @@
+PACKAGE="lynx"
+VER="2.8.9rel.1"
+
+DEPENDS=(   glibc ncurses openssl zlib  )
+CONFLICTS=()
+
+URL="https://invisible-mirror.net/archives/lynx/tarballs/"
+SRCDIR="${PACKAGE}${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --with-zlib \
+	    --with-bzlib \
+	    --with-ssl \
+	    --with-screen=ncursesw \
+	    --enable-local-charset
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install-full
+}

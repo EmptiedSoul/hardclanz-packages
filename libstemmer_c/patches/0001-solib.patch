@@ -1,0 +1,16 @@
+--- a/Makefile	2021-01-21 08:03:16.000000000 +0300
++++ b/Makefile	2021-08-23 23:31:24.158024878 +0300
+@@ -1,9 +1,11 @@
+ include mkinc.mak
+-CFLAGS=-O2
++CFLAGS=-O2 -fpic
+ CPPFLAGS=-Iinclude
+-all: libstemmer.o stemwords
++all: libstemmer.so stemwords libstemmer.o
+ libstemmer.o: $(snowball_sources:.c=.o)
+ 	$(AR) -cru $@ $^
++libstemmer.so: $(snowball_sources:.c=.o)
++	$(CC) $(CFLAGS) -shared -o $@ $^
+ stemwords: examples/stemwords.o libstemmer.o
+ 	$(CC) $(CFLAGS) -o $@ $^
+ clean:

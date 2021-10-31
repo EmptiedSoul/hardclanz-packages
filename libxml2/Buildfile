@@ -1,0 +1,28 @@
+PACKAGE="libxml2"
+VER="2.9.10"
+
+DEPENDS=(   glibc libxcrypt ncurses readline xz zlib  )
+CONFLICTS=()
+
+URL="http://xmlsoft.org/sources/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i '/if Py/{s/Py/(Py/;s/)/))/}' python/{types.c,libxml.c}
+	sed -i "s/ TRUE/ true/" encoding.c
+    ./configure $CONFIGUREOPTS --disable-static --with-history --with-python=/usr/bin/python3 --with-icu--with-threads
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

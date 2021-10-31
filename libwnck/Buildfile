@@ -1,0 +1,33 @@
+PACKAGE="libwnck"
+VER="3.36.0"
+
+DEPENDS=(   atk cairo gdk-pixbuf glib glibc gtk3 libX11 libXrender pango startup-notification  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/libwnck/3.36/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dbuildtype=release ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

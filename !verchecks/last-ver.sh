@@ -26,7 +26,7 @@ ver_compare(){
 
 pointer "Current version: $VER"
 
-newver=$(curl -Ls $URL |html2text| grep "$PACKAGE-" | sed -e "s/^.*$PACKAGE-//" -e 's/\.tar.*$//' -e 's/\.zip.*$//' -e 's/\.cpio.*$//' -e 's/^[^0-9]*//' | awk '{print $1}'|sort | uniq | sort -V | tail -1)
+newver=$(curl -Ls $URL | html2text |grep "$PACKAGE-" | sed -e "s/^.*$PACKAGE-//" -e 's/\.tar.*$//' -e 's/\.zip.*$//' -e 's/\.cpio.*$//' -e 's/^[^0-9]*//' | awk '{print $1}'|sort | uniq | sort -V | tail -1)
 
 pointer "New version: $newver"
 

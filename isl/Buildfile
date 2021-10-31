@@ -1,0 +1,27 @@
+PACKAGE="isl"
+VER="0.24"
+
+DEPENDS=(   glibc gmp  )
+CONFLICTS=()
+
+URL="https://repo.or.cz/isl.git/snapshot/"
+SRCDIR="isl-3ea3e8b"
+SRCTGZ="3ea3e8b77475bea49b35b8215d8f66af94121b3c.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    	./autogen.sh
+	./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

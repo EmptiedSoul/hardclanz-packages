@@ -1,0 +1,8 @@
+#!/bin/bash
+# rc: depends: dbus-uuidgen
+# rc: hd-opts: -kt5
+. /etc/rc.d/lib/functions.sh
+
+msg_ok "Started DBus"
+
+run_daemon dbus-daemon --nofork --system

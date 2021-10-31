@@ -1,0 +1,27 @@
+PACKAGE="libgsf"
+VER="1.14.47"
+
+DEPENDS=(   gdk-pixbuf glib glibc libxml2 zlib  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/libgsf/1.14/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+

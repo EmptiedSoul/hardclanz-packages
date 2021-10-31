@@ -1,0 +1,46 @@
+PACKAGE="ffmpeg"
+VER="4.4"
+
+DEPENDS=(   alsa-lib fdk-aac freetype-harfbuzz glibc lame libass libdrm libtheora libva libvdpau libvorbis libvpx libX11 libxcb openssl opus pulseaudio SDL2 x264 x265 xz zlib  )
+CONFLICTS=()
+
+URL="https://ffmpeg.org/releases/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's/-lflite"/-lflite -lasound"/' configure
+    ./configure --prefix=/usr --enable-gpl \
+	    --enable-version3 \
+	    --disable-static \
+	    --enable-shared \
+	    --disable-debug \
+	    --enable-avresample \
+	    --enable-libass \
+	    --enable-libfdk-aac \
+	    --enable-libfreetype \
+	    --enable-libmp3lame \
+	    --enable-libopus \
+	    --enable-libtheora \
+	    --enable-libvorbis \
+	    --enable-libvpx \
+	    --enable-libx264 \
+	    --enable-libx265 \
+	    --enable-openssl \
+	    --enable-libdrm \
+	    --enable-libpulse \
+	    --enable-nonfree # ???
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

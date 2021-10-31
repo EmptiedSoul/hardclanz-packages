@@ -1,0 +1,33 @@
+PACKAGE="vte"
+VER="0.62.3"
+
+DEPENDS=( atk cairo fribidi gcc gdk-pixbuf glib glibc gnutls gtk3 pango pcre2 zlib  icu  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/vte/0.62/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build 
+	cd    build &&
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -D_systemd=false -Dfribidi=true -Dvapi=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

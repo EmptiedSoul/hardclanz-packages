@@ -1,5 +1,5 @@
 PACKAGE="iproute2"
-VER="5.13.0"
+VER="5.14.0"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="System routing"
 
-DEPENDS=( glibc binutils elfutils libcap libmnl  libbsd  )
+DEPENDS=( glibc binutils elfutils libcap libmnl libbsd  iptables  )
 CONFLICTS=()
 
 URL="https://www.kernel.org/pub/linux/utils/net/iproute2/"
@@ -23,7 +23,9 @@ __unpacksrc(){
 }
 __preparesrc(){
 
-    ./configure $CONFIGUREOPTS
+    ./configure 
+    sed -i 's/.m_ipt.o//' tc/Makefile
+
 }
 __compilesrc(){
     make $MAKEOPTS

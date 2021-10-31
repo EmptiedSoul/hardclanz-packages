@@ -1,0 +1,38 @@
+PACKAGE="gsettings-desktop-schemas"
+VER="3.38.0"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/${PACKAGE}/3.38/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}
+
+pkg_postinstall(){
+	glib-compile-schemas /usr/share/glib-2.0/schemas
+}

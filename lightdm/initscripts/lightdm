@@ -1,0 +1,8 @@
+#!/bin/bash
+# rc: depends: elogind
+# rc: hd-opts: -kt5
+. /etc/rc.d/lib/functions.sh
+
+msg_ok "Started lightdm"
+
+run_daemon lightdm

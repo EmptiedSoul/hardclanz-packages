@@ -1,0 +1,33 @@
+PACKAGE="shared-mime-info"
+VER="2.0"
+
+DEPENDS=(   glib glibc libxml2  )
+CONFLICTS=()
+
+URL="http://deb.debian.org/debian/pool/main/s/shared-mime-info/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${PACKAGE}_${VER}.orig.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dupdate-mimedb=true ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

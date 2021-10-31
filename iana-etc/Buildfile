@@ -1,5 +1,5 @@
 PACKAGE="iana-etc"
-VER="20210611"
+VER="20211001"
 
 ARCH="installer"
 ACCESS="restricted"

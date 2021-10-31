@@ -1,9 +1,7 @@
 PACKAGE="binutils"
 VER="2.37"
 
-ACCESS="restricted"
-ARCH="installer"
-CRYPT="key"
+export PATCHDIR="$(pwd)/patches"
 
 DESCRIPTION="GNU linker, assembler and other stuff"
 
@@ -22,6 +20,7 @@ __unpacksrc(){
 	tar xJf $SRCTGZ
 }
 __preparesrc(){
+	patch -Np1 -i $PATCHDIR/binutils-2.37-upstream_fix-1.patch
 	./configure $CONFIGUREOPTS \
 	--enable-gold	\
 	--enable-ld=default	\

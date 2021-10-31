@@ -1,0 +1,33 @@
+PACKAGE="pulseaudio"
+VER="15.0" # 15.0 fails to build
+
+DEPENDS=(   alsa-lib dbus elogind eudev gdbm glib glibc libcap libICE libSM libsndfile libtool libX11 libxcb libXtst openssl speex  )
+CONFLICTS=()
+
+URL="https://www.freedesktop.org/software/pulseaudio/releases/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dsystemduserunitdir=/tmp -Ddatabase=gdbm -Dbluez5=disabled --buildtype=release ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

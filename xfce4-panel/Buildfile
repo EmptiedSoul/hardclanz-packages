@@ -1,0 +1,26 @@
+PACKAGE="xfce4-panel"
+VER="4.16.3"
+
+DEPENDS=(   atk cairo exo freetype-harfbuzz garcon gdk-pixbuf glib glibc gtk3 libICE libSM libwnck libX11 libXext libxfce4ui libxfce4util pango xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/xfce/xfce4-panel/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

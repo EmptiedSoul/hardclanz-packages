@@ -1,0 +1,24 @@
+PACKAGE="giflib"
+VER="5.2.1"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://sourceforge.net/projects/giflib/files/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS PREFIX=/usr DESTDIR="$DEST" install &&
+	    rm -f $DEST/usr/lib/libgif.a
+}

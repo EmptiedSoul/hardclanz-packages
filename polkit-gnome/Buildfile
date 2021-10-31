@@ -1,0 +1,39 @@
+PACKAGE="polkit-gnome"
+VER="0.105"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 pango polkit  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/polkit-gnome/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+mkdir -p $DEST/etc/xdg/autostart &&
+cat > $DEST/etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop << "EOF"
+[Desktop Entry]
+Name=PolicyKit Authentication Agent
+Comment=PolicyKit Authentication Agent
+Exec=/usr/libexec/polkit-gnome-authentication-agent-1
+Terminal=false
+Type=Application
+Categories=
+NoDisplay=true
+OnlyShowIn=GNOME;XFCE;Unity;
+AutostartCondition=GNOME3 unless-session gnome
+EOF
+}

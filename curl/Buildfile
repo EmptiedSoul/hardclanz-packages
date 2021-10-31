@@ -1,5 +1,5 @@
 PACKAGE="curl"
-VER="7.78.0"
+VER="7.79.1"
 
 ARCH="installer"
 ACCESS="restricted"

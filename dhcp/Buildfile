@@ -1,0 +1,47 @@
+PACKAGE="dhcp"
+VER="4.4.2"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="ftp://ftp.isc.org/isc/dhcp/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+sed -i '/o.*dhcp_type/d' server/mdb.c &&
+sed -r '/u.*(local|remote)_port/d'    \
+    -i client/dhclient.c              \
+       relay/dhcrelay.c
+
+( export CFLAGS="${CFLAGS:--g -O2} -Wall -fno-strict-aliasing                 \
+        -D_PATH_DHCLIENT_SCRIPT='\"/sbin/dhclient-script\"'         \
+        -D_PATH_DHCPD_CONF='\"/etc/dhcp/dhcpd.conf\"'               \
+        -D_PATH_DHCLIENT_CONF='\"/etc/dhcp/dhclient.conf\"'"        &&
+
+./configure --prefix=/usr                                           \
+            --sysconfdir=/etc/dhcp                                  \
+            --localstatedir=/var                                    \
+            --with-srv-lease-file=/var/lib/dhcpd/dhcpd.leases       \
+            --with-srv6-lease-file=/var/lib/dhcpd/dhcpd6.leases     \
+            --with-cli-lease-file=/var/lib/dhclient/dhclient.leases \
+            --with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases
+)
+}
+__compilesrc(){
+    make -j1
+}
+__installsrc(){
+	mkdir -pv $DEST/sbin $DEST/var/lib/dhclient
+    	make DESTDIR="$DEST" install &&
+	mv -v $DEST/usr/sbin/dhclient $DEST/sbin/ &&
+	install -v -m755 client/scripts/linux $DEST/sbin/dhclient-script &&
+	{ find $DEST/lib $DEST/usr/lib -name "*.a" -delete; true; }
+}

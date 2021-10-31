@@ -36,16 +36,24 @@ do
 		hpkg-make build && {
 			echo $pkg >> ../.done
 			pointer "Installing $pkg..."
-			hpkg -fnp $DISTDIR/$pkg/$pkg.hard
+			../hpkg-update.sh -fnp $DISTDIR/$pkg/${pkg}_*.hard
 		} || {
-			echo $pkg >> ../.failed
-			cp -v $DISTDIR/hpkg-make.log ../logs/$pkg.log
-			echo 
-			echo "$pkg failed to build, log: ./logs/$pkg.log"
-			echo "Resolve failure and build again."
-			echo "Bailing out"
-			cd ..
-			exit 101
+			FAILED=1
+			while [[ "$FAILED" == "1" ]];
+			do
+				echo $pkg >> ../.failed
+				cp -v $DISTDIR/hpkg-make.log ../logs/$pkg.log
+				echo 
+				echo "$pkg failed to build, log: ./logs/$pkg.log"
+				echo "Resolve failure and type 'exit' to resume rebuild"
+				PS1="(failed build: $pkg)# " bash
+				hpkg-make clean
+				hpkg-make build && {
+					echo $pkg >> ../.done
+					pointer "Installing $pkg..."
+					../hpkg-update.sh -fnp $DISTDIR/$pkg/${pkg}_*.hard && FAILED=0
+				} || FAILED=1
+			done
 		}
 	cd .. &>/dev/null
 done

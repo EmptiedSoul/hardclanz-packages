@@ -1,0 +1,26 @@
+PACKAGE="xfce4-power-manager"
+VER="4.16.0"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libICE libnotify libSM libX11 libXext libxfce4ui libxfce4util libXrandr pango upower xfce4-panel xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/xfce/xfce4-power-manager/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

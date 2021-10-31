@@ -1,0 +1,34 @@
+PACKAGE="at-spi2-core"
+VER="2.38.0"
+
+DEPENDS=(   dbus glib glibc libX11 libXtst  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/${PACKAGE}/2.38/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dsystemd_user_dir=/tmp ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+    	cd build
+	ninja install
+	cd ..
+}

@@ -1,0 +1,26 @@
+PACKAGE="tumbler"
+VER="4.16.0"
+
+DEPENDS=( curl freetype-harfbuzz gdk-pixbuf glib glibc libjpeg-turbo libpng zlib  gst-plugins-base gstreamer libgsf libxml2  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/xfce/tumbler/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

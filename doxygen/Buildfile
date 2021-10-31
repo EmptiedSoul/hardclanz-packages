@@ -1,0 +1,37 @@
+PACKAGE="doxygen"
+VER="1.9.1"
+
+DEPENDS=( gcc glibc  clang  )
+CONFLICTS=()
+
+URL="http://doxygen.nl/files/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.src.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	rm src/._xmlgen.cpp
+	mkdir build
+	cd build
+	cmake -G "Unix Makefiles" \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-Duse_libclang=on \
+		-Wno-dev ..
+	cd ..	
+}
+__compilesrc(){
+	cd build
+    make $MAKEOPTS
+	cd ..
+}
+__installsrc(){
+	cd build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

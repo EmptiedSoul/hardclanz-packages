@@ -1,0 +1,31 @@
+PACKAGE="newt"
+VER="0.52.21"
+
+DEPENDS=(   glibc libxcrypt popt slang  )
+CONFLICTS=()
+
+URL="https://releases.pagure.org/newt/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -e 's/^LIBNEWT =/#&/' \
+    -e '/install -m 644 $(LIBNEWT)/ s/^/#/' \
+    -e 's/$(LIBNEWT)/$(LIBNEWTSONAME)/g' \
+    -i Makefile.in                           &&
+
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,13 +1,9 @@
 PACKAGE="llvm"
-VER="12.0.1"
-
-ARCH="installer"
-ACCESS="restricted"
-CRYPT="key"
+VER="13.0.0"
 
 DESCRIPTION="Low-Level Virtual Machine"
 
-DEPENDS=( zlib gcc glibc ncurses   )
+DEPENDS=( zlib gcc glibc ncurses  libffi libxml2  )
 CONFLICTS=()
 
 URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${VER}/"
@@ -19,29 +15,35 @@ __getsrc(){
     wget -c $SRCURL
 }
 __unpacksrc(){
-    tar xJf $SRCTGZ
+	tar xJf $SRCTGZ
 }
 __preparesrc(){
 	export DESTDIR="$DEST"
+	export CC=gcc
+	export CXX=g++
 	cmake -B build \
 	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DLLVM_ENABLE_FFI=ON \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DLLVM_BUILD_LLVM_DYLIB=ON \
 	-DLLVM_LINK_LLVM_DYLIB=ON \
-	-DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
+	-DLLVM_TARGETS_TO_BUILD="host;AMDGPU;BPF" \
 	-DLLVM_ENABLE_RTTI=ON \
 	-DLLVM_HOST_TRIPLE="$(cc -dumpmachine)" \
 	-DLLVM_BUILD_EXAMPLES=OFF \
 	-DLLVM_BUILD_DOCS=OFF \
 	-DLLVM_BUILD_TESTS=OFF \
-	-DLLVM_ENABLE_LIBXML2=OFF \
+	-DLLVM_BINUTILS_INCDIR=/usr/include \
+	-DLLVM_ENABLE_LIBXML2=ON \
 	-Wno-dev
 }
 __compilesrc(){
-
-cmake --build build $MAKEOPTS
+	cd build
+	make $MAKEOPTS
+	cd ..
 }
 __installsrc(){
-cmake --install build
+	cd build
+	make install DESTDIR="$DEST"
 }
 GITHUB_CHECK=1

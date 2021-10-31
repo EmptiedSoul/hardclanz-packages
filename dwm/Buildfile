@@ -25,8 +25,8 @@ __unpacksrc(){
 #    ./configure $CONFIGUREOPTS
 #}
 __compilesrc(){
-    make $MAKEOPTS
+    make $MAKEOPTS prefix=/usr
 }
 __installsrc(){
-    make $MAKEOPTS DESTDIR="$DEST" install
+    make $MAKEOPTS DESTDIR="$DEST" install prefix=/usr PREFIX=/usr
 }

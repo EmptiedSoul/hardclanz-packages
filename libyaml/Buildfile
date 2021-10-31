@@ -1,0 +1,26 @@
+PACKAGE="libyaml"
+VER="0.2.5"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="http://pyyaml.org/download/libyaml/"
+SRCDIR="${PACKAGE/lib}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,29 @@
+PACKAGE="slang"
+VER="2.3.2"
+
+DEPENDS=(   glibc libpng pcre zlib  )
+CONFLICTS=()
+
+URL="http://www.jedsoft.org/releases/slang/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+#	sed -i 's/-lreadline/-lreadline -lncursesw/' configure
+    ./configure $CONFIGUREOPTS 
+}
+__compilesrc(){
+    make -j1 # $MAKEOPTS
+}
+__installsrc(){
+    make DESTDIR="$DEST" install-all &&
+	    chmod -v 755 $DEST/usr/lib/libslang.so.2.3.2 \
+             $DEST/usr/lib/slang/v2/modules/*.so
+}

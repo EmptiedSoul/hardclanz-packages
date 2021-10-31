@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU GRand Unified Bootloader v2"
 
-DEPENDS=( bash xz gettext freetype-harfbuzz glibc lvm2   )
+DEPENDS=( bash xz gettext freetype-harfbuzz glibc lvm2  fuse2  )
 CONFLICTS=()
 
 SRCURL="https://git.savannah.gnu.org/git/grub.git"

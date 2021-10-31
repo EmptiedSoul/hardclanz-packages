@@ -1,0 +1,38 @@
+PACKAGE="clang"
+VER="13.0.0"
+
+DESCRIPTION="LLVM C-family compiler"
+
+DEPENDS=(  llvm gcc glibc libxml2  )
+CONFLICTS=()
+
+URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${VER}/"
+SRCDIR="${PACKAGE}-${VER}.src"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+	tar xf $SRCTGZ
+}
+__preparesrc(){
+	export DESTDIR="$DEST"
+	export CC=gcc
+	export CXX=g++
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+	-Wno-dev
+}
+__compilesrc(){
+	cd build
+	make $MAKEOPTS
+	cd ..
+}
+__installsrc(){
+	cd build
+	make install DESTDIR="$DEST"
+}
+GITHUB_CHECK=1

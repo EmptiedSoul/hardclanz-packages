@@ -1,0 +1,33 @@
+PACKAGE="appstream-glib"
+VER="0.7.18"
+
+DEPENDS=(   cairo fontconfig freetype-harfbuzz gdk-pixbuf glib glibc gtk3 json-glib libarchive libsoup libstemmer_c libyaml pango util-linux  )
+CONFLICTS=()
+
+URL="https://github.com/hughsie/appstream-glib/archive/refs/tags/"
+SRCDIR="$PACKAGE-${PACKAGE/-/_}_${VER//./_}"
+SRCTGZ="${PACKAGE/-/_}_${VER//./_}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dman=false -Dgtk_doc=false \
+		-Drpm=false -Dalpm=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

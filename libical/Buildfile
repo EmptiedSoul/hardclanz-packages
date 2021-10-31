@@ -1,0 +1,33 @@
+PACKAGE="libical"
+VER="3.0.10"
+
+DEPENDS=(   gcc glib glibc icu libxml2  )
+CONFLICTS=()
+
+URL="https://github.com/libical/libical/releases/download/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DSHARED_ONLY=yes \
+		-DICAL_BUILD_DOCS=false \
+		-DGOBJECT_INTROSPECTION=true \
+		-Wno-dev .
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=1

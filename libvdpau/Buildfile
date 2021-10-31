@@ -1,0 +1,33 @@
+PACKAGE="libvdpau"
+VER="1.4"
+
+DEPENDS=(   glibc libX11 libXext  )
+CONFLICTS=()
+
+URL="https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

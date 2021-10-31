@@ -1,0 +1,46 @@
+PACKAGE="sgml-common"
+VER="0.6.3"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tgz"
+SRCURL="${URL}${SRCTGZ}"
+
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/autotools.patch
+	autoreconf -ivf   
+ ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install docdir="/usr/share/doc"
+}
+
+pkg_postinstall(){
+	install-catalog --add /etc/sgml/sgml-ent.cat \
+	/usr/share/sgml/sgml-iso-entities-8879.1986/catalog
+	install-catalog --add /etc/sgml/sgml-docbook.cat \
+	/etc/sgml/sgml-ent.cat
+	true
+}
+
+pkg_preinstall(){
+	install-catalog --remove /etc/sgml/sgml-ent.cat \
+	/usr/share/sgml/sgml-iso-entities-8879.1986/catalog
+	install-catalog --remove /etc/sgml/sgml-docbook.cat \
+	/etc/sgml/sgml-ent.cat
+	true
+}

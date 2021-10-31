@@ -1,0 +1,18 @@
+
+realine also requires ncursesw
+
+--- a/js/moz.configure	2021-08-15 19:12:39.192101823 +0000
++++ b/js/moz.configure	2021-08-15 19:17:15.957072194 +0000
+@@ -696,10 +696,10 @@
+ js_option('--enable-readline', help='Link js shell to system readline library',
+           when=editline)
+ 
+-has_readline = check_symbol('readline', flags=['-lreadline'], when='--enable-readline',
++has_readline = check_symbol('readline', flags=['-lreadline', '-lncursesw'], when='--enable-readline',
+                             onerror=lambda: die('No system readline library found'))
+ 
+-set_config('EDITLINE_LIBS', ['-lreadline'], when=has_readline)
++set_config('EDITLINE_LIBS', ['-lreadline', '-lncursesw'], when=has_readline)
+ 
+ @depends('--enable-readline', editline, when=editline)
+ def bundled_editline(readline, editline):

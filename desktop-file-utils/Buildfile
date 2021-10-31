@@ -1,0 +1,33 @@
+PACKAGE="desktop-file-utils"
+VER="0.26"
+
+DEPENDS=(   glib glibc  )
+CONFLICTS=()
+
+URL="https://www.freedesktop.org/software/desktop-file-utils/releases/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build 
+	cd    build &&
+	export DESTDIR="$DEST"
+	meson --prefix=/usr ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

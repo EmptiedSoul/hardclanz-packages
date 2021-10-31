@@ -1,0 +1,30 @@
+PACKAGE="mousepad"
+VER="0.5.7"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 gtksourceview pango  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/apps/${PACKAGE}/0.5/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --enable-keyfile-settings
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_postinstall(){
+glib-compile-schemas /usr/share/glib-2.0/schemas/
+}

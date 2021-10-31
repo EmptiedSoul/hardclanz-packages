@@ -1,0 +1,33 @@
+PACKAGE="logrotate"
+VER="3.18.0"
+
+DEPENDS=(   acl glibc popt  )
+CONFLICTS=()
+
+URL="https://github.com/logrotate/logrotate/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+export CFGDIR="$(pwd)/config"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+	mkdir -pv $DEST/etc/logrotate.d/ $DEST/etc/cron.daily/
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	    install -vm644 $CFGDIR/logrotate.conf $DEST/etc/logrotate.conf &&
+	    install -vm754 $CFGDIR/logrotate.sh   $DEST/etc/cron.daily/logrotate.sh &&
+	    install -vm644 $CFGDIR/syslog.log     $DEST/etc/logrotate.d/syslog.log
+}
+
+GITHUB_CHECK=1

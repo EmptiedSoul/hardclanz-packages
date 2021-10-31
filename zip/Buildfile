@@ -1,0 +1,23 @@
+PACKAGE="zip"
+VER="3.0"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/infozip/"
+SRCDIR="${PACKAGE}${VER/./}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    curl -JLO $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__compilesrc(){
+    make $MAKEOPTS -f unix/Makefile generic_gcc
+}
+__installsrc(){
+    make $MAKEOPTS  prefix=$DEST/usr MANDIR="$DEST/usr/share/man/man1" -f unix/Makefile install
+}

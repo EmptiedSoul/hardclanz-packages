@@ -1,5 +1,5 @@
 PACKAGE="grep"
-VER="3.6"
+VER="3.7"
 
 ARCH="installer"
 ACCESS="restricted"

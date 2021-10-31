@@ -1,0 +1,24 @@
+
+rename static bool play -> static bool _play due
+to name conflict with unistd's int pause
+
+--- a/profiles/audio/media.c	2021-07-07 16:45:55.000000000 +0300
++++ b/proflles/audio/media.c	2021-08-22 20:50:44.656093581 +0300
+@@ -1281,7 +1281,7 @@
+ 	return media_player_send(mp, "Stop");
+ }
+ 
+-static bool pause(void *user_data)
++static bool _pause(void *user_data)
+ {
+ 	struct media_player *mp = user_data;
+ 
+@@ -1331,7 +1331,7 @@
+ 	.set_volume = set_volume,
+ 	.play = play,
+ 	.stop = stop,
+-	.pause = pause,
++	.pause = _pause,
+ 	.next = next,
+ 	.previous = previous,
+ };

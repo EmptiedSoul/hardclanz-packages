@@ -1,0 +1,33 @@
+PACKAGE="libnma"
+VER="1.8.32"
+
+DEPENDS=(   cairo gcr glib glibc gtk3 NetworkManager  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/libnma/1.8/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dgtk_doc=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}

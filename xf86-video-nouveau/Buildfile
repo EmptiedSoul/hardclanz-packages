@@ -26,8 +26,8 @@ __preparesrc(){
     	patch -p1 < $LAUNCHDIR/patches/rootless-nouveau.patch
 	export LDFLAGS="-Wl,-z,lazy"
 	enable globstar
-	sed -i -e 's/slave_dst/secondary_dst/g' -e 's/current_master/current_primary/g' -e 's/master_pixmap/primary_pixmap/g' */*.c */*.h
-	./configure $CONFIGUREOPTS
+#	sed -i -e 's/slave_dst/secondary_dst/g' -e 's/current_master/current_primary/g' -e 's/master_pixmap/primary_pixmap/g' */*.c */*.h
+	./configure $CONFIGUREOPTS --enable-glamor --enable-dri3
 }
 __compilesrc(){
     make $MAKEOPTS

@@ -1,0 +1,30 @@
+PACKAGE="autoconf2.13"
+VER="2.13"
+
+DEPENDS=( )
+CONFLICTS=()
+
+URL="https://ftp.gnu.org/gnu/autoconf/"
+SRCDIR="${PACKAGE/2.13/}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i ${PATCHDIR}/autoconf-2.13-consolidated_fixes-1.patch &&
+	mv -v autoconf.texi autoconf213.texi                      &&
+	rm -v autoconf.info                                       &&
+    ./configure $CONFIGUREOPTS --program-suffix=2.13
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,38 @@
+PACKAGE="freeglut"
+VER="3.2.1"
+
+DEPENDS=(   glibc libX11 libXi libXrandr libXxf86vm mesa  )
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/freeglut/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/freeglut-3.2.1-gcc10_fix-1.patch
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DFREEGLUT_BUILD_DEMOS=OFF \
+		-DFREEGLUT_BUILD_STATIC_LIBS=OFF \
+		-Wno-dev ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+    make $MAKEOPTS
+	cd ..
+}
+__installsrc(){
+	cd build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

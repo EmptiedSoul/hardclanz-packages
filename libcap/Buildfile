@@ -1,5 +1,5 @@
 PACKAGE="libcap"
-VER="2.52"
+export VER="2.59"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -34,6 +34,6 @@ __installsrc(){
 for libname in cap psx; do
     mv -v $DEST/usr/lib/lib${libname}.so.* $DEST/lib
     ln -sfv ../../lib/lib${libname}.so.2 $DEST/usr/lib/lib${libname}.so
-    chmod -v 755 $DEST/lib/lib${libname}.so.2.52
+    chmod -v 755 $DEST/lib/lib${libname}.so.${VER}
 done
 }

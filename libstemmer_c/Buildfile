@@ -1,0 +1,33 @@
+PACKAGE="libstemmer_c"
+VER="2.1.0"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://snowballstem.org/dist/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/0001-solib.patch
+}
+
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+	mkdir -pv $DEST/usr/{lib,include}
+	install -vm755 libstemmer.so $DEST/usr/lib/libstemmer.so
+	ln -sv libstemmer.so         $DEST/usr/lib/libstemmer.so.0
+	ln -sv libstemmer.so         $DEST/usr/lib/libstemmer.so.0.0.0
+	install -vm644 include/libstemmer.h $DEST/usr/include/libstemmer.h
+}

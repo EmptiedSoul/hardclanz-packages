@@ -1,0 +1,26 @@
+PACKAGE="ristretto"
+VER="0.10.0"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libexif libICE libSM libX11 libxfce4ui libxfce4util pango xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/apps/${PACKAGE}/0.10/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

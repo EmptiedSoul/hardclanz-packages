@@ -1,0 +1,8 @@
+#!/bin/bash
+# rc: depends: dbus-socket
+# rc: hd-opts: -kt5
+. /etc/rc.d/lib/functions.sh
+
+msg_ok "Started NetworkManager"
+
+run_daemon NetworkManager -n

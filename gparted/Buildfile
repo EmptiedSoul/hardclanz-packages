@@ -1,0 +1,26 @@
+PACKAGE="gparted"
+VER="1.2.0"
+
+DEPENDS=(   atk atkmm cairo cairomm freetype-harfbuzz gcc gdk-pixbuf glib glibc glibmm gtk3 gtk3mm libsigc++ pango pangomm parted util-linux  )
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/gparted/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-doc --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

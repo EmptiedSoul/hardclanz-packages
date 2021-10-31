@@ -1,0 +1,27 @@
+PACKAGE="gnome-keyring"
+VER="3.36.0"
+
+DEPENDS=(   atk cairo freetype-harfbuzz gcr gdk-pixbuf glib glibc gtk3 libcap-ng libgcrypt libgpg-error linux-pam p11-kit pam pango  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/gnome-keyring/3.36/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's:"/desktop:"/org:' schema/*.xml
+    ./configure $CONFIGUREOPTS --with-pam-dir=/lib/security
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

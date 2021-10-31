@@ -1,0 +1,27 @@
+PACKAGE="noto-fonts"
+VER="25101027"
+
+DEPENDS=( )
+CONFLICTS=()
+
+SRCDIR="fonts"
+SRCTGZ="Noto-hinted.zip"
+SRCURL="https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+	mkdir $SRCDIR -pv
+	cd $SRCDIR
+	unzip ../$SRCTGZ
+	cd ..
+}
+__installsrc(){
+	mkdir -pv $DEST/usr/share/fonts/noto
+	install -vm644 *.ttf $DEST/usr/share/fonts/noto/
+}
+
+pkg_postinstall(){
+	fc-cache -v /usr/share/fonts/noto
+}

@@ -1,5 +1,5 @@
 PACKAGE="gnupg"
-VER="2.3.1"
+VER="2.3.2"
 
 ARCH="installer"
 ACCESS="restricted"
@@ -7,7 +7,7 @@ CRYPT="key"
 
 DESCRIPTION="GNU Policy Guard"
 
-DEPENDS=( libassuan libgcrypt libksba npth pinentry glibc libgpg-error ncurses readline sqlite3 zlib   )
+DEPENDS=( libassuan libgcrypt libksba npth pinentry glibc libgpg-error ncurses readline sqlite3 zlib  gnutls libldap libusb  )
 CONFLICTS=()
 
 URL="https://www.gnupg.org/ftp/gcrypt/gnupg/"

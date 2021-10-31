@@ -1,0 +1,26 @@
+PACKAGE="xfce4-pulseaudio-plugin"
+VER="0.4.3"
+
+DEPENDS=(   atk cairo exo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libnotify libwnck libxfce4ui libxfce4util pango pulseaudio xfce4-panel xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.4/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

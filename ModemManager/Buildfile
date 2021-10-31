@@ -1,0 +1,31 @@
+PACKAGE="ModemManager"
+VER="1.18.2"
+
+DEPENDS=(   glib glibc libgudev polkit  )
+CONFLICTS=()
+
+URL="https://www.freedesktop.org/software/ModemManager/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --localstatedir=/var \
+	    --disable-static \
+	    --with-systemd-journal=no \
+	    --with-systemd-suspend-resume \
+	    --without-mbim \
+	    --without-qmi
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

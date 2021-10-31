@@ -1,0 +1,28 @@
+PACKAGE="libostree"
+VER="2021.3"
+
+DEPENDS=(   elogind fuse2 glib glibc gpgme libarchive libassuan libgpg-error libsoup util-linux xz zlib  )
+CONFLICTS=()
+
+URL="https://github.com/ostreedev/ostree/releases/download/v${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-static
+	sed -i 's/-Werror=incompatible-pointer-types//' config.status
+	./config.status
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

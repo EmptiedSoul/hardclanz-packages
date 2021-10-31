@@ -1,0 +1,29 @@
+PACKAGE="htop"
+VER="3.1.0rc3"
+
+DEPENDS=(   glibc libcap libnl ncurses  )
+CONFLICTS=()
+
+URL="https://github.com/htop-dev/htop/archive/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	./autogen.sh
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=1

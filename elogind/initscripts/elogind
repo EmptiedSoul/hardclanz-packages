@@ -1,0 +1,10 @@
+#!/bin/bash
+# rc: depends: dbus-socket
+# rc: hd-opts: -kt5
+. /etc/rc.d/lib/functions.sh
+
+msg_ok "Started elogind"
+
+chmod 1777 /tmp
+
+run_daemon /lib/elogind/elogind

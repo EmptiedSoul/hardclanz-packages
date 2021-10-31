@@ -1,12 +1,8 @@
 PACKAGE="vim"
-VER="8.2.3001"
-
-ARCH="installer"
-ACCESS="restricted"
-CRYPT="key"
+VER="8.2.3458"
 
 CONFLICTS=()
-DEPENDS=( gmp glibc zlib libffi acl ncurses   )
+DEPENDS=( gmp glibc zlib libffi acl ncurses  gdk-pixbuf glib gtk2 libcanberra libICE libSM libsodium libX11 libXt pango  )
 
 DESCRIPTION="VI Improved text editor"
 
@@ -19,19 +15,19 @@ __getsrc(){
     wget -c $SRCURL
 }
 __unpacksrc(){
-    tar xzf $SRCTGZ
+    tar xf $SRCTGZ 
+    SRCDIR="vim-tags-v${VER}"
 }
 __preparesrc(){
-	cd src
+	unset SRCDIR
     ./configure $CONFIGUREOPTS \
-	--with-features=large  \
-	--disable-gui \
-	--with-x=no
+	--with-features=huge  
+    SRCDIR="vim-tags-v${VER}"
 }
 __compilesrc(){
     make $MAKEOPTS
 }
 __installsrc(){
     make $MAKEOPTS DESTDIR="$DEST" install
-    cd ..
+    make -C src installruntime $MAKEOPTS DESTDIR="$DEST"
 }

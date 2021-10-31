@@ -1,0 +1,44 @@
+
+# emptiedsoul: i couldnt build firefox from source for 20+ hours
+# emptiedsoul: also, to obtain all functionality we need api key
+# emptiedsoul: so i preffered using precompiled version from Mozilla.
+#
+# emptiedsoul: please, replace binary firefox version with built 
+# emptiedsoul: from source version and get api keys for hardclanz
+
+PACKAGE="firefox"
+VER="91.0.1"
+
+DEPENDS=(   atk cairo dbus dbus-glib fontconfig freetype-harfbuzz gcc gdk-pixbuf glib glibc gtk3 libX11 libxcb libXcomposite libXcursor libXdamage libXext libXfixes libXi libXrender libXt pango  )
+CONFLICTS=()
+
+URL="https://archive.mozilla.org/pub/firefox/releases/${VER}/linux-x86_64/en-US/"
+SRCDIR="${PACKAGE}-${VER/esr/}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+export FILESDIR="$(pwd)/files"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+	mkdir $DEST/opt/firefox-bin/ -pv
+    tar xvf $SRCTGZ -C $DEST/opt/firefox-bin/
+	mkdir -pv $SRCDIR
+}
+__installsrc(){
+	mkdir -pv $DEST/usr/share/pixmaps $DEST/usr/share/applications/ $DEST/usr/bin/
+	cp -v $FILESDIR/firefox.desktop $DEST/usr/share/applications/firefox.desktop
+	ln -sv /opt/firefox-bin/firefox/browser/chrome/icons/default/default128.png $DEST/usr/share/pixmaps/firefox.png
+	cat >> $DEST/usr/bin/firefox <<EOF 
+#!/bin/bash
+# Wrapper
+exec /opt/firefox-bin/firefox/firefox-bin \$@
+EOF
+	chmod -v +x $DEST/usr/bin/firefox
+}
+
+pkg_postinstall(){
+	update-desktop-database
+	true
+}

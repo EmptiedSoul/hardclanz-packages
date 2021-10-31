@@ -1,0 +1,26 @@
+PACKAGE="alsa-lib"
+VER="1.2.5.1"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://alsa-project.org/files/pub/lib/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

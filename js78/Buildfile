@@ -1,0 +1,45 @@
+PACKAGE="js78"
+VER="78.8.0"
+
+DEPENDS=( gcc glibc ncurses readline zlib  icu  )
+CONFLICTS=()
+
+SRCDIR="firefox-78.8.0"
+SRCTGZ="${SRCDIR}esr.source.tar.xz"
+SRCURL="https://archive.mozilla.org/pub/firefox/releases/78.8.0esr/source/firefox-78.8.0esr.source.tar.xz"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/0002-bash-fallback.patch
+	patch -Np1 -i $PATCHDIR/0001-hardclanz-readline.patch
+	mkdir obj
+	cd obj
+    ../js/src/configure --prefix=/usr --with-intl-api \
+	--with-system-zlib \
+	--with-system-icu \
+	--disable-jemalloc \
+	--disable-debug-symbols \
+	--enable-readline
+	cd ..
+}
+__compilesrc(){
+	cd obj
+    make $MAKEOPTS
+	cd ..
+}
+__installsrc(){
+	cd obj
+    make $MAKEOPTS DESTDIR="$DEST" install &&
+	rm -fv $DEST/usr/lib/libjs_static.ajs &&
+sed -i '/@NSPR_CFLAGS@/d' $DEST/usr/bin/js78-config
+}
+
+pkg_preinstall(){
+	rm -fv /usr/lib/libmozjs-78.so
+}

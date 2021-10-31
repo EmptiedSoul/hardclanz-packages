@@ -1,0 +1,28 @@
+PACKAGE="fuse2"
+VER="2.9.9"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://github.com/libfuse/libfuse/releases/download/fuse-${VER}/"
+SRCDIR="${PACKAGE/2}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/0001-local-closefrom.patch
+    ./configure $CONFIGUREOPTS --enable-lib --enable-util --disable-example
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

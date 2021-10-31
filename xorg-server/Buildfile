@@ -1,11 +1,11 @@
 PACKAGE="xorg-server"
-VER="21.0.99.1"
+VER="1.20.13"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=( fontconfig bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib brotli graphite2 libunwind eudev glibc libXdmcp  libbsd  )
+DEPENDS=( fontconfig bzip2 freetype-harfbuzz libX11 libXau libXdamage libXext libXfixes libXfont2 libXxf86vm libdrm libepoxy libfontenc libpciaccess openssl libxcb libxkbfile libxshmfence mesa pixman xkeyboard-config zlib brotli graphite2 libunwind eudev glibc libXdmcp libbsd  wayland  )
 CONFLICTS=()
 
 DESCRIPTION="X11 Server"
@@ -13,14 +13,14 @@ DESCRIPTION="X11 Server"
 LAUNCHDIR="$(pwd)"
 URL="https://x.org/releases/individual/xserver/"
 SRCDIR="${PACKAGE}-${VER}"
-SRCTGZ="${SRCDIR}.tar.bz2"
+SRCTGZ="${SRCDIR}.tar.xz"
 SRCURL="${URL}${SRCTGZ}"
 
 __getsrc(){
     wget -c $SRCURL
 }
 __unpacksrc(){
-    tar xjf $SRCTGZ
+    tar xf $SRCTGZ
 }
 __preparesrc(){
     	patch -p1 < $LAUNCHDIR/patches/rootless_modesetting.patch
@@ -28,7 +28,7 @@ __preparesrc(){
 	./configure $CONFIGUREOPTS \
 	--localstatedir=/var \
 	--disable-systemd-logind \
-	--disable-xwayland \
+	--enable-xwayland \
 	--disable-unit-tests \
 	--enable-glx \
 	--enable-dri \

@@ -1,6 +1,6 @@
 #!/bin/bash
 PACKAGE="wget"
-VER="1.21.1"
+VER="1.21.2"
 
 DESCRIPTION="Non-interactive downloader"
 

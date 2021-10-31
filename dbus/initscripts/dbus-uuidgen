@@ -1,0 +1,12 @@
+#!/bin/bash
+# rc: depends:
+# rc: hd-opts: -no
+. /etc/rc.d/lib/functions.sh
+
+msg_pending "Generating DBus machine-id..."
+
+mkdir /run/dbus -p
+
+dbus-uuidgen --ensure
+
+msg_ok "Generated machine-id"

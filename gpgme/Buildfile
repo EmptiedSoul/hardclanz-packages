@@ -1,0 +1,28 @@
+PACKAGE="gpgme"
+VER="1.16.0"
+
+DEPENDS=(   gcc glibc libassuan libgpg-error  )
+CONFLICTS=()
+
+URL="https://www.gnupg.org/ftp/gcrypt/gpgme/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -Np1 -i $PATCHDIR/0001-closefrom-void.patch
+    ./configure $CONFIGUREOPTS --disable-gpg-test --disable-fd-passing --disable-static
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

@@ -1,0 +1,27 @@
+PACKAGE="cairo"
+VER="1.17.2+f93fc72c03e"
+
+DEPENDS=(   fontconfig freetype-harfbuzz glib glibc libpng libX11 libxcb libXext libXrender pixman zlib  )
+CONFLICTS=()
+
+URL="http://anduin.linuxfromscratch.org/BLFS/cairo/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	autoreconf -fv 
+	./configure --prefix=/usr --disable-static --enable-tee
+}
+__compilesrc(){
+	make $MAKEOPTS
+}
+__installsrc(){
+	make DESTDIR="$DEST" install
+}

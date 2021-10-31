@@ -1,0 +1,27 @@
+PACKAGE="thunar"
+VER="4.16.10"
+
+DEPENDS=(   atk cairo exo freetype-harfbuzz gdk-pixbuf glib glibc gtk3 libexif libgudev libICE libnotify libSM libX11 libxfce4ui libxfce4util pango pcre xfce4-panel xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/xfce/thunar/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's/\tinstall-systemd_userDATA/\t/' Makefile.in
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

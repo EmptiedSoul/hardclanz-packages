@@ -1,0 +1,26 @@
+PACKAGE="vala"
+VER="0.50.3"
+
+DEPENDS=(   glib glibc graphviz  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/vala/0.50/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

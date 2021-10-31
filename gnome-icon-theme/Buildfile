@@ -1,0 +1,26 @@
+PACKAGE="gnome-icon-theme"
+VER="3.12.0"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/gnome-icon-theme/3.12/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

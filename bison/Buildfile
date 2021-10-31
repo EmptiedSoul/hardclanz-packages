@@ -1,5 +1,5 @@
 PACKAGE="bison"
-VER="3.7.6"
+VER="3.8.2"
 
 ACCESS="restricted"
 ARCH="installer"

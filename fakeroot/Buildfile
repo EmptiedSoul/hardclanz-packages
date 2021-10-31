@@ -1,0 +1,32 @@
+PACKAGE="fakeroot"
+VER="1.25.3"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="http://deb.debian.org/debian/pool/main/f/fakeroot/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR/-/_}.orig.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+PATCHDIR="$(pwd)/patches"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	patch -p1 -i $PATCHDIR/fakeroot-1.25.3-glibc-2.33-fix-1.patch
+	patch -p1 -i $PATCHDIR/fakeroot-1.25.3-glibc-2.33-fix-2.patch
+	patch -p1 -i $PATCHDIR/fakeroot-1.25.3-glibc-2.33-fix-3.patch
+    	autoreconf -ivf
+	./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install -k 
+    true
+}

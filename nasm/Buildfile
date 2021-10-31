@@ -1,0 +1,26 @@
+PACKAGE="nasm"
+VER="2.15.05"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://www.nasm.us/pub/nasm/releasebuilds/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS 
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

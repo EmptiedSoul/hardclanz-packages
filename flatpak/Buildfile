@@ -1,0 +1,37 @@
+PACKAGE="flatpak"
+VER="1.12.1"
+
+DEPENDS=(   appstream-glib elogind fuse2 gdk-pixbuf glib glibc gpgme json-glib libarchive libassuan libcap libgpg-error libostree libseccomp libsoup libXau libxml2 polkit zstd  )
+CONFLICTS=()
+
+URL="https://github.com/flatpak/flatpak/releases/download/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS
+    sed -i 's/-Werror=incompatible-pointer-types//' config.status
+    ./config.status
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_preinstall(){
+	groupadd -r flatpak
+	useradd -r -g flatpak -d / -s /sbin/nologin \
+		-c "Flatpak system helper" flatpak
+	true
+}
+
+GITHUB_CHECK=1

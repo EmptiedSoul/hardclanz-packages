@@ -1,0 +1,37 @@
+PACKAGE="vulkan-headers"
+VER="1.2.189"
+
+DEPENDS=(  )
+CONFLICTS=()
+
+URL="https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/"
+SRCDIR="v${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	cd Vulkan-Headers*
+	mkdir _build
+	cd _build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    ..
+	cd ../..
+}
+__compilesrc(){
+	cd Vulkan-Headers*/_build
+    make $MAKEOPTS
+    	cd ../..
+}
+__installsrc(){
+	cd Vulkan-Headers*/_build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+GITHUB_CHECK=1

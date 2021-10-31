@@ -1,11 +1,11 @@
 PACKAGE="gcc"
-VER="11.1.0"
+export VER="11.2.0"
 
 ARCH="installer"
 ACCESS="restricted"
 CRYPT="key"
 
-DEPENDS=( mpc binutils zstd glibc gmp mpfr zlib   )
+DEPENDS=( mpc binutils zstd glibc gmp mpfr zlib  isl  )
 CONFLICTS=()
 
 DESCRIPTION="GNU Compiler Collection"
@@ -22,11 +22,19 @@ __unpacksrc(){
     tar xJf $SRCTGZ
 }
 __preparesrc(){
+	sed -e '/static.*SIGSTKSZ/d' \
+    		-e 's/return kAltStackSize/return SIGSTKSZ * 4/' \
+    		-i libsanitizer/sanitizer_common/sanitizer_posix_libcdep.cpp
+	sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
+	
 	mkdir -pv buildZ && cd $_
-    ../configure $CONFIGUREOPTS	\
-	LD=ld	\
-	--with-system-zlib \
-	--disable-multilib
+	GCC_OPTS="LD=ld --with-system-zlib --disable-multilib "
+	CURR_GCC_VER=$(gcc --version | cut -s -f3 -d" " | head -1)
+	if [[ "$CURR_GCC_VER" == "$VER" ]]; then
+		GCC_OPTS+="--disable-bootstrap"
+	fi
+	../configure $CONFIGUREOPTS	\
+		$GCC_OPTS
 	cd ..
 }
 __compilesrc(){
@@ -41,7 +49,7 @@ __installsrc(){
 	ln -svf /usr/bin/cpp $DEST/lib/cpp && \
 	ln -svf /usr/bin/gcc $DEST/usr/bin/cc && \
 	install -v -dm755 $DEST/usr/lib/bfd-plugins && \
-	ln -svf ../../libexec/gcc/$(gcc -dumpmachine)/10.2.0/liblto_plugin.so $DEST/usr/lib/bfd-plugins/ 
+	ln -svf ../../libexec/gcc/$(gcc -dumpmachine)/${VER}/liblto_plugin.so $DEST/usr/lib/bfd-plugins/ 
 	cd ..
 }
 

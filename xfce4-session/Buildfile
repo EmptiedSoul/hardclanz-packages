@@ -1,0 +1,31 @@
+PACKAGE="xfce4-session"
+VER="4.16.0"
+
+DEPENDS=(   atk cairo gdk-pixbuf glib glibc gtk3 libICE libSM libwnck libX11 libxfce4ui libxfce4util pango polkit xfconf  )
+CONFLICTS=()
+
+URL="http://archive.xfce.org/src/xfce/xfce4-session/4.16/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.bz2"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-legacy-sm
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_postinstall(){
+update-desktop-database &&
+update-mime-database /usr/share/mime
+}

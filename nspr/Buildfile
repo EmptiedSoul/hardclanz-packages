@@ -1,6 +1,6 @@
 #!/bin/bash
 PACKAGE="nspr"
-VER="4.29"
+VER="4.32"
 
 DESCRIPTION="NetScape Portable Runtime"
 

@@ -1,0 +1,26 @@
+PACKAGE="libgudev"
+VER="234"
+
+DEPENDS=(   eudev glib glibc  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/${PACKAGE}/${VER}/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+    ./configure $CONFIGUREOPTS --disable-umockdev
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

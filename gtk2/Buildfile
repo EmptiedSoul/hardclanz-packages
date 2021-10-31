@@ -1,0 +1,32 @@
+PACKAGE="gtk2"
+VER="2.24.33"
+
+DEPENDS=(   atk cairo fontconfig freetype-harfbuzz gdk-pixbuf glib glibc libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXinerama libXrandr libXrender pango  )
+CONFLICTS=()
+
+URL="https://download.gnome.org/sources/gtk+/2.24/"
+SRCDIR="gtk+-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	sed -i 's#1 \(gtk-.*\).sgml#& -o \1#' docs/{faq,tutorial}/Makefile.in
+    ./configure $CONFIGUREOPTS
+}
+__compilesrc(){
+    make $MAKEOPTS
+}
+__installsrc(){
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_postinstall(){
+	ldconfig
+	gtk-query-immodules-2.0 --update-cache
+}

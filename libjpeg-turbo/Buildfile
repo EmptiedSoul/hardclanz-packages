@@ -1,0 +1,39 @@
+PACKAGE="libjpeg-turbo"
+VER="2.0.6"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://downloads.sourceforge.net/libjpeg-turbo/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=RELEASE \
+		-DENABLE_STATIC=FALSE \
+		-DCMAKE_INSTALL_DEFAULT_LIBDIR=lib ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+    make $MAKEOPTS
+	cd ..
+}
+__installsrc(){
+	cd build
+    make $MAKEOPTS DESTDIR="$DEST" install
+}
+
+pkg_preinstall(){
+	rm -rf /usr/lib/libjpeg.so*
+}

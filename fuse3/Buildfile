@@ -1,0 +1,35 @@
+PACKAGE="fuse3"
+VER="3.10.2"
+
+DEPENDS=(   glibc  )
+CONFLICTS=()
+
+URL="https://github.com/libfuse/libfuse/releases/download/fuse-${VER}/"
+SRCDIR="${PACKAGE/3}-${VER}"
+SRCTGZ="${SRCDIR}.tar.xz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir build
+	cd build
+	export DESTDIR="$DEST"
+	meson --prefix=/usr -Dexamples=false ..
+	cd ..
+}
+__compilesrc(){
+	cd build
+	ninja
+	cd ..
+}
+__installsrc(){
+	cd build
+	ninja install
+}
+
+GITHUB_CHECK=1

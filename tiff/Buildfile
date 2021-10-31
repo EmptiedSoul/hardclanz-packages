@@ -1,0 +1,35 @@
+PACKAGE="tiff"
+VER="4.2.0"
+
+DEPENDS=(   freeglut gcc glibc glu libjpeg-turbo libwebp libXi libXmu mesa xz zlib zstd  )
+CONFLICTS=()
+
+URL="https://download.osgeo.org/libtiff/"
+SRCDIR="${PACKAGE}-${VER}"
+SRCTGZ="${SRCDIR}.tar.gz"
+SRCURL="${URL}${SRCTGZ}"
+
+__getsrc(){
+    wget -c $SRCURL
+}
+__unpacksrc(){
+    tar xf $SRCTGZ
+}
+__preparesrc(){
+	mkdir	build_tiff
+	cd 	build_tiff
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-G "Unix Makefiles" \
+		-Wno-dev ..
+	cd ..
+}
+__compilesrc(){
+	cd build_tiff
+    make $MAKEOPTS
+    	cd ..
+}
+__installsrc(){
+	cd build_tiff
+    make $MAKEOPTS DESTDIR="$DEST" install
+}

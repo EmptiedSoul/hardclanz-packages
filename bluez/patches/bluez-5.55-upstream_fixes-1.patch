@@ -1,0 +1,40 @@
+Submitted By:            Douglas R. Reno <renodr at linuxfromscratch dot org>
+Date:                    2021-02-12
+Initial Package Version: 5.55
+Origin:                  Upstream
+Upstream Status:         Applied
+Description:             Fixes a crash when using A2DP protocol bluetooth
+                         devices, such as Jabra and Razer headsets, and
+                         Harmon-Kardon Loudspeakers.
+
+diff -Naurp bluez-5.55.orig/profiles/audio/a2dp.c bluez-5.55/profiles/audio/a2dp.c
+--- bluez-5.55.orig/profiles/audio/a2dp.c	2020-09-06 08:53:08.000000000 -0500
++++ bluez-5.55/profiles/audio/a2dp.c	2021-02-12 11:30:53.446407645 -0600
+@@ -1900,8 +1900,8 @@ static void register_remote_sep(void *da
+ 				sep, remote_sep_free) == FALSE) {
+ 		error("Could not register remote sep %s", sep->path);
+ 		free(sep->path);
+-		sep->path = NULL;
+-		goto done;
++		free(sep);
++      return;
+ 	}
+ 
+ 	DBG("Found remote SEP: %s", sep->path);
+@@ -2643,10 +2643,15 @@ static void store_remote_sep(void *data,
+ 	GKeyFile *key_file = user_data;
+ 	char seid[4], value[256];
+ 	struct avdtp_service_capability *service = avdtp_get_codec(sep->sep);
+-	struct avdtp_media_codec_capability *codec = (void *) service->data;
++	struct avdtp_media_codec_capability *codec;
+ 	unsigned int i;
+ 	ssize_t offset;
+ 
++   if (!service)
++      return;
++
++   codec = (void *) service->data;
++
+ 	sprintf(seid, "%02hhx", avdtp_get_seid(sep->sep));
+ 
+ 	offset = sprintf(value, "%02hhx:%02hhx:%02hhx:",
