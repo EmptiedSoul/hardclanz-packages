@@ -1,5 +1,10 @@
 repo/
 .HARDS/
 .done
+.needs_correction
+.needs_update
+.depends
+.provides
 .failed
+.work
 logs/
